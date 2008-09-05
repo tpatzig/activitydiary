@@ -1,0 +1,9 @@
+urgent TODO:
+============
+
+- Klasse Tracks und GPSParser kombinieren. Beide representieren einen Track und machen momentan fasst das selbe, bis auf das parsen des XML files. Wir haben sonst in der Ui zu einem Track immer 2 Objecte, die es du verwalten gilt. Am besten machen wir aus der GPXParser Klasse nur eine static methode, die kein object brauch und nur die parse_file methode anbietet. Alles andere ist dann aufgabe der Track Klasse.
+
+- Koordinatensystemanzeige fuer das Hoehendiagramm (Hoehe,Zeit)
+- beim klick auf WP im View punkt im hoehendiagramm zeigen
+- die komplette streckendistanz wird nur am Anfang angezeigt, wenn kein einzelner waypoint selektiert ist. Es muss eine moeglichkeit geben, die WP wieder zu deselektieren, um zB wieder die gesamte streckenlaenge und zeit anzuzeigen
+-....

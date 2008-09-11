@@ -41,6 +41,9 @@ public:
     float get_wp_distance(Waypoint*,Waypoint*);
     
     Waypoint* at(int);
+    int indexOf(Waypoint*);
+    Waypoint* first();
+    Waypoint* last();
 
 private:
 

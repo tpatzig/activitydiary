@@ -5,6 +5,10 @@
 #include <QtGui> 
 #include <klocalizedstring.h> 
 #include <QObject>
+#include <qwt/qwt_plot.h>
+#include <qwt/qwt_plot_curve.h>
+#include <qwt/qwt_curve_fitter.h>
+
  
 #include "mapview.h" 
 #include "gpxparser.h"
@@ -31,8 +35,13 @@ private:
 	QHash<Track*,GPXParser*> trackHash;
 	QGraphicsScene* scene;
 
-	void drawGraph(Track* track);
-	int roundNumber(double f);
+	void drawGraph(Waypoint* start,Waypoint* end);
+	QString roundNumberAsString(double f);
+
+	QwtPlotCurve* curve1;
+	QwtPlotCurve* curve2;
+
+	
 
 public slots:
 	
@@ -41,7 +50,7 @@ public slots:
 	void slotSetZoom(int);
 	void slotSetSliderValue(int);
 	void slotWaypointSelected(Waypoint*);
-
+	void slotStartEndPointsChanged(Waypoint* start,Waypoint* end);
 
 
 };

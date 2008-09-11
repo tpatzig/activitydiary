@@ -119,14 +119,16 @@ double Calc::xAtZoomToLongitude(int x, int zoom )
 
 float Calc::distance_in_km(float lat1, float lon1, float lat2, float lon2)
 {
-  	 float theta = lon1 - lon2;
+//  	 float theta = lon1 - lon2;
 
-  	 float dist = sin(degToRad(lat1)) * sin(degToRad(lat2)) + cos(degToRad(lat1)) * cos(degToRad(lat2)) * cos(degToRad(theta));
+//  	 float dist = sin(degToRad(lat1)) * sin(degToRad(lat2)) + cos(degToRad(lat1)) * cos(degToRad(lat2)) * cos(degToRad(theta));
 
-  	 dist = radToDeg(acos(dist));
+//	 dist = radToDeg(acos(dist));
 
 	 // distance in km //
-  	 return (dist * 60.0 * 1.1515 * 1.609344);
+//  	 return (dist * 60.0 * 1.1515 * 1.609344);
+	 float distance = (3958*M_PI*sqrt((lat2-lat1)*(lat2-lat1) + cos(lat2/57.29578)*cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
+	 return distance;
 
 }
 

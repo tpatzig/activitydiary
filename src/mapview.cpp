@@ -79,6 +79,7 @@ void MapView::drawPins()
 
 	if (_endWaypoint)
 		drawPin(QPointF (_endWaypoint->get_longitude(), _endWaypoint->get_latitude()), "end.gif");
+
 }
 
 
@@ -176,20 +177,27 @@ void MapView::slotResetStartEndPoint()
 	if (!_track)
 		return;
 
-	_startWaypoint = _track->wayPoint( 0 );
-	_endWaypoint   = _track->wayPoint( _track->count_waypoints() -1 );
+	_startWaypoint = _track->at( 0 );
+	_endWaypoint   = _track->at( _track->count_waypoints() -1 );
+	repaint();
+	emit startEndPointsMoved(_startWaypoint,_endWaypoint);
 }
 
 void MapView::slotSetStartPoint()
 {
 	_startWaypoint = findWaypointNear(_temp);
 	repaint();
+	if (_startWaypoint && _endWaypoint)
+		emit startEndPointsMoved(_startWaypoint,_endWaypoint);
 }
 
 void MapView::slotSetEndPoint()
 {
 	_endWaypoint = findWaypointNear(_temp);
 	repaint();
+	if (_startWaypoint && _endWaypoint)
+		emit startEndPointsMoved(_startWaypoint,_endWaypoint);
+
 }
 
 

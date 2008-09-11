@@ -38,6 +38,7 @@ signals:
 	void centerChanged ( QPointF );
 	void zoomChanged ( int );
 	void downloadState( int );
+	void startEndPointsMoved(Waypoint*,Waypoint*);
 
 
 private:

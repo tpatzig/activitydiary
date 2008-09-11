@@ -2,6 +2,7 @@ include_directories(
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}
    ${KDE4_INCLUDES}
+   ${QWT_INCLUDE_DIR}
    )
 
 
@@ -27,7 +28,7 @@ kde4_add_ui_files(map_SRCS
 kde4_add_executable(activitydiary ${map_SRCS})
 
 target_link_libraries(activitydiary
-                      ${KDE4_KDEUI_LIBS})
+                      ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
  
 #install(TARGETS mapview
 #        DESTINATION ${KDE4_BIN_INSTALL_DIR})

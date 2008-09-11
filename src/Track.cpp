@@ -98,10 +98,30 @@ float Track::get_overall_distance() {
 }
 
 float Track::get_wp_distance(Waypoint* wp1,Waypoint* wp2) {
+	
+	Waypoint* tmp = 0;
+	float distance = 0;
 
-	return Calc::distance_in_km(wp1->get_latitude(),wp1->get_longitude(),wp2->get_latitude(),wp2->get_longitude());
+	for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
+		if (tmp)
+			distance += Calc::distance_in_km(tmp->get_latitude(),tmp->get_longitude(),at(i)->get_latitude(),at(i)->get_longitude());
+		tmp = at(i);
+	}
+	return distance;
 }
 
 Waypoint* Track::at(int i) {
 	 return waypoint_list.at(i);
+}
+
+int Track::indexOf(Waypoint* w) {
+	return waypoint_list.indexOf(w);
+}
+
+Waypoint* Track::first() {
+	return waypoint_list.at(0);
+}
+
+Waypoint* Track::last() {
+	return waypoint_list.at(count_waypoints()-1);
 }

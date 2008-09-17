@@ -5,9 +5,9 @@
 #include <QtGui> 
 #include <klocalizedstring.h> 
 #include <QObject>
-#include <qwt/qwt_plot.h>
-#include <qwt/qwt_plot_curve.h>
-#include <qwt/qwt_curve_fitter.h>
+#include <qwt_plot.h>
+#include <qwt_plot_curve.h>
+#include <qwt_curve_fitter.h>
 
  
 #include "mapview.h" 

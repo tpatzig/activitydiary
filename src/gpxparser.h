@@ -10,43 +10,24 @@
 
 #include "waypoint.h"
 #include "gpxparser.h"
+#include "Track.h"
+
+class Track;
 
 class GPXParser : public QObject
 {
 
-public:
+    public:
 
-    GPXParser(QString filename);
-    ~GPXParser();
-    
-    int count_waypoints();
-    
-    QPointF max_east();
-    QPointF max_west();
-    QPointF max_north();
-    QPointF max_south();
+        GPXParser(QString filename);
+        ~GPXParser();
 
-    void add_waypoint(Waypoint*);
+        TrackList tracks() { return mTracks; }
+    private: 
+        TrackList mTracks;
 
-    QList<Waypoint*> get_waypoint_list();
-    QList<Waypoint*> waypoint_list;
-    
-private:
-
-    void parse_file(QFile&);
-    bool open_file(QFile&);
-    Waypoint* wpt;
-  
-    double maxLat;
-    double maxLon;
-    double minLat;
-    double minLon;
-    
-    QPointF maxNorth;
-    QPointF maxSouth;
-    QPointF maxWest;
-    QPointF maxEast;
-
+        void parse_file(QFile&);
+        bool open_file(QFile&);
 };
 
 #endif

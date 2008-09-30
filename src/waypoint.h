@@ -13,47 +13,53 @@
 class Waypoint : public QObject
 {
 
-public:  
-      Waypoint(double lat,double lon,int sat,float alt,float spd,float cs,QDateTime& time);
-      ~Waypoint();
+    public:  
+        Waypoint(double lat,double lon,int sat,float alt,float spd,float cs,QDateTime& time);
+        ~Waypoint();
 
-      double get_latitude();
-      double get_longitude();
+        double get_latitude();
+        double get_longitude();
 
-      double get_rel_x(int zoom);
-      double get_rel_y(int zoom);
+        double get_rel_x(int zoom);
+        double get_rel_y(int zoom);
 
-      int get_satelites();
-      float get_altitude();
+        int get_satelites();
+        float get_altitude();
 
-      float get_speed();
-      int get_course();
-      QDate get_date();
-      QTime get_time();
-      QString get_tile_path(int zoom);
+        float get_speed();
+        int get_course();
+        QDate get_date();
+        QTime get_time();
+        QString get_tile_path(int zoom);
 
-      int get_floor_y(int zoom);
-      int get_floor_x(int zoom);
-
-
-bool ge (Waypoint* w) const;
-bool le (Waypoint* w) const;
-bool gt (Waypoint* w) const;
-bool lt (Waypoint* w) const;
+        int get_floor_y(int zoom);
+        int get_floor_x(int zoom);
 
 
+        bool ge (Waypoint* w) const;
+        bool le (Waypoint* w) const;
+        bool gt (Waypoint* w) const;
+        bool lt (Waypoint* w) const;
 
-private: 
+    private: 
 
-      double latitude;
-      double longitude;
-      
-      int satelites;
-      float altitude;
-      float speed;
-      float course;
-      QDateTime date_time;
-      
+        double latitude;
+        double longitude;
+
+        int satelites;
+        float altitude;
+        float speed;
+        float course;
+        QDateTime date_time;
+
+};
+
+class WaypointList : public QList<Waypoint*>
+{
+    public:
+        WaypointList();
+        ~WaypointList();
+
 };
 
 #endif

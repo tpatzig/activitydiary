@@ -11,7 +11,7 @@ int main( int argc, char **argv )
     QApplication app(argc, argv);
 
     SportsDiary mainWin;
-//    MainWindow mainWin;
+    //    MainWindow mainWin;
     mainWin.show();
     return app.exec();
 }

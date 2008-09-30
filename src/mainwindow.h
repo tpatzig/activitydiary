@@ -8,17 +8,17 @@
 // Class to represent our MainWindow 
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 
-public:
-		MainWindow();
+    public:
+        MainWindow();
 
-private:
-	MapView* _mapWidget;
+    private:
+        MapView* _mapWidget;
 
 
-private slots:
-	void slotLoad();
+        // private slots:
+        //	void slotLoad();
 
 };
 

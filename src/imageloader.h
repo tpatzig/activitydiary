@@ -24,48 +24,48 @@
 
 class ImageLoader : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
-public:
+    public:
 
-	ImageLoader(QObject* parent = 0);
-	~ImageLoader();
+        ImageLoader(QObject* parent = 0);
+        ~ImageLoader();
 
-	QPixmap load_tile(int zoom, int x, int y);
-	QPixmap load_tile(int zoom, Waypoint* wpt);
+        QPixmap load_tile(int zoom, int x, int y);
+        QPixmap load_tile(int zoom, Waypoint* wpt);
 
-private:
+    private:
 
-	Loader* loader_1;
-	Loader* loader_2;
-	Loader* loader_3;
-	Loader* loader_4;
-	Loader* loader_5;
+        Loader* loader_1;
+        Loader* loader_2;
+        Loader* loader_3;
+        Loader* loader_4;
+        Loader* loader_5;
 
-	QList<Loader*> loader_list;
+        QList<Loader*> loader_list;
 
-	void download_image(QString path);
-	QFile* local_file(int zoom,int x,int y);
-//	QString get_local_path(int zoom, int x, int y);
-//	QString get_local_path(QString);
-//	QString get_osm_path(int zoom, int x, int y);
-	QString get_pic_path(int zoom, int x, int y, QString pre = 0);
-  
-	QStringList download_queue;
-    	bool active_download;
-	int active_download_id;
-  
+        void download_image(QString path);
+        QFile* local_file(int zoom,int x,int y);
+        //	QString get_local_path(int zoom, int x, int y);
+        //	QString get_local_path(QString);
+        //	QString get_osm_path(int zoom, int x, int y);
+        QString get_pic_path(int zoom, int x, int y, QString pre = 0);
 
-public slots:
+        QStringList download_queue;
+        bool active_download;
+        int active_download_id;
 
-	void downloadFinished(Loader* loader,int id,bool error);
-	void abort_downloads();
 
-signals:
+    public slots:
 
-	void download_finished(QString);
-	void download_status(int);
-    
+        void downloadFinished(Loader* loader,int id,bool error);
+        void abort_downloads();
+
+    signals:
+
+        void download_finished(QString);
+        void download_status(int);
+
 
 };
 #endif

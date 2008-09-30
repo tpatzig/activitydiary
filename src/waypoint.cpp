@@ -4,23 +4,23 @@
 
 Waypoint::Waypoint(double lat,double lon,int sat,float alt,float spd,float cs,QDateTime& time) {
 
-  latitude = lat;
-  longitude = lon;
+    latitude = lat;
+    longitude = lon;
 
-  // number of satelites used to calculate this waypoint //  
-  satelites = sat;
+    // number of satelites used to calculate this waypoint //
+    satelites = sat;
 
-  altitude = alt;
+    altitude = alt;
 
 
-  // in meters per second at that point//
-  speed = spd;
+    // in meters per second at that point//
+    speed = spd;
 
-  // course in degrees at that point //
-  course = cs;
+    // course in degrees at that point //
+    course = cs;
 
-  // in UTC, not localtime //  
-  date_time = time;
+    // in UTC, not localtime //
+    date_time = time;
 
 }
 
@@ -32,100 +32,113 @@ Waypoint::~Waypoint() {
 // Some Getter Methods //
 
 double Waypoint::get_latitude() {
-  return latitude;
+    return latitude;
 }
 
 double Waypoint::get_longitude() {
-  return longitude;
+    return longitude;
 }
 
 int Waypoint::get_satelites() {
-  return satelites;
+    return satelites;
 }
 
 float Waypoint::get_speed() {
-  return speed;
+    return speed;
 }
 
 QDate Waypoint::get_date() {
-  return date_time.date();
+    return date_time.date();
 }
 
 QTime Waypoint::get_time() {
-  return date_time.time();
+    return date_time.time();
 }
 
 float Waypoint::get_altitude() {
-  return altitude;
+    return altitude;
 }
 
 int Waypoint::get_course() {
-  return course;
+    return course;
 }
 
 // Calculation of X and Y coordinates //
 
 double Waypoint::get_rel_x(int zoom) {
 
-  double x = (longitude + 180) / 360 * pow(2,zoom);
-  return x;
+    double x = (longitude + 180) / 360 * pow(2,zoom);
+    return x;
 }
 
 double Waypoint::get_rel_y(int zoom) {
 
-  double y = (1- log(tan(latitude * M_PI / 180) + 1 / cos(latitude * M_PI / 180)) / M_PI) / 2 * pow(2,zoom);
-  return y;
+    double y = (1- log(tan(latitude * M_PI / 180) + 1 / cos(latitude * M_PI / 180)) / M_PI) / 2 * pow(2,zoom);
+    return y;
 }
 
 // Calculation of rounded down X and Y coordinates //
 
 int Waypoint::get_floor_x(int zoom) {
-  
-  int x = floor(get_rel_x(zoom));
-  return x;
+
+    int x = floor(get_rel_x(zoom));
+    return x;
 }
 
 int Waypoint::get_floor_y(int zoom) {
-  
-  int y = floor(get_rel_y(zoom));
-  return y;
+
+    int y = floor(get_rel_y(zoom));
+    return y;
 }
 
 // Path to the osm png //
 QString Waypoint::get_tile_path(int zoom)
 {
-  int x = get_floor_x(zoom);
-  int y = get_floor_y(zoom);
-  QString path(QString::number(zoom) + "/" + QString::number(x) + "/" + QString::number(y));
-  return path;
+    int x = get_floor_x(zoom);
+    int y = get_floor_y(zoom);
+    QString path(QString::number(zoom) + "/" + QString::number(x) + "/" + QString::number(y));
+    return path;
 }
 
 
 bool Waypoint::ge (Waypoint* w) const
 {
-	if (!w)
-		return false;
-	return date_time >= w->date_time;
+    if (!w)
+        return false;
+    return date_time >= w->date_time;
 }
 
 bool Waypoint::le (Waypoint* w) const
 {
-	if (!w)
-		return false;
-	return date_time <= w->date_time;
+    if (!w)
+        return false;
+    return date_time <= w->date_time;
 }
 
 bool Waypoint::gt (Waypoint* w) const
 {
-	if (!w)
-		return false;
-	return date_time > w->date_time;
+    if (!w)
+        return false;
+    return date_time > w->date_time;
 }
 
 bool Waypoint::lt (Waypoint* w) const
 {
-	if (!w)
-		return false;
-	return date_time < w->date_time;
+    if (!w)
+        return false;
+    return date_time < w->date_time;
+}
+
+
+// ################################################################################
+
+WaypointList::WaypointList() : QList<Waypoint*>()
+{
+
+}
+
+WaypointList::~WaypointList()
+{
+
 }
 

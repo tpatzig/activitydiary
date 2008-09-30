@@ -20,67 +20,67 @@
 
 class MapView : public QFrame
 {
-	Q_OBJECT
+    Q_OBJECT
 
-public:
-	MapView(QWidget* parent=0);
-	~MapView();
+    public:
+        MapView(QWidget* parent=0);
+        ~MapView();
 
-	QPointF center ();
-	int zoom ();
+        QPointF center ();
+        int zoom ();
 
-	void setTrack    ( Track* );
-	void setCenter   ( QPointF );
-	void setZoom     ( int );
+        void setTrack    ( Track* );
+        void setCenter   ( QPointF );
+        void setZoom     ( int );
 
-signals:
-	void pointSelected( Waypoint* );
-	void centerChanged ( QPointF );
-	void zoomChanged ( int );
-	void downloadState( int );
-	void startEndPointsMoved(Waypoint*,Waypoint*);
-
-
-private:
-	void paintEvent( QPaintEvent *event );
-	void mouseMoveEvent ( QMouseEvent * event );
-	void mousePressEvent ( QMouseEvent * event );
-	void wheelEvent(QWheelEvent* event);
+    signals:
+        void pointSelected( Waypoint* );
+        void centerChanged ( QPointF );
+        void zoomChanged ( int );
+        void downloadState( int );
+        void startEndPointsMoved(Waypoint*,Waypoint*);
 
 
-	ImageLoader* _imageLoader;
-	QPixmap getMapTile(QPointF p, int zoom);
-
-	void drawMap();
-	void drawPins();
-	void drawPin( QPointF pin, QString pixmapName);
-	void drawTrack();
-	void drawInfos();
-
-	QPoint _center;
-	QPoint _temp;
-	
-	Waypoint* _startWaypoint;
-	Waypoint* _endWaypoint;
-
-	int _tilewidth;
-	int _tileheight;
-	int _zoom;
-
-	Track* _track;
-
-	Waypoint* findWaypointNear(QPoint mpos);
+    private:
+        void paintEvent( QPaintEvent *event );
+        void mouseMoveEvent ( QMouseEvent * event );
+        void mousePressEvent ( QMouseEvent * event );
+        void wheelEvent(QWheelEvent* event);
 
 
-public slots:
-	void slotNewTileDownloaded(QString filename); 
-	void slotUpdateDownloadStaus(int queue);
-	void slotAbortDownload();
+        ImageLoader* _imageLoader;
+        QPixmap getMapTile(QPointF p, int zoom);
+
+        void drawMap();
+        void drawPins();
+        void drawPin( QPointF pin, QString pixmapName);
+        void drawTrack();
+        void drawInfos();
+
+        QPoint _center;
+        QPoint _temp;
+
+        Waypoint* _startWaypoint;
+        Waypoint* _endWaypoint;
+
+        int _tilewidth;
+        int _tileheight;
+        int _zoom;
+
+        Track* _track;
+
+        Waypoint* findWaypointNear(QPoint mpos);
 
 
-	void slotSetStartPoint();
-	void slotSetEndPoint();
-	void slotResetStartEndPoint();
+    public slots:
+            void slotNewTileDownloaded(QString filename); 
+        void slotUpdateDownloadStaus(int queue);
+        void slotAbortDownload();
+
+
+        void slotSetStartPoint();
+        void slotSetEndPoint();
+        void slotResetStartEndPoint();
 
 };
 

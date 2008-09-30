@@ -7,57 +7,68 @@
 #include <QPointF>
 #include <QPen>
 
+#include "waypoint.h"
+
 class Track 
 {
 
-public:
+    public:
 
-    Track( QList<Waypoint*> wpList = QList<Waypoint*>() ) ;
-    ~Track();
-    
-    QPointF max_east();
-    QPointF max_west();
-    QPointF max_north();
-    QPointF max_south();
+        Track( WaypointList wpList = WaypointList() ) ;
+        ~Track();
 
-    void set_max_east(QPointF);
-    void set_max_west(QPointF);
-    void set_max_north(QPointF);
-    void set_max_south(QPointF);
+        QPointF max_east();
+        QPointF max_west();
+        QPointF max_north();
+        QPointF max_south();
+
+        void set_max_east(QPointF);
+        void set_max_west(QPointF);
+        void set_max_north(QPointF);
+        void set_max_south(QPointF);
 
 
-    void set_waypoint_list(QList<Waypoint*> w);
+        void set_waypoint_list( const WaypointList& );
 
-    int count_waypoints();
+        int count_waypoints();
 
-    Waypoint* wayPoint(int);
+        Waypoint* wayPoint(int);
 
-    QList<Waypoint*> get_waypoint_list();
+        WaypointList get_waypoint_list();
 
-    QPen pen();
-    void setPen();
+        QPen pen();
+        void setPen();
 
-    float get_overall_distance();
-    float get_wp_distance(Waypoint*,Waypoint*);
-    
-    Waypoint* at(int);
-    int indexOf(Waypoint*);
-    Waypoint* first();
-    Waypoint* last();
+        float get_overall_distance();
+        float get_wp_distance(Waypoint*,Waypoint*);
 
-private:
+        Waypoint* at(int);
+        int indexOf(Waypoint*);
+        Waypoint* first();
+        Waypoint* last();
 
-    QList<Waypoint*> waypoint_list;
+    private:
 
-    Waypoint* wpt;
-  
-    QPointF maxNorth;
-    QPointF maxSouth;
-    QPointF maxWest;
-    QPointF maxEast;
+        WaypointList waypoint_list;
 
-    QPen _trackPen;
+        Waypoint* wpt;
 
+        QPointF maxNorth;
+        QPointF maxSouth;
+        QPointF maxWest;
+        QPointF maxEast;
+
+        QPen _trackPen;
+
+};
+
+// ################################################################################
+
+class TrackList : public QList<Track*>
+{
+    public:
+        TrackList();
+        ~TrackList();
 };
 
 #endif

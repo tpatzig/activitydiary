@@ -8,27 +8,27 @@
 
 class Loader : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
-public:
-	Loader(QObject* parent = 0,QString host = "");
-	~Loader();
-	
-	QHttp* http;
-	QFile* current_png_file;
-	int active_download_id;
+    public:
+        Loader(QObject* parent = 0,QString host = "");
+        ~Loader();
 
-	void close_file();
+        QHttp* http;
+        QFile* current_png_file;
+        int active_download_id;
 
-public slots:
-	void downloaded(int,bool);
-	void abort_download();
+        void close_file();
 
-signals:
+    public slots:
+        void downloaded(int,bool);
+        void abort_download();
 
-	void downloadReady(Loader*,int id,bool err);
-		
-	
+    signals:
+
+        void downloadReady(Loader*,int id,bool err);
+
+
 };
 
 #endif

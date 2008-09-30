@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1228</width>
-    <height>886</height>
+    <width>1417</width>
+    <height>946</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -17,14 +17,11 @@
     <rect>
      <x>0</x>
      <y>24</y>
-     <width>1228</width>
-     <height>841</height>
+     <width>1417</width>
+     <height>901</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_20" >
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_15" />
-    </item>
+   <layout class="QVBoxLayout" name="verticalLayout_18" >
     <item>
      <widget class="QStackedWidget" name="diaryStackedWidget" >
       <property name="frameShape" >
@@ -48,11 +45,11 @@
         <rect>
          <x>1</x>
          <y>1</y>
-         <width>1218</width>
-         <height>825</height>
+         <width>1407</width>
+         <height>891</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_19" >
+       <layout class="QVBoxLayout" name="verticalLayout_17" >
         <item>
          <widget class="QLabel" name="dateLabel" >
           <property name="font" >
@@ -83,813 +80,282 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1202</width>
-             <height>758</height>
+             <width>1391</width>
+             <height>824</height>
             </rect>
            </property>
            <attribute name="title" >
             <string>Cycling - Racing Bike</string>
            </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_18" >
+           <layout class="QVBoxLayout" name="verticalLayout_16" >
             <item>
              <widget class="QSplitter" name="splitter" >
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
               </property>
-              <widget class="QGroupBox" name="groupBox" >
+              <widget class="QGroupBox" name="groupBox_2" >
                <property name="title" >
                 <string/>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_22" >
+               <layout class="QVBoxLayout" name="verticalLayout_15" >
                 <item>
-                 <widget class="QSplitter" name="splitter_2" >
-                  <property name="orientation" >
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <widget class="QWidget" name="layoutWidget" >
-                   <layout class="QVBoxLayout" name="verticalLayout_21" >
+                 <layout class="QVBoxLayout" name="verticalLayout_11" >
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_18" >
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_14" >
+                     <spacer name="horizontalSpacer_3" >
+                      <property name="orientation" >
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0" >
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_17" >
                       <item>
-                       <widget class="MapView" native="1" name="mapFrame" >
-                        <property name="sizePolicy" >
-                         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
+                       <widget class="QLabel" name="label_21" >
+                        <property name="font" >
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
                         </property>
-                        <property name="minimumSize" >
-                         <size>
-                          <width>800</width>
-                          <height>400</height>
-                         </size>
-                        </property>
-                        <property name="lineWidth" stdset="0" >
-                         <number>3</number>
+                        <property name="text" >
+                         <string>Activity:</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <layout class="QVBoxLayout" name="verticalLayout_4" >
+                       <widget class="QComboBox" name="comboBox" >
                         <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_13" >
-                          <item>
-                           <widget class="QSlider" name="zoomSlider" >
-                            <property name="minimum" >
-                             <number>4</number>
-                            </property>
-                            <property name="maximum" >
-                             <number>16</number>
-                            </property>
-                            <property name="pageStep" >
-                             <number>1</number>
-                            </property>
-                            <property name="orientation" >
-                             <enum>Qt::Vertical</enum>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
+                         <property name="text" >
+                          <string>Cycling - Racing Bike</string>
+                         </property>
                         </item>
                         <item>
-                         <layout class="QVBoxLayout" name="verticalLayout_3" >
-                          <item>
-                           <widget class="QCheckBox" name="checkBox" >
-                            <property name="text" >
-                             <string>km</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QCheckBox" name="checkBox_2" >
-                            <property name="text" >
-                             <string>WP</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
+                         <property name="text" >
+                          <string>Cycling - Mountain Bike</string>
+                         </property>
                         </item>
-                       </layout>
+                        <item>
+                         <property name="text" >
+                          <string>Hiking</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text" >
+                          <string>Running</string>
+                         </property>
+                        </item>
+                       </widget>
                       </item>
                      </layout>
                     </item>
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_23" >
+                     <spacer name="horizontalSpacer_4" >
+                      <property name="orientation" >
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0" >
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_16" >
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_8" >
                       <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_22" >
-                        <item>
-                         <widget class="QLabel" name="loaderStatusLabel" >
-                          <property name="text" >
-                           <string/>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="abortButton" >
-                          <property name="text" >
-                           <string>Abort</string>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
+                       <widget class="QLabel" name="label_28" >
+                        <property name="font" >
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text" >
+                         <string>Picture:</string>
+                        </property>
+                       </widget>
                       </item>
                       <item>
-                       <spacer name="horizontalSpacer" >
+                       <spacer name="verticalSpacer_3" >
                         <property name="orientation" >
-                         <enum>Qt::Horizontal</enum>
+                         <enum>Qt::Vertical</enum>
                         </property>
                         <property name="sizeHint" stdset="0" >
                          <size>
-                          <width>40</width>
-                          <height>20</height>
+                          <width>1</width>
+                          <height>40</height>
                          </size>
                         </property>
                        </spacer>
                       </item>
                      </layout>
                     </item>
-                   </layout>
-                  </widget>
-                  <widget class="QWidget" name="layoutWidget" >
-                   <layout class="QVBoxLayout" name="verticalLayout_7" >
                     <item>
-                     <widget class="QTabWidget" name="tabWidget" >
-                      <property name="currentIndex" >
-                       <number>0</number>
+                     <widget class="QFrame" name="pictureFrame" >
+                      <property name="sizePolicy" >
+                       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
                       </property>
-                      <widget class="QWidget" name="tab" >
-                       <property name="geometry" >
-                        <rect>
-                         <x>0</x>
-                         <y>0</y>
-                         <width>798</width>
-                         <height>161</height>
-                        </rect>
-                       </property>
-                       <attribute name="title" >
-                        <string>Altitude</string>
-                       </attribute>
-                       <layout class="QVBoxLayout" name="verticalLayout_5" >
-                        <item>
-                         <widget class="QwtPlot" name="diagramm" >
-                          <property name="sizePolicy" >
-                           <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
-                          </property>
-                          <property name="minimumSize" >
-                           <size>
-                            <width>0</width>
-                            <height>150</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </widget>
-                      <widget class="QWidget" name="tab_2" >
-                       <property name="geometry" >
-                        <rect>
-                         <x>0</x>
-                         <y>0</y>
-                         <width>798</width>
-                         <height>211</height>
-                        </rect>
-                       </property>
-                       <attribute name="title" >
-                        <string>Heartrate</string>
-                       </attribute>
-                      </widget>
-                      <widget class="QWidget" name="tab_3" >
-                       <property name="geometry" >
-                        <rect>
-                         <x>0</x>
-                         <y>0</y>
-                         <width>798</width>
-                         <height>211</height>
-                        </rect>
-                       </property>
-                       <attribute name="title" >
-                        <string>Speed</string>
-                       </attribute>
-                      </widget>
+                      <property name="minimumSize" >
+                       <size>
+                        <width>0</width>
+                        <height>200</height>
+                       </size>
+                      </property>
+                      <property name="frameShape" >
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="frameShadow" >
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <property name="lineWidth" >
+                       <number>3</number>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_9" >
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_19" >
+                    <item>
+                     <widget class="QLabel" name="label_23" >
+                      <property name="font" >
+                       <font>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                       </font>
+                      </property>
+                      <property name="text" >
+                       <string>Route:</string>
+                      </property>
                      </widget>
                     </item>
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_15" >
-                      <item>
-                       <layout class="QVBoxLayout" name="verticalLayout" >
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_2" >
-                          <item>
-                           <widget class="QLabel" name="label_5" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Distance:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="distanceLabel" >
-                            <property name="text" >
-                             <string>40km</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout" >
-                          <item>
-                           <widget class="QLabel" name="label_7" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Time:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="timeLabel" >
-                            <property name="text" >
-                             <string>56min</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_5" >
-                          <item>
-                           <widget class="QLabel" name="label_13" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Speed:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="speedLabel" >
-                            <property name="text" >
-                             <string>12km/h</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <layout class="QVBoxLayout" name="verticalLayout_2" >
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_3" >
-                          <item>
-                           <widget class="QLabel" name="label_8" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Cadence:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="cadenceLabel" >
-                            <property name="text" >
-                             <string>83</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_4" >
-                          <item>
-                           <widget class="QLabel" name="label_6" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Altitude:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="altitudeLabel" >
-                            <property name="text" >
-                             <string>305m</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_6" >
-                          <item>
-                           <widget class="QLabel" name="label_15" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Heartrate:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="heartrateLabel" >
-                            <property name="text" >
-                             <string>161</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <layout class="QVBoxLayout" name="verticalLayout_6" >
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_12" >
-                          <item>
-                           <widget class="QLabel" name="label_24" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Temperature:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="tempratureLabel" >
-                            <property name="text" >
-                             <string>28 °C</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
+                     <spacer name="horizontalSpacer_5" >
+                      <property name="orientation" >
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0" >
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
                     </item>
                    </layout>
-                  </widget>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QGroupBox" name="groupBox_2" >
-               <property name="title" >
-                <string/>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_17" >
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_16" >
+                  </item>
                   <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_14" >
-                    <item>
-                     <layout class="QVBoxLayout" name="verticalLayout_11" >
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_18" >
-                        <item>
-                         <spacer name="horizontalSpacer_3" >
-                          <property name="orientation" >
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0" >
-                           <size>
-                            <width>40</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_17" >
-                          <item>
-                           <widget class="QLabel" name="label_21" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Activity:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QComboBox" name="comboBox" >
-                            <item>
-                             <property name="text" >
-                              <string>Cycling - Racing Bike</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>Cycling - Mountain Bike</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>Hiking</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>Running</string>
-                             </property>
-                            </item>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <spacer name="horizontalSpacer_4" >
-                          <property name="orientation" >
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0" >
-                           <size>
-                            <width>40</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_16" >
-                        <item>
-                         <layout class="QVBoxLayout" name="verticalLayout_8" >
-                          <item>
-                           <widget class="QLabel" name="label_28" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Picture:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <spacer name="verticalSpacer_3" >
-                            <property name="orientation" >
-                             <enum>Qt::Vertical</enum>
-                            </property>
-                            <property name="sizeHint" stdset="0" >
-                             <size>
-                              <width>1</width>
-                              <height>40</height>
-                             </size>
-                            </property>
-                           </spacer>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <widget class="QFrame" name="pictureFrame" >
-                          <property name="sizePolicy" >
-                           <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
-                          </property>
-                          <property name="minimumSize" >
-                           <size>
-                            <width>0</width>
-                            <height>256</height>
-                           </size>
-                          </property>
-                          <property name="frameShape" >
-                           <enum>QFrame::Box</enum>
-                          </property>
-                          <property name="frameShadow" >
-                           <enum>QFrame::Raised</enum>
-                          </property>
-                          <property name="lineWidth" >
-                           <number>3</number>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QVBoxLayout" name="verticalLayout_9" >
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_19" >
-                        <item>
-                         <widget class="QLabel" name="label_23" >
-                          <property name="font" >
-                           <font>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
-                          <property name="text" >
-                           <string>Route:</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <spacer name="horizontalSpacer_5" >
-                          <property name="orientation" >
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0" >
-                           <size>
-                            <width>40</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <widget class="QTextBrowser" name="textBrowser_2" >
-                        <property name="sizePolicy" >
-                         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="frameShadow" >
-                         <enum>QFrame::Sunken</enum>
-                        </property>
-                        <property name="readOnly" >
-                         <bool>false</bool>
-                        </property>
-                        <property name="html" >
-                         <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+                   <widget class="QTextBrowser" name="textBrowser_2" >
+                    <property name="sizePolicy" >
+                     <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="frameShadow" >
+                     <enum>QFrame::Sunken</enum>
+                    </property>
+                    <property name="readOnly" >
+                     <bool>false</bool>
+                    </property>
+                    <property name="html" >
+                     <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 &lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
 &lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_20" >
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_10" >
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_7" >
+                      <item>
+                       <widget class="QLabel" name="label_18" >
+                        <property name="font" >
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
                         </property>
+                        <property name="text" >
+                         <string>Track-Profil:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="comboBox_2" >
+                        <item>
+                         <property name="text" >
+                          <string>even</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text" >
+                          <string>hilly</string>
+                         </property>
+                        </item>
                        </widget>
                       </item>
                      </layout>
                     </item>
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_20" >
+                     <layout class="QHBoxLayout" name="horizontalLayout_9" >
                       <item>
-                       <layout class="QVBoxLayout" name="verticalLayout_10" >
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_7" >
-                          <item>
-                           <widget class="QLabel" name="label_18" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Track-Profil:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QComboBox" name="comboBox_2" >
-                            <item>
-                             <property name="text" >
-                              <string>even</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>hilly</string>
-                             </property>
-                            </item>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_9" >
-                          <item>
-                           <widget class="QLabel" name="label_22" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Way Quality:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QComboBox" name="comboBox_4" >
-                            <item>
-                             <property name="text" >
-                              <string>excellent</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>good</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>bad</string>
-                             </property>
-                            </item>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                       </layout>
+                       <widget class="QLabel" name="label_22" >
+                        <property name="font" >
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text" >
+                         <string>Way Quality:</string>
+                        </property>
+                       </widget>
                       </item>
                       <item>
-                       <layout class="QVBoxLayout" name="verticalLayout_12" >
+                       <widget class="QComboBox" name="comboBox_4" >
                         <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_8" >
-                          <item>
-                           <widget class="QLabel" name="label_19" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Way Covering:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QComboBox" name="comboBox_3" >
-                            <item>
-                             <property name="text" >
-                              <string>asphalt</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>ballast</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>forest soil</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text" >
-                              <string>gras</string>
-                             </property>
-                            </item>
-                           </widget>
-                          </item>
-                         </layout>
+                         <property name="text" >
+                          <string>excellent</string>
+                         </property>
                         </item>
                         <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_11" >
-                          <item>
-                           <widget class="QLabel" name="label_17" >
-                            <property name="font" >
-                             <font>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text" >
-                             <string>Rating:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <layout class="QHBoxLayout" name="horizontalLayout_10" >
-                            <item>
-                             <widget class="QLabel" name="label_25" >
-                              <property name="text" >
-                               <string/>
-                              </property>
-                              <property name="pixmap" >
-                               <pixmap>../../../usr/share/icons/oxygen/32x32/places/favorites.png</pixmap>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="label_26" >
-                              <property name="text" >
-                               <string/>
-                              </property>
-                              <property name="pixmap" >
-                               <pixmap>../../../usr/share/icons/oxygen/32x32/places/favorites.png</pixmap>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLabel" name="label_27" >
-                              <property name="text" >
-                               <string/>
-                              </property>
-                              <property name="pixmap" >
-                               <pixmap>../../../usr/share/icons/oxygen/32x32/places/favorites.png</pixmap>
-                              </property>
-                             </widget>
-                            </item>
-                           </layout>
-                          </item>
-                         </layout>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QVBoxLayout" name="verticalLayout_13" >
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_21" >
-                        <item>
-                         <widget class="QLabel" name="label_3" >
-                          <property name="font" >
-                           <font>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
-                          <property name="text" >
-                           <string>Description:</string>
-                          </property>
-                         </widget>
+                         <property name="text" >
+                          <string>good</string>
+                         </property>
                         </item>
                         <item>
-                         <spacer name="horizontalSpacer_6" >
-                          <property name="orientation" >
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0" >
-                           <size>
-                            <width>40</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
+                         <property name="text" >
+                          <string>bad</string>
+                         </property>
                         </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <widget class="QTextBrowser" name="textBrowser" >
-                        <property name="sizePolicy" >
-                         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="frameShadow" >
-                         <enum>QFrame::Sunken</enum>
-                        </property>
-                        <property name="readOnly" >
-                         <bool>false</bool>
-                        </property>
-                        <property name="html" >
-                         <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
-p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
-                        </property>
                        </widget>
                       </item>
                      </layout>
@@ -897,14 +363,530 @@ p, li { white-space: pre-wrap; }
                    </layout>
                   </item>
                   <item>
-                   <widget class="QCalendarWidget" name="calendarWidget" >
+                   <layout class="QVBoxLayout" name="verticalLayout_12" >
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_8" >
+                      <item>
+                       <widget class="QLabel" name="label_19" >
+                        <property name="font" >
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text" >
+                         <string>Way Covering:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="comboBox_3" >
+                        <item>
+                         <property name="text" >
+                          <string>asphalt</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text" >
+                          <string>ballast</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text" >
+                          <string>forest soil</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text" >
+                          <string>gras</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_11" >
+                      <item>
+                       <widget class="QLabel" name="label_17" >
+                        <property name="font" >
+                         <font>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text" >
+                         <string>Rating:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_10" >
+                        <item>
+                         <widget class="QLabel" name="label_25" >
+                          <property name="text" >
+                           <string/>
+                          </property>
+                          <property name="pixmap" >
+                           <pixmap>../../../../../../suse/usr/share/icons/oxygen/32x32/places/favorites.png</pixmap>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_26" >
+                          <property name="text" >
+                           <string/>
+                          </property>
+                          <property name="pixmap" >
+                           <pixmap>../../../../../../suse/usr/share/icons/oxygen/32x32/places/favorites.png</pixmap>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_27" >
+                          <property name="text" >
+                           <string/>
+                          </property>
+                          <property name="pixmap" >
+                           <pixmap>../../../../../../suse/usr/share/icons/oxygen/32x32/places/favorites.png</pixmap>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_13" >
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_21" >
+                    <item>
+                     <widget class="QLabel" name="label_3" >
+                      <property name="font" >
+                       <font>
+                        <weight>75</weight>
+                        <bold>true</bold>
+                       </font>
+                      </property>
+                      <property name="text" >
+                       <string>Description:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_6" >
+                      <property name="orientation" >
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0" >
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QTextBrowser" name="textBrowser" >
                     <property name="sizePolicy" >
                      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <property name="frameShadow" >
+                     <enum>QFrame::Sunken</enum>
+                    </property>
+                    <property name="readOnly" >
+                     <bool>false</bool>
+                    </property>
+                    <property name="html" >
+                     <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
+                    </property>
                    </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QCalendarWidget" name="calendarWidget" >
+                  <property name="sizePolicy" >
+                   <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QGroupBox" name="groupBox" >
+               <property name="title" >
+                <string/>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_14" >
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_21" >
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_14" >
+                    <item>
+                     <widget class="MapView" native="1" name="mapFrame" >
+                      <property name="sizePolicy" >
+                       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize" >
+                       <size>
+                        <width>800</width>
+                        <height>400</height>
+                       </size>
+                      </property>
+                      <property name="lineWidth" stdset="0" >
+                       <number>3</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_4" >
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_13" >
+                        <item>
+                         <widget class="QSlider" name="zoomSlider" >
+                          <property name="minimum" >
+                           <number>4</number>
+                          </property>
+                          <property name="maximum" >
+                           <number>16</number>
+                          </property>
+                          <property name="pageStep" >
+                           <number>1</number>
+                          </property>
+                          <property name="orientation" >
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <layout class="QVBoxLayout" name="verticalLayout_3" >
+                        <item>
+                         <widget class="QCheckBox" name="checkBox" >
+                          <property name="text" >
+                           <string>km</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QCheckBox" name="checkBox_2" >
+                          <property name="text" >
+                           <string>WP</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_23" >
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_22" >
+                      <item>
+                       <widget class="QLabel" name="loaderStatusLabel" >
+                        <property name="text" >
+                         <string/>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="abortButton" >
+                        <property name="text" >
+                         <string>Abort</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer" >
+                      <property name="orientation" >
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0" >
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QTabWidget" name="tabWidget" >
+                  <property name="currentIndex" >
+                   <number>0</number>
+                  </property>
+                  <widget class="QWidget" name="tab" >
+                   <property name="geometry" >
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>951</width>
+                     <height>254</height>
+                    </rect>
+                   </property>
+                   <attribute name="title" >
+                    <string>Altitude</string>
+                   </attribute>
+                   <layout class="QVBoxLayout" name="verticalLayout_5" >
+                    <item>
+                     <widget class="QwtPlot" name="diagramm" >
+                      <property name="sizePolicy" >
+                       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize" >
+                       <size>
+                        <width>0</width>
+                        <height>150</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                  <widget class="QWidget" name="tab_2" >
+                   <property name="geometry" >
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>951</width>
+                     <height>254</height>
+                    </rect>
+                   </property>
+                   <attribute name="title" >
+                    <string>Heartrate</string>
+                   </attribute>
+                  </widget>
+                  <widget class="QWidget" name="tab_3" >
+                   <property name="geometry" >
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>951</width>
+                     <height>254</height>
+                    </rect>
+                   </property>
+                   <attribute name="title" >
+                    <string>Speed</string>
+                   </attribute>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_7" >
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_15" >
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout" >
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_2" >
+                        <item>
+                         <widget class="QLabel" name="label_5" >
+                          <property name="font" >
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text" >
+                           <string>Distance:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="distanceLabel" >
+                          <property name="text" >
+                           <string>40km</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout" >
+                        <item>
+                         <widget class="QLabel" name="label_7" >
+                          <property name="font" >
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text" >
+                           <string>Time:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="timeLabel" >
+                          <property name="text" >
+                           <string>56min</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_5" >
+                        <item>
+                         <widget class="QLabel" name="label_13" >
+                          <property name="font" >
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text" >
+                           <string>Speed:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="speedLabel" >
+                          <property name="text" >
+                           <string>12km/h</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_2" >
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_3" >
+                        <item>
+                         <widget class="QLabel" name="label_8" >
+                          <property name="font" >
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text" >
+                           <string>Cadence:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="cadenceLabel" >
+                          <property name="text" >
+                           <string>83</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_4" >
+                        <item>
+                         <widget class="QLabel" name="label_6" >
+                          <property name="font" >
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text" >
+                           <string>Altitude:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="altitudeLabel" >
+                          <property name="text" >
+                           <string>305m</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_6" >
+                        <item>
+                         <widget class="QLabel" name="label_15" >
+                          <property name="font" >
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text" >
+                           <string>Heartrate:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="heartrateLabel" >
+                          <property name="text" >
+                           <string>161</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_6" >
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_12" >
+                        <item>
+                         <widget class="QLabel" name="label_24" >
+                          <property name="font" >
+                           <font>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text" >
+                           <string>Temperature:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="tempratureLabel" >
+                          <property name="text" >
+                           <string>28 °C</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
                   </item>
                  </layout>
                 </item>
@@ -919,8 +901,8 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1202</width>
-             <height>758</height>
+             <width>1391</width>
+             <height>824</height>
             </rect>
            </property>
            <attribute name="title" >
@@ -940,7 +922,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1228</width>
+     <width>1417</width>
      <height>24</height>
     </rect>
    </property>
@@ -957,8 +939,8 @@ p, li { white-space: pre-wrap; }
    <property name="geometry" >
     <rect>
      <x>0</x>
-     <y>865</y>
-     <width>1228</width>
+     <y>925</y>
+     <width>1417</width>
      <height>21</height>
     </rect>
    </property>
@@ -978,7 +960,7 @@ p, li { white-space: pre-wrap; }
   <customwidget>
    <class>QwtPlot</class>
    <extends>QFrame</extends>
-   <header>qwt/qwt_plot.h</header>
+   <header>qwt_plot.h</header>
   </customwidget>
   <customwidget>
    <class>MapView</class>

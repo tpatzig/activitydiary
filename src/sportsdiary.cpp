@@ -19,6 +19,10 @@ SportsDiary::SportsDiary(QObject* parent)
     cadenceLabel->setText("");
     heartrateLabel->setText("");
     tempratureLabel->setText("");
+    speedLabel->setText("");
+    altitudeLabel->setText("");
+    timeLabel->setText("");
+    distanceLabel->setText("");
 
     parser = 0;
     curve1 = 0;
@@ -61,7 +65,7 @@ void SportsDiary::slotImportTrack()
         mCurrentTrack = parser->tracks()[0];
         dateLabel->setText( mCurrentTrack->at(0)->get_date().toString() );
         distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_overall_distance()) + " km");
-
+        timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time()) + " min");
 
         mapFrame->setTrack( mCurrentTrack);
 
@@ -132,15 +136,17 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
         if (mCurrentTrack->at(startIndex)->get_time().secsTo(mCurrentTrack->at(i)->get_time()) >= tmpTime) {
             timeValues << mCurrentTrack->at(startIndex)->get_time().secsTo(mCurrentTrack->at(i)->get_time()) / 60;
             tmpTime += 60;
-            altitudeValues << mCurrentTrack->at(i)->get_altitude();
-            speedValues << mCurrentTrack->at(i)->get_speed() * 3.6;
+            if ( mCurrentTrack->at(i)->get_altitude() > 0 )
+                altitudeValues << mCurrentTrack->at(i)->get_altitude();
+            if ( mCurrentTrack->at(i)->get_speed() > 0 )
+                speedValues << mCurrentTrack->at(i)->get_speed() * 3.6;
         }
     }
 
     curve1 = new QwtPlotCurve("Altitude");
     //      curve1->setBrush(Qt::red);
     curve1->setPen(QPen(QColor(255,0,0)));
-    curve1->setCurveAttribute(QwtPlotCurve::Fitted);
+    //curve1->setCurveAttribute(QwtPlotCurve::Fitted);
     curve1->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
     curve1->setData(timeValues,altitudeValues);
     curve1->attach(diagramm);
@@ -148,7 +154,7 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     curve2 = new QwtPlotCurve("Speed");
     //      curve2->setBrush(Qt::green);
     curve2->setPen(QPen(QColor(0,255,0)));
-    curve2->setCurveAttribute(QwtPlotCurve::Fitted);
+    //curve2->setCurveAttribute(QwtPlotCurve::Fitted);
     curve2->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
     curve2->setData(timeValues,speedValues);
     curve2->attach(diagramm);
@@ -195,4 +201,5 @@ void SportsDiary::slotStartEndPointsChanged(Waypoint* start,Waypoint* end)
 {
     drawGraph(start,end);
     distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_wp_distance(start,end)) + " km");
+    timeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_time(start,end)) + " min");
 }

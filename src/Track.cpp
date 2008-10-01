@@ -112,6 +112,31 @@ float Track::get_wp_distance(Waypoint* wp1,Waypoint* wp2) {
     return distance;
 }
 
+float Track::get_overall_time() {
+    float time_in_sec = 0;
+    Waypoint* tmp = 0;
+
+    foreach(Waypoint* wp,waypoint_list) {
+        if (tmp) {
+            time_in_sec += tmp->get_time().secsTo(wp->get_time());
+        }
+        tmp = wp;
+    }
+    return time_in_sec / 60;
+}
+
+float Track::get_wp_time(Waypoint* wp1,Waypoint* wp2) {
+    Waypoint* tmp = 0;
+    float time_in_sec = 0;
+
+    for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
+        if (tmp)
+            time_in_sec += tmp->get_time().secsTo(at(i)->get_time());
+        tmp = at(i);
+    }
+    return time_in_sec / 60;
+}
+
 Waypoint* Track::at(int i) {
     return waypoint_list.at(i);
 }

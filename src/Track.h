@@ -42,6 +42,9 @@ class Track
         float get_overall_distance();
         float get_wp_distance(Waypoint*,Waypoint*);
 
+        float get_overall_time();
+        float get_wp_time(Waypoint*,Waypoint*);
+
         Waypoint* at(int);
         int indexOf(Waypoint*);
         Waypoint* first();

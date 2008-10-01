@@ -5,6 +5,7 @@
 
 #define EARTHRADIUS 6378137
 #define EARTHCIRCUM ( (double) EARTHRADIUS * 2.0 * M_PI )
+#define MILES_PER_KM 1.852
 
 
 #include <QRect>
@@ -32,7 +33,7 @@ class Calc
         static double yAtZoomToLatitude(int x, int zoom );
         static double xAtZoomToLongitude(int x, int zoom );
         static float distance_in_km(float lat1, float lon1, float lat2, float lon2);
-        static float acos(float f);
+//      static float acos(float f);
         static float abso(float x);
 };
 

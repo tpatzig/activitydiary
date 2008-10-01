@@ -1,6 +1,7 @@
 #include "Calc.h"
 #include <QDebug>
 
+
 Calc::Calc()
 {
 }
@@ -63,7 +64,7 @@ QPoint Calc::calcTileXY(float lat, float lon, long zoom)
 double Calc::degToRad(double d)
 {
     //OK
-    return d * M_PI / 180.0;
+    return d / 180.0 * M_PI;
 }
 
 double Calc::radToDeg(double r)
@@ -119,23 +120,24 @@ double Calc::xAtZoomToLongitude(int x, int zoom )
 
 float Calc::distance_in_km(float lat1, float lon1, float lat2, float lon2)
 {
-    //  	 float theta = lon1 - lon2;
 
-    //  	 float dist = sin(degToRad(lat1)) * sin(degToRad(lat2)) + cos(degToRad(lat1)) * cos(degToRad(lat2)) * cos(degToRad(theta));
 
-    //	 dist = radToDeg(acos(dist));
+//  float distance = (acos(sin(lat1/180*M_PI)*sin(lat2/180*M_PI) + cos(lat1/180*M_PI)*cos(lat2/180*M_PI)*cos(lon1/180*M_PI-lon2/180*M_PI))*180*60/M_PI);
 
-    // distance in km //
-    //  	 return (dist * 60.0 * 1.1515 * 1.609344);
-    float distance = (3958*M_PI*sqrt((lat2-lat1)*(lat2-lat1) + cos(lat2/57.29578)*cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
-    return distance;
+
+    float distance = (acos(sin(degToRad(lat1)) * sin(degToRad(lat2)) + 
+                    cos(degToRad(lat1)) * cos(degToRad(lat2)) * cos(degToRad(lon1)-degToRad(lon2))) * 180*60/M_PI);
+
+    // miles in km
+    return (distance * MILES_PER_KM);
 
 }
-
+/*
 float Calc::acos(float f)
 {
     return (atan2(sqrt(abso(1 - pow(f,2))), f) );
 }
+*/
 
 float Calc::abso(float x)
 {

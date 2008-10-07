@@ -1,6 +1,9 @@
 #include "sportsdiary.h"
 
+#include <QComboBox>
+
 SportsDiary::SportsDiary(QObject* parent)
+  :parser( 0 )
 {
     Q_UNUSED(parent);
 
@@ -18,11 +21,15 @@ SportsDiary::SportsDiary(QObject* parent)
     zoomSlider->setValue(mapFrame->zoom());
     cadenceLabel->setText("");
     heartrateLabel->setText("");
-    tempratureLabel->setText("");
+    // tempratureLabel->setText("");
     speedLabel->setText("");
     altitudeLabel->setText("");
     timeLabel->setText("");
     distanceLabel->setText("");
+
+    mTrackCombo->setSizeAdjustPolicy( QComboBox::AdjustToContents );
+    connect( mTrackCombo, SIGNAL( activated( int ) ),
+             this,  SLOT( slotSelectCurrentTrack( int ) ) );
 
     parser = 0;
     curve1 = 0;
@@ -56,25 +63,47 @@ void SportsDiary::slotUpdateDownloadState(int queue)
 
 void SportsDiary::slotImportTrack()
 {
-    qDebug() << "importing track";
-    QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Open GPX File"), "./", tr("GPX Files (*.gpx)"));
-    if (!fileName.isEmpty()) {
-        parser = new GPXParser(fileName);
-        qDebug() << "Read file with " << parser->tracks().count() << " tracks";
-        mCurrentTrack = parser->tracks()[0];
-        dateLabel->setText( mCurrentTrack->at(0)->get_date().toString() );
-        distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_overall_distance()) + " km");
-        timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time()) + " min");
+  qDebug() << "importing track";
+  QString fileName = QFileDialog::getOpenFileName(this,
+                                                  tr("Open GPX File"), "./", tr("GPX Files (*.gpx)"));
+  if (!fileName.isEmpty()) {
+    if ( parser ) delete parser;
 
-        mapFrame->setTrack( mCurrentTrack);
+    parser = new GPXParser(fileName);
+    qDebug() << "Read file with " << parser->tracks().count() << " tracks";
 
-        drawGraph(mCurrentTrack->first(),mCurrentTrack->last());
-    } else 
-        qDebug() << "no track found";
+    TrackList tracks = parser->tracks();
+    QListIterator<Track*> it( tracks );
+    int cnt = 0;
+    mTrackCombo->clear();
 
+    while ( it.hasNext() ) {
+      mTrackCombo->addItem( i18n( "Track No. %1" ).arg( cnt++ ) );
+      it.next();
+    }
+
+    slotSelectCurrentTrack( 0 );
+  } else
+    qDebug() << "no track found";
 }
 
+void SportsDiary::slotSelectCurrentTrack( int num )
+{
+  TrackList tracks = parser->tracks();
+
+  if ( num >= 0 && num < tracks.count() ) {
+    qDebug() << "Selecting track " << num;
+    mCurrentTrack = tracks[num];
+
+    mDateLabel->setText( mCurrentTrack->at(0)->get_date().toString() );
+    distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_overall_distance()) + " km");
+    timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time()) + " min");
+
+    mapFrame->setTrack( mCurrentTrack);
+
+    drawGraph(mCurrentTrack->first(),mCurrentTrack->last());
+  }
+}
 
 void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 {
@@ -135,12 +164,12 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     for(int i = startIndex; i <= mCurrentTrack->indexOf(end); i++) {
         // only take wp from every full minute, to have a smooth curve in the diagramm //
         if (mCurrentTrack->at(startIndex)->get_time().secsTo(mCurrentTrack->at(i)->get_time()) >= tmpTime) {
-            
-//          Altitude 0 should be a valid value, otherwise the gpx is incorrect           
+
+//          Altitude 0 should be a valid value, otherwise the gpx is incorrect
 //          if ( curr_alt > 0 ) {
                 altitudeValues << mCurrentTrack->at(i)->get_altitude();
 
-//          speedvalues should be calculated, so we do not have the 0 value problem!            
+//          speedvalues should be calculated, so we do not have the 0 value problem!
 //          if ( curr_speed > 0 )
                 speedValues << mCurrentTrack->at(i)->get_speed() * 3.6;
             timeValues << mCurrentTrack->at(startIndex)->get_time().secsTo(mCurrentTrack->at(i)->get_time()) / 60;

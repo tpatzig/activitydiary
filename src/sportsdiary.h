@@ -13,7 +13,7 @@
 #include "mapview.h" 
 #include "gpxparser.h"
 #include "Track.h" 
-#include "ui_sportsdiary.h" 
+#include "ui_sportnew3.h" 
 
 
 
@@ -21,35 +21,33 @@
 class SportsDiary : public QMainWindow, 
                     private Ui_SportsDiary 
 { 
-    Q_OBJECT
+  Q_OBJECT
 
-    public:
-        SportsDiary(QObject* parent = 0);
-        ~SportsDiary();
+public:
+  SportsDiary(QObject* parent = 0);
+  ~SportsDiary();
 
-    private:
-        Track *mCurrentTrack;
-        GPXParser* parser;
+public slots:
 
-        QGraphicsScene* scene;
+  void slotUpdateDownloadState(int);
+  void slotImportTrack();
+  void slotSetZoom(int);
+  void slotSetSliderValue(int);
+  void slotWaypointSelected(Waypoint*);
+  void slotStartEndPointsChanged(Waypoint* start,Waypoint* end);
+  void slotSelectCurrentTrack( int );
 
-        void drawGraph( Waypoint* ,Waypoint* );
-        QString roundNumberAsString(double f);
+private:
+  Track *mCurrentTrack;
+  GPXParser* parser;
 
-        QwtPlotCurve* curve1;
-        QwtPlotCurve* curve2;
+  QGraphicsScene* scene;
 
+  void drawGraph( Waypoint* ,Waypoint* );
+  QString roundNumberAsString(double f);
 
-
-        public slots:
-
-            void slotUpdateDownloadState(int);
-        void slotImportTrack();
-        void slotSetZoom(int);
-        void slotSetSliderValue(int);
-        void slotWaypointSelected(Waypoint*);
-        void slotStartEndPointsChanged(Waypoint* start,Waypoint* end);
-
+  QwtPlotCurve* curve1;
+  QwtPlotCurve* curve2;
 
 };
 

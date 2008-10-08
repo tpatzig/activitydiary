@@ -17,6 +17,7 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mapFrame,SIGNAL(zoomChanged(int)),this,SLOT(slotSetSliderValue(int)));
     connect(mapFrame,SIGNAL(startEndPointsMoved(Waypoint*,Waypoint*)),this,SLOT(slotStartEndPointsChanged(Waypoint*,Waypoint*)));
 
+    iconLabel->setPixmap(QPixmap("kompassberg.png"));
     abortButton->setEnabled(false);
     zoomSlider->setValue(mapFrame->zoom());
     cadenceLabel->setText("");
@@ -98,6 +99,8 @@ void SportsDiary::slotSelectCurrentTrack( int num )
     mDateLabel->setText( mCurrentTrack->at(0)->get_date().toString() );
     distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_overall_distance()) + " km");
     timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time()) + " min");
+    speedLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_avg_speed() * 3.6 ) + " km/h");
+    altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_avg_altitude()) + " m");
 
     mapFrame->setTrack( mCurrentTrack);
 
@@ -161,18 +164,19 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     int tmpTime = 0;
     int startIndex = mCurrentTrack->indexOf(start);
 
+    Waypoint* it = 0;
+
     for(int i = startIndex; i <= mCurrentTrack->indexOf(end); i++) {
+        it = mCurrentTrack->at(i);
         // only take wp from every full minute, to have a smooth curve in the diagramm //
-        if (mCurrentTrack->at(startIndex)->get_time().secsTo(mCurrentTrack->at(i)->get_time()) >= tmpTime) {
+        if (start->get_time().secsTo(it->get_time()) >= tmpTime) {
 
 //          Altitude 0 should be a valid value, otherwise the gpx is incorrect
 //          if ( curr_alt > 0 ) {
-                altitudeValues << mCurrentTrack->at(i)->get_altitude();
-
-//          speedvalues should be calculated, so we do not have the 0 value problem!
-//          if ( curr_speed > 0 )
-                speedValues << mCurrentTrack->at(i)->get_speed() * 3.6;
-            timeValues << mCurrentTrack->at(startIndex)->get_time().secsTo(mCurrentTrack->at(i)->get_time()) / 60;
+            altitudeValues << it->get_altitude();
+            if (mCurrentTrack->indexOf(it) < mCurrentTrack->count_waypoints() -1)
+                speedValues << mCurrentTrack->get_wp_speed(it,mCurrentTrack->at(mCurrentTrack->indexOf(it)+1)) * 3.6;
+            timeValues << start->get_time().secsTo(it->get_time()) / 60;
             tmpTime += 60;
         }
     }
@@ -195,7 +199,6 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 
 
     diagramm->replot();
-
 }
 
 void SportsDiary::slotSetZoom(int zoom)
@@ -236,4 +239,7 @@ void SportsDiary::slotStartEndPointsChanged(Waypoint* start,Waypoint* end)
     drawGraph(start,end);
     distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_wp_distance(start,end)) + " km");
     timeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_time(start,end)) + " min");
+    speedLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_speed(start,end) * 3.6 ) + " km/h");
+    altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_altitude(start,end)) + " m");
 }
+

@@ -137,6 +137,69 @@ float Track::get_wp_time(Waypoint* wp1,Waypoint* wp2) {
     return time_in_sec / 60;
 }
 
+float Track::get_wp_speed(Waypoint* wp1,Waypoint* wp2) {
+    float time = get_wp_time(wp1,wp2) * 60;
+    float distance = get_wp_distance(wp1,wp2) * 1000;
+
+    // return speed in m/s
+    return distance/time;
+}
+
+float Track::get_overall_avg_speed()
+{
+    float avg_speed = 0;
+    Waypoint* tmp = 0;
+
+    foreach(Waypoint* wp,waypoint_list) {
+        if (tmp) {
+            avg_speed += get_wp_speed(tmp,wp);
+        }
+        tmp = wp;
+    }
+    return avg_speed / count_waypoints();
+
+}
+
+float Track::get_wp_avg_speed(Waypoint* wp1, Waypoint* wp2)
+{
+    float avg_speed = 0;
+    Waypoint* tmp = 0;
+
+    for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
+        if (tmp) {
+            avg_speed += get_wp_speed(tmp,at(i));
+        }
+        tmp = at(i);
+    }
+    int count = indexOf(wp2) - indexOf(wp1);
+    return avg_speed / count;
+
+}
+
+float Track::get_overall_avg_altitude()
+{
+    float avg_alt = 0;
+
+    foreach(Waypoint* wp,waypoint_list) {
+        avg_alt += wp->get_altitude();
+    }
+
+    return avg_alt / count_waypoints();
+}
+
+float Track::get_wp_avg_altitude(Waypoint* wp1, Waypoint* wp2)
+{
+    float avg_alt = 0;
+
+    for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
+        avg_alt += at(i)->get_altitude();
+    }
+    int count = indexOf(wp2) - indexOf(wp1);
+
+    return avg_alt / count;
+}
+
+
 Waypoint* Track::at(int i) {
     return waypoint_list.at(i);
 }

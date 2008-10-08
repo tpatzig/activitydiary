@@ -45,6 +45,13 @@ class Track
         float get_overall_time();
         float get_wp_time(Waypoint*,Waypoint*);
 
+        float get_wp_speed(Waypoint*, Waypoint*);
+        float get_overall_avg_speed();
+        float get_wp_avg_speed(Waypoint*, Waypoint*);
+
+        float get_overall_avg_altitude();
+        float get_wp_avg_altitude(Waypoint*,Waypoint*);
+
         Waypoint* at(int);
         int indexOf(Waypoint*);
         Waypoint* first();

@@ -13,6 +13,7 @@
 #include "mapview.h" 
 #include "gpxparser.h"
 #include "Track.h" 
+#include "waypoint.h"
 #include "ui_sportnew3.h" 
 
 

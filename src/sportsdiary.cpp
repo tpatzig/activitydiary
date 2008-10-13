@@ -165,19 +165,24 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     int startIndex = mCurrentTrack->indexOf(start);
 
     Waypoint* it = 0;
+    Waypoint* tmpWp = 0;
 
     for(int i = startIndex; i <= mCurrentTrack->indexOf(end); i++) {
         it = mCurrentTrack->at(i);
         // only take wp from every full minute, to have a smooth curve in the diagramm //
-        if (start->get_time().secsTo(it->get_time()) >= tmpTime) {
+        if (start->get_time().secsTo(it->get_time()) >= tmpTime ) {
+            if (tmpWp) {
 
 //          Altitude 0 should be a valid value, otherwise the gpx is incorrect
 //          if ( curr_alt > 0 ) {
-            altitudeValues << it->get_altitude();
-            if (mCurrentTrack->indexOf(it) < mCurrentTrack->count_waypoints() -1)
-                speedValues << mCurrentTrack->get_wp_speed(it,mCurrentTrack->at(mCurrentTrack->indexOf(it)+1)) * 3.6;
-            timeValues << start->get_time().secsTo(it->get_time()) / 60;
-            tmpTime += 60;
+                 altitudeValues << it->get_altitude();
+
+                 speedValues << mCurrentTrack->get_wp_speed(tmpWp,it) * 3.6;
+
+                 timeValues << (start->get_time().secsTo(it->get_time())) / 60;
+                 tmpTime += 60;
+            }
+            tmpWp = it;
         }
     }
 

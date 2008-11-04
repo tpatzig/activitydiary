@@ -14,6 +14,8 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(abortButton,SIGNAL(clicked()),mapFrame,SLOT(slotAbortDownload()));
     connect(actionImport,SIGNAL(triggered()),this,SLOT(slotImportTrack()));
     connect(zoomSlider,SIGNAL(sliderMoved(int)),this,SLOT(slotSetZoom(int)));
+    connect(altitudeCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotAltitudeCheck(bool)));
+    connect(speedCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotSpeedCheck(bool)));
     connect(mapFrame,SIGNAL(zoomChanged(int)),this,SLOT(slotSetSliderValue(int)));
     connect(mapFrame,SIGNAL(startEndPointsMoved(Waypoint*,Waypoint*)),this,SLOT(slotStartEndPointsChanged(Waypoint*,Waypoint*)));
 
@@ -33,21 +35,22 @@ SportsDiary::SportsDiary(QObject* parent)
              this,  SLOT( slotSelectCurrentTrack( int ) ) );
 
     parser = 0;
-    curve1 = 0;
-    curve2 = 0;
+    altitudeDiagram = 0;
+    speedDiagram = 0;
 
 }
 
 SportsDiary::~SportsDiary()
 {
-    if (curve1) {
-        delete curve1;
-        curve1 = 0;
+    if (altitudeDiagram) {
+        delete altitudeDiagram;
+        altitudeDiagram = 0;
     }
-    if (curve2) {
-        delete curve2;
-        curve2 = 0;
+    if (speedDiagram) {
+        delete speedDiagram;
+        speedDiagram = 0;
     }
+
 }
 
 void SportsDiary::slotUpdateDownloadState(int queue)
@@ -111,56 +114,32 @@ void SportsDiary::slotSelectCurrentTrack( int num )
 void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 {
 
-    // Diagramm with GraphicsView //
-    /*
-       scene = new QGraphicsScene(diagramGraphicsView);
-       int trackLength = 0;
-    //      float maxHeight = 0.0;
-    //      float minHeight = track->get_waypoint_list()[0]->get_altitude();
-    Waypoint* tmp = 0;
-
-
-    //      scene->setSceneRect(0,0,trackSecs,maxHeight-minHeight);
-
-    tmp = 0;
-    trackLength = 0;
-    int trackLength0 = 0;
-    foreach(Waypoint* wp,track->get_waypoint_list()) {
-    if (tmp) {
-
-    scene->addLine(trackLength,tmp->get_altitude() * -1,trackLength+1,wp->get_altitude()*-1,QPen(QColor(255,0,0)));
+    if (altitudeDiagram) {
+        altitudeDiagram->detach();
+        delete altitudeDiagram;
+        altitudeDiagram = 0;
     }
-    tmp = wp;
-    trackLength++;
+    if (speedDiagram) {
+        speedDiagram->detach();
+        delete speedDiagram;
+        speedDiagram = 0;
     }
-
-    diagramGraphicsView->setScene(scene);
-    diagramGraphicsView->show();
-     */
-
-    // diagramm with Qwt //
-
 
     //      diagramm->clear();
-    if (curve1) {
-        curve1->detach();
-        delete curve1;
-        curve1 = 0;
-    }
-    if (curve2) {
-        curve2->detach();
-        delete curve2;
-        curve2 = 0;
-    }
 
-    diagramm->enableAxis(QwtPlot::yRight);
-    diagramm->setAxisTitle(QwtPlot::yRight,"Speed in km/h");
-    diagramm->setAxisTitle(QwtPlot::yLeft,"Altitude in m");
-    diagramm->setAxisTitle(QwtPlot::xBottom,"Time in min");
+    altitudeDiagram = new DiagramCurve(diagram,"Altitude");
+    speedDiagram = new DiagramCurve(diagram,"Speed");
 
-    QwtArray<double> timeValues;
-    QwtArray<double> altitudeValues;
-    QwtArray<double> speedValues;
+
+    diagram->enableAxis(QwtPlot::yRight);
+    diagram->setAxisTitle(QwtPlot::yRight,"Speed in km/h");
+    diagram->setAxisTitle(QwtPlot::yLeft,"Altitude in m");
+    diagram->setAxisTitle(QwtPlot::xBottom,"Time in min");
+
+
+    QVector<double> timeValues;
+    QVector<double> altitudeValues;
+    QVector<double> speedValues;
     int tmpTime = 0;
     int startIndex = mCurrentTrack->indexOf(start);
 
@@ -186,24 +165,18 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
         }
     }
 
-    curve1 = new QwtPlotCurve("Altitude");
-    //      curve1->setBrush(Qt::red);
-    curve1->setPen(QPen(QColor(255,0,0)));
-    //curve1->setCurveAttribute(QwtPlotCurve::Fitted);
-    curve1->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
-    curve1->setData(timeValues,altitudeValues);
-    curve1->attach(diagramm);
+    altitudeDiagram->setColor(QColor(255,0,0));
+    altitudeDiagram->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
+    altitudeDiagram->setValues(timeValues,altitudeValues);
+    speedDiagram->setColor(QColor(0,255,0));
+    speedDiagram->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
+    speedDiagram->setValues(timeValues,speedValues);
 
-    curve2 = new QwtPlotCurve("Speed");
-    //      curve2->setBrush(Qt::green);
-    curve2->setPen(QPen(QColor(0,255,0)));
-    //curve2->setCurveAttribute(QwtPlotCurve::Fitted);
-    curve2->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
-    curve2->setData(timeValues,speedValues);
-    curve2->attach(diagramm);
+    diagram->replot();
 
+    altitudeCheckBox->setChecked(true);
+    speedCheckBox->setChecked(true);
 
-    diagramm->replot();
 }
 
 void SportsDiary::slotSetZoom(int zoom)
@@ -246,5 +219,53 @@ void SportsDiary::slotStartEndPointsChanged(Waypoint* start,Waypoint* end)
     timeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_time(start,end)) + " min");
     speedLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_speed(start,end) * 3.6 ) + " km/h");
     altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_altitude(start,end)) + " m");
+}
+
+void SportsDiary::slotAltitudeCheck(bool checked)
+{
+    enableDisableDiagram(checked,altitudeDiagram,"Altitude in m");
+}
+
+void SportsDiary::slotSpeedCheck(bool checked)
+{
+    enableDisableDiagram(checked,speedDiagram,"Speed in km/h");
+
+}
+
+void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString axText)
+{
+    if (check) {
+        qDebug() << "enable " << axText << " Diagram";
+        if (diagram->itemList().size() > 0) {
+            diagram->enableAxis(QwtPlot::yRight);
+            curve->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
+            diagram->setAxisTitle(QwtPlot::yRight,axText);
+        } else {
+            curve->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
+            diagram->setAxisTitle(QwtPlot::yLeft,axText);
+        }
+        curve->attachToDiagram(diagram);
+
+    } else {
+        curve->detach();
+
+        qDebug() << "disable " << axText << " Diagram";
+        if (curve->yAxis() == QwtPlot::yRight) {
+            diagram->enableAxis(QwtPlot::yRight,false);
+
+        } else if (diagram->itemList().size() > 0) {
+            diagram->itemList()[0]->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
+            diagram->setAxisTitle(QwtPlot::yLeft,diagram->axisTitle(QwtPlot::yRight ).text());
+            diagram->enableAxis(QwtPlot::yRight,false);
+            
+        } else {
+            diagram->setAxisTitle(QwtPlot::yLeft,"");
+        }
+
+
+    }
+
+    diagram->replot();
+
 }
 

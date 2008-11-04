@@ -19,6 +19,7 @@ set(map_SRCS
 	loader.cpp
 	Track.cpp
 	sportsdiary.cpp
+        diagramcurve.cpp
 )
 
 

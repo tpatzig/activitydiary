@@ -5,16 +5,17 @@
 #include <QtGui> 
 #include <klocalizedstring.h> 
 #include <QObject>
-#include <qwt_plot.h>
-#include <qwt_plot_curve.h>
-#include <qwt_curve_fitter.h>
+
 
 
 #include "mapview.h" 
 #include "gpxparser.h"
 #include "Track.h" 
 #include "waypoint.h"
-#include "ui_sportnew3.h" 
+#include "diagramcurve.h"
+
+#include "ui_sportnew3.h"
+
 
 
 
@@ -37,6 +38,8 @@ public slots:
   void slotWaypointSelected(Waypoint*);
   void slotStartEndPointsChanged(Waypoint* start,Waypoint* end);
   void slotSelectCurrentTrack( int );
+  void slotAltitudeCheck(bool);
+  void slotSpeedCheck(bool);
 
 private:
   Track *mCurrentTrack;
@@ -47,8 +50,12 @@ private:
   void drawGraph( Waypoint* ,Waypoint* );
   QString roundNumberAsString(double f);
 
-  QwtPlotCurve* curve1;
-  QwtPlotCurve* curve2;
+  DiagramCurve* altitudeDiagram;
+  DiagramCurve* speedDiagram;
+
+  void enableDisableDiagram(bool, DiagramCurve*, QString);
+
+
 
 };
 

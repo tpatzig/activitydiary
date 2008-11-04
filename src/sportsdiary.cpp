@@ -34,6 +34,11 @@ SportsDiary::SportsDiary(QObject* parent)
     connect( mTrackCombo, SIGNAL( activated( int ) ),
              this,  SLOT( slotSelectCurrentTrack( int ) ) );
 
+    altitudeCheckBox->setChecked(true);
+    speedCheckBox->setChecked(true);
+    altitudeCheckBox->setEnabled(false);
+    speedCheckBox->setEnabled(false);
+
     parser = 0;
     altitudeDiagram = 0;
     speedDiagram = 0;
@@ -114,29 +119,6 @@ void SportsDiary::slotSelectCurrentTrack( int num )
 void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 {
 
-    if (altitudeDiagram) {
-        altitudeDiagram->detach();
-        delete altitudeDiagram;
-        altitudeDiagram = 0;
-    }
-    if (speedDiagram) {
-        speedDiagram->detach();
-        delete speedDiagram;
-        speedDiagram = 0;
-    }
-
-    //      diagramm->clear();
-
-    altitudeDiagram = new DiagramCurve(diagram,"Altitude");
-    speedDiagram = new DiagramCurve(diagram,"Speed");
-
-
-    diagram->enableAxis(QwtPlot::yRight);
-    diagram->setAxisTitle(QwtPlot::yRight,"Speed in km/h");
-    diagram->setAxisTitle(QwtPlot::yLeft,"Altitude in m");
-    diagram->setAxisTitle(QwtPlot::xBottom,"Time in min");
-
-
     QVector<double> timeValues;
     QVector<double> altitudeValues;
     QVector<double> speedValues;
@@ -165,17 +147,27 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
         }
     }
 
-    altitudeDiagram->setColor(QColor(255,0,0));
-    altitudeDiagram->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
+    if (!altitudeDiagram) {
+        altitudeDiagram = new DiagramCurve(diagram,"Altitude");
+        altitudeDiagram->setColor(QColor(255,0,0));
+        slotAltitudeCheck(altitudeCheckBox->isChecked());
+    }
+    if (!speedDiagram) {
+        speedDiagram = new DiagramCurve(diagram,"Speed");
+        speedDiagram->setColor(QColor(0,255,0));
+        slotSpeedCheck(speedCheckBox->isChecked());
+    }
+
+    diagram->setAxisTitle(QwtPlot::xBottom,"Time in min");
+
     altitudeDiagram->setValues(timeValues,altitudeValues);
-    speedDiagram->setColor(QColor(0,255,0));
-    speedDiagram->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
     speedDiagram->setValues(timeValues,speedValues);
+
 
     diagram->replot();
 
-    altitudeCheckBox->setChecked(true);
-    speedCheckBox->setChecked(true);
+    altitudeCheckBox->setEnabled(true);
+    speedCheckBox->setEnabled(true);
 
 }
 
@@ -235,12 +227,13 @@ void SportsDiary::slotSpeedCheck(bool checked)
 void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString axText)
 {
     if (check) {
+
         qDebug() << "enable " << axText << " Diagram";
-        if (diagram->itemList().size() > 0) {
+        if (diagram->itemList().size() == 1) {
             diagram->enableAxis(QwtPlot::yRight);
             curve->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
             diagram->setAxisTitle(QwtPlot::yRight,axText);
-        } else {
+        } else if (diagram->itemList().size() == 0) {
             curve->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
             diagram->setAxisTitle(QwtPlot::yLeft,axText);
         }
@@ -261,11 +254,7 @@ void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString 
         } else {
             diagram->setAxisTitle(QwtPlot::yLeft,"");
         }
-
-
     }
-
     diagram->replot();
-
 }
 

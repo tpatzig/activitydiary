@@ -4,9 +4,7 @@ DiagramCurve::DiagramCurve(QwtPlot* parent, QString dia_name) : name(dia_name), 
 {
     setParent(parent);
     curve = new QwtPlotCurve(name);
-    curve->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
-    attachToDiagram(parent);
-
+    setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
 }
 
 DiagramCurve::~DiagramCurve()

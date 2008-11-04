@@ -9,6 +9,11 @@ SportsDiary::SportsDiary(QObject* parent)
 
     setupUi(this);
 
+    settings = new QSettings();
+    if (!settings->contains("TilesDir"))
+        settings->setValue("TilesDir","~/tiles");
+
+    qDebug() << "Tiles Directory: " << settings->value("TilesDir").toString();
 
     connect(mapFrame,SIGNAL(downloadState(int)),this,SLOT(slotUpdateDownloadState(int)));
     connect(abortButton,SIGNAL(clicked()),mapFrame,SLOT(slotAbortDownload()));
@@ -56,6 +61,7 @@ SportsDiary::~SportsDiary()
         speedDiagram = 0;
     }
 
+    delete settings;
 }
 
 void SportsDiary::slotUpdateDownloadState(int queue)

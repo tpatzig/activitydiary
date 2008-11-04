@@ -54,6 +54,7 @@ private:
   DiagramCurve* speedDiagram;
 
   void enableDisableDiagram(bool, DiagramCurve*, QString);
+  QSettings* settings;
 
 
 

@@ -5,9 +5,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1386</width>
+    <width>1268</width>
     <height>972</height>
    </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle" >
    <string>ActivityDiary</string>
@@ -17,7 +23,7 @@
     <rect>
      <x>0</x>
      <y>24</y>
-     <width>1386</width>
+     <width>1268</width>
      <height>927</height>
     </rect>
    </property>
@@ -242,6 +248,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize" >
+             <size>
+              <width>188</width>
+              <height>26</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -749,7 +761,7 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="" >
+      <widget class="QWidget" name="layoutWidget" >
        <layout class="QVBoxLayout" name="verticalLayout_15" >
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_7" >
@@ -955,7 +967,7 @@ p, li { white-space: pre-wrap; }
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="" >
+             <widget class="QWidget" name="layoutWidget" >
               <layout class="QHBoxLayout" name="horizontalLayout_12" >
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_7" >
@@ -1034,7 +1046,7 @@ p, li { white-space: pre-wrap; }
                     <x>4</x>
                     <y>22</y>
                     <width>148</width>
-                    <height>255</height>
+                    <height>238</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_12" >
@@ -1364,7 +1376,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1386</width>
+     <width>1268</width>
      <height>24</height>
     </rect>
    </property>
@@ -1382,7 +1394,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>951</y>
-     <width>1386</width>
+     <width>1268</width>
      <height>21</height>
     </rect>
    </property>

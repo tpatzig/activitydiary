@@ -25,6 +25,11 @@ ImageLoader::ImageLoader(QObject* parent) : QObject(parent) {
     qDebug() << "OSM Host: " << OSM_HOST_A;
 
     active_download = 0;
+
+    QSettings settings;
+    tilesPath = settings.value("TilesDir").toString();
+    if (tilesPath.isEmpty())
+        tilesPath = "tiles";
 }
 
 
@@ -37,9 +42,9 @@ ImageLoader::~ImageLoader() {
 // public functions // 
 QPixmap ImageLoader::load_tile(int zoom, int x, int y) {
 
-    if ( access( get_pic_path( zoom,x,y,QString(PATH) ).toLatin1(),F_OK ) == 0 ) {
+    if ( access( get_pic_path( zoom,x,y,QString(tilesPath) ).toLatin1(),F_OK ) == 0 ) {
         qDebug() << "file exists";
-        QPixmap local_pixmap(get_pic_path( zoom,x,y,QString(PATH) ));
+        QPixmap local_pixmap(get_pic_path( zoom,x,y,QString(tilesPath) ));
         return local_pixmap;
     } else {
         QString download_path = get_pic_path(zoom,x,y);
@@ -77,7 +82,7 @@ void ImageLoader::downloadFinished(Loader* loader, int id, bool err) {
 
                 QFileInfo info(*loader->current_png_file);
 
-                QString osm_path = info.absoluteFilePath().split(QString(PATH))[1];
+                QString osm_path = info.absoluteFilePath().split(QString(tilesPath))[1];
 
                 qDebug() << "OSM-PATH : " << osm_path;
 
@@ -114,7 +119,7 @@ void ImageLoader::download_image(QString path) {
         if ( loader->http->currentId() == 0) {
             qDebug() << "Activating Download";
 
-            QFileInfo info( QString(PATH) + path );
+            QFileInfo info( QString(tilesPath) + path );
             QDir dir;
             if (!info.absoluteDir().exists())
                 dir.mkpath(info.path());

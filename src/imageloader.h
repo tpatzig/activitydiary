@@ -8,6 +8,7 @@
 #include <QHttp>
 #include <QDir>
 #include <QFileInfo>
+#include <QSettings>
 #include <qdebug.h>
 #include <unistd.h>
 
@@ -18,8 +19,6 @@
 #define OSM_HOST_A "a.tile.openstreetmap.org"
 #define OSM_HOST_B "b.tile.openstreetmap.org"
 #define OSM_HOST_C "c.tile.openstreetmap.org"
-
-#define PATH "tiles"
 
 
 class ImageLoader : public QObject
@@ -54,6 +53,8 @@ class ImageLoader : public QObject
         QStringList download_queue;
         bool active_download;
         int active_download_id;
+
+        QString tilesPath;
 
 
     public slots:

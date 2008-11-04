@@ -9,6 +9,9 @@
 int main( int argc, char **argv )
 {
     QApplication app(argc, argv);
+    QCoreApplication::setOrganizationName("ActivityDiary");
+    QCoreApplication::setApplicationName("ActivityDiary");
+    QCoreApplication::setOrganizationDomain("activitydiary.org");
 
     SportsDiary mainWin;
     //    MainWindow mainWin;

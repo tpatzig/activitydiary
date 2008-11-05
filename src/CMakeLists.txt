@@ -24,7 +24,7 @@ set(map_SRCS
 
 
 kde4_add_ui_files(map_SRCS
-			sportnew3.ui)
+			activitydiary.ui)
 
 kde4_add_executable(activitydiary ${map_SRCS})
 

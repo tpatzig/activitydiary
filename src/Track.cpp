@@ -20,10 +20,10 @@ Track::Track(WaypointList wpList)
 
 Track::~Track()
 {
-    // gpxparser already cares about that data structure -> no double delete !//
-
-    //  qDeleteAll(waypoint_list.begin(),waypoint_list.end());
-    //  waypoint_list.clear();
+    if (count_waypoints() > 0) {
+         qDeleteAll(waypoint_list.begin(),waypoint_list.end());
+         waypoint_list.clear();
+    }
 }
 
 

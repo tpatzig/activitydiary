@@ -13,7 +13,14 @@ GPXParser::GPXParser(QString filename) {
 
 GPXParser::~GPXParser()
 {
-    mTracks.clear();
+    if (singleTracks.size() > 0) {
+        qDeleteAll(singleTracks.begin(),singleTracks.end());
+    }
+    singleTracks.clear();
+    if (allInOneTrack.size() > 0) {
+        allInOneTrack[0]->set_waypoint_list(WaypointList());
+        delete allInOneTrack[0];
+    }
 }
 
 void GPXParser::parse_file(QFile &file)
@@ -22,6 +29,13 @@ void GPXParser::parse_file(QFile &file)
     QDomDocument document;
     document.setContent(&file);
     QDomElement mainElement = document.documentElement();
+
+    WaypointList allPoints;
+    QPointF allMaxNorth(0,0);
+    QPointF allMaxSouth(0,0);
+    QPointF allMaxWest(0,0);
+    QPointF allMaxEast(0,0);
+   
 
     QDomElement trk = mainElement.firstChildElement("trk");
     for ( ; !trk.isNull(); trk = trk.nextSiblingElement( "trk" ) ) {
@@ -85,16 +99,46 @@ void GPXParser::parse_file(QFile &file)
 
                 Waypoint *wpt = new Waypoint( lat,lon,sat,alt,speed,course,date_time );
                 points.append( wpt );
+                allPoints.append(wpt);
             }
         }
-        Track *track = new Track( points );
-        track->set_max_north( maxNorth );
-        track->set_max_south( maxSouth );
-        track->set_max_west( maxWest );
-        track->set_max_east( maxEast );
+        if (points.size() > 0 ) {
+            Track *track = new Track( points );
 
-        mTracks.append( track );
+            track->set_max_north( maxNorth );
+            qDebug() << "MAX North with Latitude: " << maxNorth.y();
+            if (maxNorth.y() > allMaxNorth.y()) {
+                allMaxNorth.setY(maxNorth.y());
+                allMaxNorth.setX(maxNorth.x());
+            }
+
+            track->set_max_east( maxEast );
+            if (maxEast.x() > allMaxEast.x()) {
+                allMaxEast.setY(maxEast.y());
+                allMaxEast.setX(maxEast.x());
+            }
+
+            track->set_max_south( maxSouth );
+            if (allMaxSouth.y() == 0 || maxSouth.y() < allMaxSouth.y()) {
+                allMaxSouth.setY(maxSouth.y());
+                allMaxSouth.setX(maxSouth.x());
+            }
+
+            track->set_max_west( maxWest );
+            if (allMaxWest.x() == 0 || maxWest.x() < allMaxWest.x()) {
+                allMaxWest.setY(maxWest.y());
+                allMaxWest.setX(maxWest.x());
+            }
+
+            singleTracks.append( track );
+        }
     }
+    Track *allOverTrack = new Track(allPoints);
+    allOverTrack->set_max_north(allMaxNorth);
+    allOverTrack->set_max_south(allMaxSouth);
+    allOverTrack->set_max_west(allMaxWest);
+    allOverTrack->set_max_east(allMaxEast);
+    allInOneTrack.append(allOverTrack);
 }
 
 bool GPXParser::open_file(QFile &file) {

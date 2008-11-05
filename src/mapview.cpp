@@ -31,6 +31,8 @@ MapView::MapView( QWidget* parent) : QFrame(parent)
 
 MapView::~MapView()
 {
+    if (_imageLoader->getQueueCount() > 0)
+        slotAbortDownload();
     delete _imageLoader;
 
 }
@@ -96,6 +98,10 @@ void MapView::drawTrack()
 {
     if (!_track)
         return;
+    if (! _track->count_waypoints() > 0) {
+        qDebug() << "No Waypoints to draw in Track found.";
+        return;
+    }
 
     Waypoint* fromPoint;
     Waypoint* toPoint;
@@ -107,7 +113,6 @@ void MapView::drawTrack()
     {
         fromPoint=_track->wayPoint(i);
         toPoint=_track->wayPoint(i+1);
-
 
         QPen pen = _track->pen();
         pen.setWidth(_zoom / 2);	// adapt pen width to zoom level
@@ -279,6 +284,10 @@ void MapView::setTrack (Track* t)
     QPointF s = _track->max_south();
     QPointF w = _track->max_west();
     QPointF e = _track->max_east();
+    qDebug() << "Max West: " << t->max_west();
+    qDebug() << "Max East: " << t->max_east();
+    qDebug() << "Max North: " << t->max_north();
+    qDebug() << "Max South: " << t->max_south();
 
 
 
@@ -303,6 +312,7 @@ void MapView::setTrack (Track* t)
 
     // calculate center
     QPointF c( w.x() + ((e.x() - w.x()) /2.0) , ( n.y() + (( s.y() - n.y()) / 2.0   )    ));
+    qDebug() << "Center Point from Track: " << c;
     setCenter(c);
 
     repaint();

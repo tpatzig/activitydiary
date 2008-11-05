@@ -10,10 +10,13 @@ SportsDiary::SportsDiary(QObject* parent)
     setupUi(this);
 
     settings = new QSettings();
+
+    readSettings();
+/*
     if (!settings->contains("TilesDir"))
         settings->setValue("TilesDir","~/tiles");
-
-    qDebug() << "Tiles Directory: " << settings->value("TilesDir").toString();
+*/
+    qDebug() << "Tiles Directory: " << settings->value("TilesDir",QString("~/tiles")).toString();
 
     connect(mapFrame,SIGNAL(downloadState(int)),this,SLOT(slotUpdateDownloadState(int)));
     connect(abortButton,SIGNAL(clicked()),mapFrame,SLOT(slotAbortDownload()));
@@ -35,7 +38,6 @@ SportsDiary::SportsDiary(QObject* parent)
     timeLabel->setText("");
     distanceLabel->setText("");
 
-    mTrackCombo->setSizeAdjustPolicy( QComboBox::AdjustToContents );
     connect( mTrackCombo, SIGNAL( activated( int ) ),
              this,  SLOT( slotSelectCurrentTrack( int ) ) );
 
@@ -43,6 +45,7 @@ SportsDiary::SportsDiary(QObject* parent)
     speedCheckBox->setChecked(true);
     altitudeCheckBox->setEnabled(false);
     speedCheckBox->setEnabled(false);
+
 
     parser = 0;
     altitudeDiagram = 0;
@@ -61,65 +64,18 @@ SportsDiary::~SportsDiary()
         speedDiagram = 0;
     }
 
+   if (parser)
+        delete parser;
+
+    writeSettings();
     delete settings;
 }
 
-void SportsDiary::slotUpdateDownloadState(int queue)
+QString SportsDiary::roundNumberAsString(double x)
 {
-    if (queue > 0) {
-        loaderStatusLabel->setText("Tiles to Load: " + QString::number(queue));
-        abortButton->setEnabled(true);
-    } else {
-        loaderStatusLabel->setText("Loading finished");
-        abortButton->setEnabled(false);
-    }
-
-}
-
-void SportsDiary::slotImportTrack()
-{
-  qDebug() << "importing track";
-  QString fileName = QFileDialog::getOpenFileName(this,
-                                                  tr("Open GPX File"), "./", tr("GPX Files (*.gpx)"));
-  if (!fileName.isEmpty()) {
-    if ( parser ) delete parser;
-
-    parser = new GPXParser(fileName);
-    qDebug() << "Read file with " << parser->tracks().count() << " tracks";
-
-    TrackList tracks = parser->tracks();
-    QListIterator<Track*> it( tracks );
-    int cnt = 0;
-    mTrackCombo->clear();
-
-    while ( it.hasNext() ) {
-      mTrackCombo->addItem( i18n( "Track No. %1" ).arg( cnt++ ) );
-      it.next();
-    }
-
-    slotSelectCurrentTrack( 0 );
-  } else
-    qDebug() << "no track found";
-}
-
-void SportsDiary::slotSelectCurrentTrack( int num )
-{
-  TrackList tracks = parser->tracks();
-
-  if ( num >= 0 && num < tracks.count() ) {
-    qDebug() << "Selecting track " << num;
-    mCurrentTrack = tracks[num];
-
-    mDateLabel->setText( mCurrentTrack->at(0)->get_date().toString() );
-    distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_overall_distance()) + " km");
-    timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time()) + " min");
-    speedLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_avg_speed() * 3.6 ) + " km/h");
-    altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_avg_altitude()) + " m");
-
-    mapFrame->setTrack( mCurrentTrack);
-
-    drawGraph(mCurrentTrack->first(),mCurrentTrack->last());
-  }
+    QString val;
+    val.setNum(x,'g',3);
+    return val;
 }
 
 void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
@@ -177,59 +133,6 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 
 }
 
-void SportsDiary::slotSetZoom(int zoom)
-{
-    QPointF old = mapFrame->center();
-    mapFrame->setZoom(zoom);
-    mapFrame->setCenter(old);
-}
-
-void SportsDiary::slotSetSliderValue(int zoom)
-{
-    zoomSlider->setValue(zoom);
-}
-
-void SportsDiary::slotWaypointSelected(Waypoint* wp)
-{
-    if (wp) {
-        speedLabel->setText(QString::number( wp->get_speed() * 3.6 ) + " km/h");
-        altitudeLabel->setText(QString::number(wp->get_altitude()) + " m");
-        timeLabel->setText(wp->get_time().toString());
-        // rounded value //
-        // distanceLabel->setText(QString::number(roundNumber(mCurrentTrack->get_wp_distance(mCurrentTrack->at(0),wp)))+ " km");
-        distanceLabel->setText(QString::number(mCurrentTrack->get_wp_distance(mCurrentTrack->at(0),wp))+ " km");
-        // qDebug() << "Distance from Start to WP: " << mCurrentTrack->get_wp_distance(mCurrentTrack->at(0),wp);
-
-    }
-}
-
-QString SportsDiary::roundNumberAsString(double x)
-{
-    QString val;
-    val.setNum(x,'g',3);
-    return val;
-}
-
-void SportsDiary::slotStartEndPointsChanged(Waypoint* start,Waypoint* end)
-{
-    drawGraph(start,end);
-    distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_wp_distance(start,end)) + " km");
-    timeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_time(start,end)) + " min");
-    speedLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_speed(start,end) * 3.6 ) + " km/h");
-    altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_altitude(start,end)) + " m");
-}
-
-void SportsDiary::slotAltitudeCheck(bool checked)
-{
-    enableDisableDiagram(checked,altitudeDiagram,"Altitude in m");
-}
-
-void SportsDiary::slotSpeedCheck(bool checked)
-{
-    enableDisableDiagram(checked,speedDiagram,"Speed in km/h");
-
-}
-
 void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString axText)
 {
     if (check) {
@@ -263,4 +166,151 @@ void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString 
     }
     diagram->replot();
 }
+
+void SportsDiary::writeSettings()
+{
+    settings->beginGroup("MainWindow");
+    settings->setValue("size", size());
+    settings->setValue("position", pos());
+    settings->endGroup();
+}
+
+void SportsDiary::readSettings()
+{
+
+    settings->beginGroup("MainWindow");
+    resize(settings->value("size", QSize(800, 600)).toSize());
+    move(settings->value("position", QPoint(200, 200)).toPoint());
+    settings->endGroup();
+}
+
+/*#################### SLOTS ##################################################################################*/
+void SportsDiary::slotUpdateDownloadState(int queue)
+{
+    if (queue > 0) {
+        loaderStatusLabel->setText("Tiles to Load: " + QString::number(queue));
+        abortButton->setEnabled(true);
+    } else {
+        loaderStatusLabel->setText("Loading finished");
+        abortButton->setEnabled(false);
+    }
+
+}
+
+void SportsDiary::slotImportTrack()
+{
+  qDebug() << "importing track";
+  QString fileName = QFileDialog::getOpenFileName(this,
+                                                  tr("Open GPX File"), "./", tr("GPX Files (*.gpx)"));
+  if (!fileName.isEmpty()) {
+    if ( parser ) delete parser;
+
+    parser = new GPXParser(fileName);
+
+    tracks = parser->getTracks();
+    qDebug() << "Read file with " << tracks.count() << " tracks";
+
+    if (tracks.size() > 1) {
+        qDebug() << "More than one track found.";
+        QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                        "More than one tracks where found in the file.\nShould they be treated as one single track?",
+                        QMessageBox::Yes | QMessageBox::No,this);
+        switch (msgBox.exec()) {
+         case QMessageBox::Yes: {
+            tracks = parser->getAllInOneTrack();
+            break; 
+         }
+         case QMessageBox::No:
+            break;
+         default:
+            break;
+         }
+    }
+
+
+    int cnt = 0;
+    mTrackCombo->clear();
+    QListIterator<Track*> it( tracks );
+    qDebug() << "Size TrackList: " << tracks.size();
+    while ( it.hasNext() ) {
+      mTrackCombo->addItem( i18n( "Track No. %1" ).arg( cnt++ ) );
+      it.next();
+    }
+
+    slotSelectCurrentTrack( 0 );
+  } else
+    qDebug() << "no track found";
+}
+
+void SportsDiary::slotSelectCurrentTrack( int num )
+{
+//TrackList tracks = parser->tracks();
+
+  if ( num >= 0 && num < tracks.count() ) {
+    qDebug() << "Selecting track " << num;
+    mCurrentTrack = tracks[num];
+
+    qDebug() << "Waypoints counter: " << mCurrentTrack->count_waypoints();
+
+    mDateLabel->setText( mCurrentTrack->at(0)->get_date().toString() );
+    distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_overall_distance()) + " km");
+    timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time()) + " min");
+    speedLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_avg_speed() * 3.6 ) + " km/h");
+    altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_avg_altitude()) + " m");
+    qDebug() << "MaxEast from MainWindow " << mCurrentTrack->max_east();
+
+    mapFrame->setTrack( mCurrentTrack);
+
+
+    drawGraph(mCurrentTrack->first(),mCurrentTrack->last());
+  }
+}
+
+void SportsDiary::slotSetZoom(int zoom)
+{
+    QPointF old = mapFrame->center();
+    mapFrame->setZoom(zoom);
+    mapFrame->setCenter(old);
+}
+
+void SportsDiary::slotSetSliderValue(int zoom)
+{
+    zoomSlider->setValue(zoom);
+}
+
+void SportsDiary::slotWaypointSelected(Waypoint* wp)
+{
+    if (wp) {
+        speedLabel->setText(QString::number( wp->get_speed() * 3.6 ) + " km/h");
+        altitudeLabel->setText(QString::number(wp->get_altitude()) + " m");
+        timeLabel->setText(wp->get_time().toString());
+        // rounded value //
+        // distanceLabel->setText(QString::number(roundNumber(mCurrentTrack->get_wp_distance(mCurrentTrack->at(0),wp)))+ " km");
+        distanceLabel->setText(QString::number(mCurrentTrack->get_wp_distance(mCurrentTrack->at(0),wp))+ " km");
+        // qDebug() << "Distance from Start to WP: " << mCurrentTrack->get_wp_distance(mCurrentTrack->at(0),wp);
+    }
+}
+
+void SportsDiary::slotStartEndPointsChanged(Waypoint* start,Waypoint* end)
+{
+    drawGraph(start,end);
+    distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_wp_distance(start,end)) + " km");
+    timeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_time(start,end)) + " min");
+    speedLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_speed(start,end) * 3.6 ) + " km/h");
+    altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_altitude(start,end)) + " m");
+}
+
+void SportsDiary::slotAltitudeCheck(bool checked)
+{
+    enableDisableDiagram(checked,altitudeDiagram,"Altitude in m");
+}
+
+void SportsDiary::slotSpeedCheck(bool checked)
+{
+    enableDisableDiagram(checked,speedDiagram,"Speed in km/h");
+
+}
+
+
+
 

@@ -22,9 +22,11 @@ class GPXParser : public QObject
         GPXParser(QString filename);
         ~GPXParser();
 
-        TrackList tracks() { return mTracks; }
+        TrackList getTracks() { return singleTracks; }
+        TrackList getAllInOneTrack() { return allInOneTrack; }
     private: 
-        TrackList mTracks;
+        TrackList singleTracks;
+        TrackList allInOneTrack;
 
         void parse_file(QFile&);
         bool open_file(QFile&);

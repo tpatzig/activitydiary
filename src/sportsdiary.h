@@ -14,7 +14,7 @@
 #include "waypoint.h"
 #include "diagramcurve.h"
 
-#include "ui_sportnew3.h"
+#include "ui_activitydiary.h"
 
 
 
@@ -43,6 +43,7 @@ public slots:
 
 private:
   Track *mCurrentTrack;
+  TrackList tracks;
   GPXParser* parser;
 
   QGraphicsScene* scene;
@@ -55,6 +56,9 @@ private:
 
   void enableDisableDiagram(bool, DiagramCurve*, QString);
   QSettings* settings;
+
+  void writeSettings();
+  void readSettings();
 
 
 

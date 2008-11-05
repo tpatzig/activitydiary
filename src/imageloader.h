@@ -33,6 +33,8 @@ class ImageLoader : public QObject
         QPixmap load_tile(int zoom, int x, int y);
         QPixmap load_tile(int zoom, Waypoint* wpt);
 
+        int getQueueCount() {return download_queue.count(); };
+
     private:
 
         Loader* loader_1;

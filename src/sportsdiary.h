@@ -13,6 +13,8 @@
 #include "Track.h" 
 #include "waypoint.h"
 #include "diagramcurve.h"
+#include <qwt_legend.h>
+
 
 #include "ui_activitydiary.h"
 
@@ -46,7 +48,7 @@ private:
   TrackList tracks;
   GPXParser* parser;
 
-  QGraphicsScene* scene;
+  QwtLegend* legend;
 
   void drawGraph( Waypoint* ,Waypoint* );
   QString roundNumberAsString(double f);

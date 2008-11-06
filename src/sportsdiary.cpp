@@ -11,6 +11,10 @@ SportsDiary::SportsDiary(QObject* parent)
 
     settings = new QSettings();
 
+    legend = new QwtLegend;
+    legend->setFrameStyle(QFrame::NoFrame|QFrame::Raised);
+    diagram->insertLegend(legend, QwtPlot::RightLegend);
+
     readSettings();
 /*
     if (!settings->contains("TilesDir"))
@@ -46,6 +50,7 @@ SportsDiary::SportsDiary(QObject* parent)
     altitudeCheckBox->setEnabled(false);
     speedCheckBox->setEnabled(false);
 
+    rightGroupBox->setHidden(true);
 
     parser = 0;
     altitudeDiagram = 0;
@@ -64,8 +69,10 @@ SportsDiary::~SportsDiary()
         speedDiagram = 0;
     }
 
-   if (parser)
+    if (parser)
         delete parser;
+    
+    delete legend;
 
     writeSettings();
     delete settings;
@@ -130,6 +137,9 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 
     altitudeCheckBox->setEnabled(true);
     speedCheckBox->setEnabled(true);
+
+
+
 
 }
 

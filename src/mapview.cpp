@@ -25,7 +25,6 @@ MapView::MapView( QWidget* parent) : QFrame(parent)
     setFrameStyle(QFrame::Panel | QFrame::Sunken);
     setLineWidth(2);
 
-    setCenter(QPointF( -155.996910, 19.640134));
 }
 
 
@@ -284,12 +283,6 @@ void MapView::setTrack (Track* t)
     QPointF s = _track->max_south();
     QPointF w = _track->max_west();
     QPointF e = _track->max_east();
-    qDebug() << "Max West: " << t->max_west();
-    qDebug() << "Max East: " << t->max_east();
-    qDebug() << "Max North: " << t->max_north();
-    qDebug() << "Max South: " << t->max_south();
-
-
 
     // calculate zoom
     QPointF p1( w.x(), n.y() );
@@ -312,7 +305,6 @@ void MapView::setTrack (Track* t)
 
     // calculate center
     QPointF c( w.x() + ((e.x() - w.x()) /2.0) , ( n.y() + (( s.y() - n.y()) / 2.0   )    ));
-    qDebug() << "Center Point from Track: " << c;
     setCenter(c);
 
     repaint();

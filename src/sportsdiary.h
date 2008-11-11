@@ -5,6 +5,7 @@
 #include <QtGui> 
 #include <klocalizedstring.h> 
 #include <QObject>
+#include <qwt_legend.h>
 
 
 
@@ -13,7 +14,8 @@
 #include "Track.h" 
 #include "waypoint.h"
 #include "diagramcurve.h"
-#include <qwt_legend.h>
+#include "adxparser.h"
+
 
 
 #include "ui_activitydiary.h"
@@ -35,6 +37,7 @@ public slots:
 
   void slotUpdateDownloadState(int);
   void slotImportTrack();
+  void slotImportTrack(QString);
   void slotSetZoom(int);
   void slotSetSliderValue(int);
   void slotWaypointSelected(Waypoint*);
@@ -42,6 +45,16 @@ public slots:
   void slotSelectCurrentTrack( int );
   void slotAltitudeCheck(bool);
   void slotSpeedCheck(bool);
+  void slotShowCalendar(bool);
+  void slotShowCalendarWidget(bool);
+  void slotSetDiagramWidgetVisibility(bool);
+  void slotSetInfoWidgetVisibility(bool);
+  void slotSaveTrackInfos();
+  void slotUpdateCurrentKW(const QDate&);
+  void slotTrackFromCalendarSelected(const QUrl&);
+  void slotSetWindowModified(const QString &);
+  void slotSetWindowModifiedDesc();
+  void slotSetWindowTitle(const QString &);
 
 private:
   Track *mCurrentTrack;
@@ -61,6 +74,9 @@ private:
 
   void writeSettings();
   void readSettings();
+
+  QTextDocument* calendar;
+  QString currentAdx;
 
 
 

@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1444</width>
-    <height>919</height>
+    <width>1191</width>
+    <height>852</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -23,17 +23,17 @@
     <rect>
      <x>0</x>
      <y>24</y>
-     <width>1444</width>
-     <height>874</height>
+     <width>1191</width>
+     <height>807</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_24" >
+   <layout class="QVBoxLayout" name="verticalLayout_18" >
     <item>
-     <widget class="QSplitter" name="splitter_2" >
+     <widget class="QSplitter" name="splitter_3" >
       <property name="orientation" >
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QSplitter" name="mainSplitter" >
+      <widget class="QSplitter" name="splitter_2" >
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
@@ -262,7 +262,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="activityCombo" >
+            <widget class="QComboBox" name="activitytype" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                <horstretch>0</horstretch>
@@ -340,7 +340,7 @@
             </layout>
            </item>
            <item>
-            <widget class="QLineEdit" name="nameLineEdit" />
+            <widget class="QLineEdit" name="trackname" />
            </item>
           </layout>
          </item>
@@ -441,13 +441,18 @@
             </widget>
            </item>
            <item row="0" column="1" >
-            <widget class="QComboBox" name="comboBox_5" >
+            <widget class="QComboBox" name="weather" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <item>
+              <property name="text" >
+               <string/>
+              </property>
+             </item>
              <item>
               <property name="text" >
                <string>sunny</string>
@@ -490,7 +495,7 @@
             </widget>
            </item>
            <item row="0" column="4" >
-            <widget class="QLineEdit" name="lineEdit" />
+            <widget class="QLineEdit" name="temperature" />
            </item>
            <item row="1" column="0" >
             <widget class="QLabel" name="label_18" >
@@ -512,13 +517,18 @@
             </widget>
            </item>
            <item row="1" column="1" >
-            <widget class="QComboBox" name="comboBox_2" >
+            <widget class="QComboBox" name="profil" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <item>
+              <property name="text" >
+               <string/>
+              </property>
+             </item>
              <item>
               <property name="text" >
                <string>even</string>
@@ -551,13 +561,18 @@
             </widget>
            </item>
            <item row="1" column="4" >
-            <widget class="QComboBox" name="comboBox_3" >
+            <widget class="QComboBox" name="covering" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <item>
+              <property name="text" >
+               <string/>
+              </property>
+             </item>
              <item>
               <property name="text" >
                <string>asphalt</string>
@@ -600,13 +615,18 @@
             </widget>
            </item>
            <item row="2" column="1" >
-            <widget class="QComboBox" name="comboBox_4" >
+            <widget class="QComboBox" name="quality" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <item>
+              <property name="text" >
+               <string/>
+              </property>
+             </item>
              <item>
               <property name="text" >
                <string>excellent</string>
@@ -726,7 +746,7 @@
             </layout>
            </item>
            <item>
-            <widget class="QTextBrowser" name="textBrowser" >
+            <widget class="QTextBrowser" name="descriptionTextBrowser" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
                <horstretch>0</horstretch>
@@ -827,7 +847,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="mCalenderButton" >
+            <widget class="QPushButton" name="mCalendarButton" >
              <property name="text" >
               <string>Calendar</string>
              </property>
@@ -998,8 +1018,8 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>4</x>
                      <y>22</y>
-                     <width>554</width>
-                     <height>219</height>
+                     <width>309</width>
+                     <height>205</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_8" >
@@ -1084,7 +1104,7 @@ p, li { white-space: pre-wrap; }
                      <x>4</x>
                      <y>22</y>
                      <width>148</width>
-                     <height>219</height>
+                     <height>205</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_12" >
@@ -1407,582 +1427,114 @@ p, li { white-space: pre-wrap; }
        </widget>
       </widget>
       <widget class="QGroupBox" name="rightGroupBox" >
+       <property name="minimumSize" >
+        <size>
+         <width>295</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="title" >
         <string>KW 38 - 2008</string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_23" >
+       <layout class="QVBoxLayout" name="verticalLayout_17" >
         <item>
-         <widget class="QFrame" name="frame" >
-          <property name="frameShape" >
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_14" >
-           <item>
-            <widget class="QLabel" name="label_10" >
-             <property name="font" >
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text" >
-              <string>Monday - 13.10.2008</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_3" >
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout_3" >
-             <item row="0" column="0" >
-              <widget class="QLabel" name="label_14" >
-               <property name="text" >
-                <string>Tracks:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" >
-              <widget class="QLabel" name="label_16" >
-               <property name="text" >
-                <string>3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QLabel" name="label_24" >
-               <property name="text" >
-                <string>Distance:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QLabel" name="label_25" >
-               <property name="text" >
-                <string>200km</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QLabel" name="label_26" >
-               <property name="text" >
-                <string>Activities:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QLabel" name="label_27" >
-               <property name="text" >
-                <string>Cycling, Running</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame_2" >
-          <property name="frameShape" >
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_17" >
-           <item>
-            <widget class="QLabel" name="label_11" >
-             <property name="font" >
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text" >
-              <string>Monday - 13.10.2008</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_4" >
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout_4" >
-             <item row="0" column="0" >
-              <widget class="QLabel" name="label_30" >
-               <property name="text" >
-                <string>Tracks:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" >
-              <widget class="QLabel" name="label_31" >
-               <property name="text" >
-                <string>3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QLabel" name="label_32" >
-               <property name="text" >
-                <string>Distance:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QLabel" name="label_33" >
-               <property name="text" >
-                <string>200km</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QLabel" name="label_34" >
-               <property name="text" >
-                <string>Activities:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QLabel" name="label_35" >
-               <property name="text" >
-                <string>Cycling, Running</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame_3" >
-          <property name="frameShape" >
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_18" >
-           <item>
-            <widget class="QLabel" name="label_12" >
-             <property name="font" >
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text" >
-              <string>Monday - 13.10.2008</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_5" >
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout_5" >
-             <item row="0" column="0" >
-              <widget class="QLabel" name="label_36" >
-               <property name="text" >
-                <string>Tracks:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" >
-              <widget class="QLabel" name="label_37" >
-               <property name="text" >
-                <string>3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QLabel" name="label_38" >
-               <property name="text" >
-                <string>Distance:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QLabel" name="label_39" >
-               <property name="text" >
-                <string>200km</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QLabel" name="label_40" >
-               <property name="text" >
-                <string>Activities:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QLabel" name="label_41" >
-               <property name="text" >
-                <string>Cycling, Running</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame_4" >
-          <property name="frameShape" >
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_19" >
-           <item>
-            <widget class="QLabel" name="label_42" >
-             <property name="font" >
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text" >
-              <string>Monday - 13.10.2008</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_6" >
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout_6" >
-             <item row="0" column="0" >
-              <widget class="QLabel" name="label_43" >
-               <property name="text" >
-                <string>Tracks:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" >
-              <widget class="QLabel" name="label_44" >
-               <property name="text" >
-                <string>3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QLabel" name="label_45" >
-               <property name="text" >
-                <string>Distance:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QLabel" name="label_46" >
-               <property name="text" >
-                <string>200km</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QLabel" name="label_47" >
-               <property name="text" >
-                <string>Activities:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QLabel" name="label_48" >
-               <property name="text" >
-                <string>Cycling, Running</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame_5" >
-          <property name="frameShape" >
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_20" >
-           <item>
-            <widget class="QLabel" name="label_49" >
-             <property name="font" >
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text" >
-              <string>Monday - 13.10.2008</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_7" >
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout_7" >
-             <item row="0" column="0" >
-              <widget class="QLabel" name="label_50" >
-               <property name="text" >
-                <string>Tracks:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" >
-              <widget class="QLabel" name="label_51" >
-               <property name="text" >
-                <string>3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QLabel" name="label_52" >
-               <property name="text" >
-                <string>Distance:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QLabel" name="label_53" >
-               <property name="text" >
-                <string>200km</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QLabel" name="label_54" >
-               <property name="text" >
-                <string>Activities:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QLabel" name="label_55" >
-               <property name="text" >
-                <string>Cycling, Running</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame_6" >
-          <property name="frameShape" >
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_21" >
-           <item>
-            <widget class="QLabel" name="label_56" >
-             <property name="font" >
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text" >
-              <string>Monday - 13.10.2008</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_8" >
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout_8" >
-             <item row="0" column="0" >
-              <widget class="QLabel" name="label_57" >
-               <property name="text" >
-                <string>Tracks:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" >
-              <widget class="QLabel" name="label_58" >
-               <property name="text" >
-                <string>3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QLabel" name="label_59" >
-               <property name="text" >
-                <string>Distance:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QLabel" name="label_60" >
-               <property name="text" >
-                <string>200km</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QLabel" name="label_61" >
-               <property name="text" >
-                <string>Activities:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QLabel" name="label_62" >
-               <property name="text" >
-                <string>Cycling, Running</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame_7" >
-          <property name="frameShape" >
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_22" >
-           <item>
-            <widget class="QLabel" name="label_63" >
-             <property name="font" >
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text" >
-              <string>Monday - 13.10.2008</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_9" >
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout_9" >
-             <item row="0" column="0" >
-              <widget class="QLabel" name="label_64" >
-               <property name="text" >
-                <string>Tracks:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1" >
-              <widget class="QLabel" name="label_65" >
-               <property name="text" >
-                <string>3</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" >
-              <widget class="QLabel" name="label_66" >
-               <property name="text" >
-                <string>Distance:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1" >
-              <widget class="QLabel" name="label_67" >
-               <property name="text" >
-                <string>200km</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0" >
-              <widget class="QLabel" name="label_68" >
-               <property name="text" >
-                <string>Activities:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" >
-              <widget class="QLabel" name="label_69" >
-               <property name="text" >
-                <string>Cycling, Running</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_16" >
+         <layout class="QHBoxLayout" name="horizontalLayout_14" >
           <item>
-           <widget class="QLabel" name="label_9" >
-            <property name="text" >
-             <string>Show Track:</string>
+           <spacer name="horizontalSpacer_4" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
             </property>
-           </widget>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
-           <widget class="QComboBox" name="trackSelectComboBox" />
+           <widget class="QToolButton" name="calToolButton" >
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
         <item>
-         <spacer name="verticalSpacer_6" >
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
+         <widget class="QGroupBox" name="calendarGroupBox" >
+          <property name="title" >
+           <string/>
           </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>20</width>
-            <height>68</height>
-           </size>
+          <property name="flat" >
+           <bool>true</bool>
           </property>
-         </spacer>
+          <layout class="QVBoxLayout" name="verticalLayout_14" >
+           <item>
+            <widget class="QCalendarWidget" name="calendarWidget" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="calendarTextBrowser" >
+          <property name="palette" >
+           <palette>
+            <active>
+             <colorrole role="Base" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>224</red>
+                <green>223</green>
+                <blue>222</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Base" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>224</red>
+                <green>223</green>
+                <blue>222</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Base" >
+              <brush brushstyle="SolidPattern" >
+               <color alpha="255" >
+                <red>244</red>
+                <green>244</green>
+                <blue>244</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="autoFillBackground" >
+           <bool>false</bool>
+          </property>
+          <property name="frameShape" >
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow" >
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth" >
+           <number>0</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -1995,7 +1547,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1444</width>
+     <width>1191</width>
      <height>24</height>
     </rect>
    </property>
@@ -2012,7 +1564,7 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionShow_TrackInfo" />
     <addaction name="actionShow_Diagram" />
-    <addaction name="actionShow_Calender" />
+    <addaction name="actionShow_Calendar" />
    </widget>
    <addaction name="menuFile" />
    <addaction name="menuView" />
@@ -2021,8 +1573,8 @@ p, li { white-space: pre-wrap; }
    <property name="geometry" >
     <rect>
      <x>0</x>
-     <y>898</y>
-     <width>1444</width>
+     <y>831</y>
+     <width>1191</width>
      <height>21</height>
     </rect>
    </property>
@@ -2031,10 +1583,16 @@ p, li { white-space: pre-wrap; }
    <property name="text" >
     <string>Import Track...</string>
    </property>
+   <property name="shortcut" >
+    <string>Ctrl+I</string>
+   </property>
   </action>
   <action name="actionSave" >
    <property name="text" >
     <string>Save</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionShow_TrackInfo" >
@@ -2059,12 +1617,12 @@ p, li { white-space: pre-wrap; }
     <string>Show Diagram</string>
    </property>
   </action>
-  <action name="actionShow_Calender" >
+  <action name="actionShow_Calendar" >
    <property name="checkable" >
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>Show Calender</string>
+    <string>Show Calendar</string>
    </property>
   </action>
  </widget>
@@ -2084,7 +1642,7 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections>
   <connection>
-   <sender>nameLineEdit</sender>
+   <sender>trackname</sender>
    <signal>textChanged(QString)</signal>
    <receiver>headlineLable</receiver>
    <slot>setText(QString)</slot>
@@ -2132,39 +1690,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>diagramDockWidget</sender>
-   <signal>visibilityChanged(bool)</signal>
-   <receiver>actionShow_Diagram</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>701</x>
-     <y>805</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>infoDockWidget</sender>
-   <signal>visibilityChanged(bool)</signal>
-   <receiver>actionShow_TrackInfo</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>1084</x>
-     <y>805</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionShow_Calender</sender>
+   <sender>actionShow_Calendar</sender>
    <signal>toggled(bool)</signal>
    <receiver>rightGroupBox</receiver>
    <slot>setVisible(bool)</slot>

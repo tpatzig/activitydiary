@@ -52,6 +52,8 @@ class Track
         float get_overall_avg_altitude();
         float get_wp_avg_altitude(Waypoint*,Waypoint*);
 
+        QDate get_start_date();
+
         Waypoint* at(int);
         int indexOf(Waypoint*);
         Waypoint* first();

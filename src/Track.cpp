@@ -216,6 +216,11 @@ Waypoint* Track::last() {
     return waypoint_list.at(count_waypoints()-1);
 }
 
+QDate Track::get_start_date()
+{
+    return waypoint_list.at(0)->get_date();
+}
+
 // ################################################################################
 
 TrackList::TrackList() : QList<Track*>()

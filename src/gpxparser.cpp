@@ -4,6 +4,7 @@
 
 GPXParser::GPXParser(QString filename) {
     qDebug() << "parsing the gpx file";
+    mFileName = filename;
     QFile file(filename);
     if (open_file(file))
         parse_file(file);
@@ -106,7 +107,6 @@ void GPXParser::parse_file(QFile &file)
             Track *track = new Track( points );
 
             track->set_max_north( maxNorth );
-            qDebug() << "MAX North with Latitude: " << maxNorth.y();
             if (maxNorth.y() > allMaxNorth.y()) {
                 allMaxNorth.setY(maxNorth.y());
                 allMaxNorth.setX(maxNorth.x());

@@ -20,6 +20,7 @@ set(map_SRCS
 	Track.cpp
 	sportsdiary.cpp
         diagramcurve.cpp
+        adxparser.cpp
 )
 
 

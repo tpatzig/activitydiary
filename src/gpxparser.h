@@ -24,12 +24,14 @@ class GPXParser : public QObject
 
         TrackList getTracks() { return singleTracks; }
         TrackList getAllInOneTrack() { return allInOneTrack; }
+        QString getFileName() { return mFileName; }
     private: 
         TrackList singleTracks;
         TrackList allInOneTrack;
 
         void parse_file(QFile&);
         bool open_file(QFile&);
+        QString mFileName;
 };
 
 #endif

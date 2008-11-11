@@ -68,7 +68,7 @@ SportsDiary::SportsDiary(QObject* parent)
     speedCheckBox->setEnabled(false);
 
     rightGroupBox->setHidden(true);
-    rightGroupBox->setTitle( QString("%1. KW %2").arg(calendarWidget->selectedDate().weekNumber()).arg(calendarWidget->selectedDate().year()) );
+    kwLabel->setText( QString("%1. KW %2").arg(calendarWidget->selectedDate().weekNumber()).arg(calendarWidget->selectedDate().year()) );
     calendarGroupBox->setHidden(true);
 
     parser = 0;
@@ -460,7 +460,7 @@ void SportsDiary::slotUpdateCurrentKW(const QDate& date)
     QMap<int,QString> weekDaysHtml;
     QString html;
 
-    rightGroupBox->setTitle( QString("%1. KW %2").arg(date.weekNumber()).arg(date.year()) );
+    kwLabel->setText( QString("%1. KW %2").arg(date.weekNumber()).arg(date.year()) );
 
     for(int i= 0;i <= 6 ; i++) {
         QDate myDate = date.addDays( -date.dayOfWeek() + i +1 );
@@ -472,35 +472,38 @@ void SportsDiary::slotUpdateCurrentKW(const QDate& date)
         html = "";
     }
 
-    foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
+    if (kwDir.entryList(QStringList("*.adx")).size() > 0) {
 
+        foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
+
+            html = "";
+            QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
+            QString activityType = AdxParser::readSetting(path + "/" + filename,"activitytype");
+            QString activityIcon = settings->value("ActivityImgMap").toMap()[activityType].toString();
+            QString activityTime = AdxParser::readSetting(path + "/" + filename,"totaltime");
+            QString activityDistance = AdxParser::readSetting(path + "/" + filename,"distance");
+       
+            html += ("<td><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>");
+            html += (activityType + "<br>");
+            html += (activityTime + " min<br>");
+            html += (activityDistance + " km</a></td>");
+
+            weekDaysHtml[ adxDate.dayOfWeek() -1 ] += html;
+
+        }
         html = "";
-        QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
-        QString activityType = AdxParser::readSetting(path + "/" + filename,"activitytype");
-        QString activityIcon = settings->value("ActivityImgMap").toMap()[activityType].toString();
-        QString activityTime = AdxParser::readSetting(path + "/" + filename,"totaltime");
-        QString activityDistance = AdxParser::readSetting(path + "/" + filename,"distance");
-   
-        html += ("<td><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>");
-        html += (activityType + "<br>");
-        html += (activityTime + "<br>");
-        html += (activityDistance + "</a></td>");
 
-        weekDaysHtml[ adxDate.dayOfWeek() -1 ] += html;
+        html += "<table align=\"center\" border=1>"; 
+        for(int day = 0; day <= 6; day++) {
+            html += "<tr>";
+            html += weekDaysHtml[day];
+            html += "</tr>";
+        }
 
+        html += ("</table>");
+        
+        calendarTextBrowser->setHtml(html);
     }
-    html = "";
-
-    html += "<table border=1>"; 
-    for(int day = 0; day <= 6; day++) {
-        html += "<tr>";
-        html += weekDaysHtml[day];
-        html += "</tr>";
-    }
-
-    html += ("</table>");
-    
-    calendarTextBrowser->setHtml(html);
 }
 
 void SportsDiary::slotTrackFromCalendarSelected(const QUrl& url)

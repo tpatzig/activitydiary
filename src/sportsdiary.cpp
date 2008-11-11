@@ -270,54 +270,57 @@ void SportsDiary::slotImportTrack()
   QString fileName = QFileDialog::getOpenFileName(this,
                                                   tr("Open GPX File"), "./", tr("GPX Files (*.gpx)"));
 
-  QFileInfo info(fileName);
-  trackname->setText(info.baseName());
-  setWindowModified(true);
+  if (!fileName.isEmpty()) {
+     QFileInfo info(fileName);
+     trackname->setText(info.baseName());
+     setWindowModified(true);
 
-  slotImportTrack(fileName);
+     slotImportTrack(fileName);
+  }
 }
 
 void SportsDiary::slotImportTrack(QString fileName)
 {
-   if (!fileName.isEmpty()) {
     if ( parser ) delete parser;
 
     parser = new GPXParser(fileName);
 
     tracks = parser->getTracks();
-    qDebug() << "Read file with " << tracks.count() << " tracks";
+    if (tracks.count() > 0) {
 
-    setWindowTitle(trackname->text() + "[*]" + " - ActivityDiary");
+        qDebug() << "Read file with " << tracks.count() << " tracks";
 
-    if (tracks.size() > 1) {
-        qDebug() << "More than one track found.";
-        QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                        "More than one tracks where found in the file.\nShould they be treated as one single track?",
-                        QMessageBox::Yes | QMessageBox::No,this);
-        switch (msgBox.exec()) {
-         case QMessageBox::Yes: {
-            tracks = parser->getAllInOneTrack();
-            break; 
-         }
-         case QMessageBox::No:
-            break;
-         default:
-            break;
-         }
-    }
+        setWindowTitle(trackname->text() + "[*]" + " - ActivityDiary");
 
-    int cnt = 0;
-    mTrackCombo->clear();
-    QListIterator<Track*> it( tracks );
-    qDebug() << "Size TrackList: " << tracks.size();
-    while ( it.hasNext() ) {
-      mTrackCombo->addItem( i18n( "Track No. %1" ).arg( cnt++ ) );
-      it.next();
-    }
+        if (tracks.size() > 1) {
+            qDebug() << "More than one track found.";
+            QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                    "More than one tracks where found in the file.\nShould they be treated as one single track?",
+                    QMessageBox::Yes | QMessageBox::No,this);
+            switch (msgBox.exec()) {
+                case QMessageBox::Yes: {
+                                           tracks = parser->getAllInOneTrack();
+                                           break; 
+                                       }
+                case QMessageBox::No:
+                                       break;
+                default:
+                                       break;
+            }
+        }
 
-    slotSelectCurrentTrack( 0 );
-  } else
-    qDebug() << "no track found";
+        int cnt = 0;
+        mTrackCombo->clear();
+        QListIterator<Track*> it( tracks );
+        qDebug() << "Size TrackList: " << tracks.size();
+        while ( it.hasNext() ) {
+            mTrackCombo->addItem( i18n( "Track No. %1" ).arg( cnt++ ) );
+            it.next();
+        }
+
+        slotSelectCurrentTrack( 0 );
+    } else
+        qDebug() << "no track found";
 }
 
 void SportsDiary::slotSelectCurrentTrack( int num )

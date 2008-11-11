@@ -27,9 +27,7 @@ ImageLoader::ImageLoader(QObject* parent) : QObject(parent) {
     active_download = 0;
 
     QSettings settings;
-    tilesPath = settings.value("TilesDir").toString();
-    if (tilesPath.isEmpty())
-        tilesPath = "tiles";
+    tilesPath = settings.value("TilesDir",QString(QDir::homePath() + "/ActivityDiary/tiles")).toString();
 }
 
 
@@ -121,6 +119,7 @@ void ImageLoader::download_image(QString path) {
 
             QFileInfo info( QString(tilesPath) + path );
             QDir dir;
+            qDebug() << "Checking if path exists: " << info.absoluteDir();
             if (!info.absoluteDir().exists())
                 dir.mkpath(info.path());
 

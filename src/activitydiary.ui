@@ -1018,7 +1018,7 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>4</x>
                      <y>22</y>
-                     <width>309</width>
+                     <width>332</width>
                      <height>205</height>
                     </rect>
                    </property>
@@ -1455,7 +1455,7 @@ p, li { white-space: pre-wrap; }
           <item>
            <widget class="QToolButton" name="calToolButton" >
             <property name="text" >
-             <string>...</string>
+             <string/>
             </property>
            </widget>
           </item>

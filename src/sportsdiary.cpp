@@ -18,13 +18,9 @@ SportsDiary::SportsDiary(QObject* parent)
     
     calendarWidget->setFirstDayOfWeek(Qt::Monday);
     calendarTextBrowser->setOpenLinks(false);
+    calToolButton->setIcon(QIcon("icons/calendar.png"));
 
     readSettings();
-/*
-    if (!settings->contains("TilesDir"))
-        settings->setValue("TilesDir","~/tiles");
-*/
-    qDebug() << "Tiles Directory: " << settings->value("TilesDir",QString("~/ActivityDiary/tiles")).toString();
 
     connect(mapFrame,SIGNAL(downloadState(int)),this,SLOT(slotUpdateDownloadState(int)));
     connect(mapFrame,SIGNAL(zoomChanged(int)),this,SLOT(slotSetSliderValue(int)));
@@ -53,12 +49,11 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(temperature,SIGNAL(textEdited(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
     connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
 
-    iconLabel->setPixmap(QPixmap("kompassberg.png"));
+    iconLabel->setPixmap(QPixmap("icons/kompassberg.png"));
     abortButton->setEnabled(false);
     zoomSlider->setValue(mapFrame->zoom());
     cadenceLabel->setText("");
     heartrateLabel->setText("");
-    // tempratureLabel->setText("");
     speedLabel->setText("");
     altitudeLabel->setText("");
     timeLabel->setText("");
@@ -235,6 +230,19 @@ void SportsDiary::readSettings()
 {
     mapFrame->setZoom(settings->value("MapZoom",int(16)).toInt());
     mapFrame->setCenter(settings->value("MapCenter",QPointF(-155.996910, 19.640134)).toPointF());
+    if (settings->value("TilesDir").toString().isEmpty())
+         settings->setValue("TilesDir",QDir::homePath() + "/ActivityDiary/tiles");
+    if (settings->value("TracksDir").toString().isEmpty())
+         settings->setValue("TracksDir",QDir::homePath() + "/ActivityDiary/tracks");
+    if (!settings->contains("ActivityImgMap")) {
+         QMap<QString,QVariant> activities;
+         activities["Cycling - Racing Bike"] = "cycling.png";
+         activities["Cycling - Mountain Bike"] = "cycling.png";
+         activities["Running"] = "running.png";
+         activities["Hiking"] = "hiking.png";
+
+         settings->setValue("ActivityImgMap",activities);
+    }
 
     settings->beginGroup("MainWindow");
     resize(settings->value("size", QSize(800, 600)).toSize());
@@ -414,15 +422,15 @@ void SportsDiary::slotSaveTrackInfos()
                                                             .arg(startdate.toString("MM"))
                                                             .arg(startdate.toString("dd"))
                                                             .arg(starttime.toString("HHmmss"))
-                                                            .arg(settings->value("TracksDir",QString("~/ActivityDiary/tracks")).toString());
+                                                            .arg(settings->value("TracksDir").toString());
 
         trackSettings["trackfile"] = parser->getFileName();
         if (! trackname->text().isEmpty() )
             trackSettings["trackname"] = trackname->text();
         if (! activitytype->currentIndex() == 0) 
             trackSettings["activitytype"] = activitytype->currentText();
-        trackSettings["totaltime"] = QString::number(mCurrentTrack->get_overall_time());
-        trackSettings["distance"] = QString::number(mCurrentTrack->get_overall_distance());
+        trackSettings["totaltime"] = roundNumberAsString(mCurrentTrack->get_overall_time());
+        trackSettings["distance"] = roundNumberAsString(mCurrentTrack->get_overall_distance());
         trackSettings["startdate"] = mCurrentTrack->get_start_date().toString();
         if (! weather->currentText().isEmpty() )
             trackSettings["weather"] = weather->currentText();
@@ -447,7 +455,6 @@ void SportsDiary::slotSaveTrackInfos()
 
 void SportsDiary::slotUpdateCurrentKW(const QDate& date)
 {
-    QString currentKW = QString::number(date.weekNumber());
     QString path = settings->value("TracksDir").toString() + "/" + QString::number(date.year()) + "/" + QString::number(date.weekNumber());
     QDir kwDir(path);
     QMap<int,QString> weekDaysHtml;
@@ -470,10 +477,11 @@ void SportsDiary::slotUpdateCurrentKW(const QDate& date)
         html = "";
         QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
         QString activityType = AdxParser::readSetting(path + "/" + filename,"activitytype");
+        QString activityIcon = settings->value("ActivityImgMap").toMap()[activityType].toString();
         QString activityTime = AdxParser::readSetting(path + "/" + filename,"totaltime");
         QString activityDistance = AdxParser::readSetting(path + "/" + filename,"distance");
    
-        html += ("<td><a href= \"" + path + "/" + filename + "\"><img src=\"ico_runcourse.gif\"><br>");
+        html += ("<td><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>");
         html += (activityType + "<br>");
         html += (activityTime + "<br>");
         html += (activityDistance + "</a></td>");

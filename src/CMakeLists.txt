@@ -21,6 +21,7 @@ set(map_SRCS
 	sportsdiary.cpp
         diagramcurve.cpp
         adxparser.cpp
+        calendar.cpp
 )
 
 

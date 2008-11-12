@@ -50,33 +50,33 @@ public slots:
   void slotSetDiagramWidgetVisibility(bool);
   void slotSetInfoWidgetVisibility(bool);
   void slotSaveTrackInfos();
-  void slotUpdateCurrentKW(const QDate&);
-  void slotTrackFromCalendarSelected(const QUrl&);
+  void slotCalendarUpdated(const QDate&);
+  void slotLoadSavedTrack(const QString&);
   void slotSetWindowModified(const QString &);
   void slotSetWindowModifiedDesc();
   void slotSetWindowTitle(const QString &);
+  void slotLoadNextActivityDay();
+  void slotLoadPrevActivityDay();
 
 private:
+
+  void drawGraph( Waypoint* ,Waypoint* );
+  void enableDisableDiagram(bool, DiagramCurve*, QString);
+  void writeSettings();
+  void readSettings();
+  void clearTrackInfos();
+
   Track *mCurrentTrack;
   TrackList tracks;
   GPXParser* parser;
-
   QwtLegend* legend;
-
-  void drawGraph( Waypoint* ,Waypoint* );
   QString roundNumberAsString(double f);
-
   DiagramCurve* altitudeDiagram;
   DiagramCurve* speedDiagram;
-
-  void enableDisableDiagram(bool, DiagramCurve*, QString);
   QSettings* settings;
-
-  void writeSettings();
-  void readSettings();
-
-  QTextDocument* calendar;
   QString currentAdx;
+  QString nextAvailAdx;
+  QString previousAvailAdx;
 
 
 

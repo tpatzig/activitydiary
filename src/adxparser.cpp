@@ -94,4 +94,23 @@ QString AdxParser::readSetting(QString filename, QString key)
      return setting;
 }
 
+bool AdxParser::hasSetting(QString filename, QString key)
+{
+    QDomDocument doc("ActivityDiary XML");
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+        qDebug() << "Could not open " << filename;
+    else
+        doc.setContent(&file);
+    file.close();
+
+    QDomElement docElem = doc.documentElement();
+
+
+    QDomElement find = docElem.firstChildElement(key);
+    
+    return (! find.isNull());
+
+}
+
 

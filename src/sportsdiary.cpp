@@ -17,7 +17,6 @@ SportsDiary::SportsDiary(QObject* parent)
 
     
     calendarWidget->setFirstDayOfWeek(Qt::Monday);
-    calendarTextBrowser->setOpenLinks(false);
     calToolButton->setIcon(QIcon("icons/calendar.png"));
 
     readSettings();
@@ -36,9 +35,13 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(diagramDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetDiagramWidgetVisibility(bool)));
     connect(infoDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetInfoWidgetVisibility(bool)));
     connect(actionSave,SIGNAL(triggered()),this,SLOT(slotSaveTrackInfos()));
-    connect(calendarWidget,SIGNAL(clicked(const QDate&)),this,SLOT(slotUpdateCurrentKW(const QDate&)));
-    connect(calendarTextBrowser,SIGNAL(anchorClicked(const QUrl&)),this,SLOT(slotTrackFromCalendarSelected(const QUrl&)));
     connect(trackname,SIGNAL(textChanged(const QString&)),this,SLOT(slotSetWindowTitle(const QString &)));
+    connect(mNextDayButton,SIGNAL(clicked()),this,SLOT(slotLoadNextActivityDay()));
+    connect(mPrevDayButton,SIGNAL(clicked()),this,SLOT(slotLoadPrevActivityDay()));
+
+    connect(calendarWidget,SIGNAL(clicked(const QDate&)),calendar,SLOT(slotUpdateCurrentKW(const QDate&)));
+    connect(calendar,SIGNAL(trackSelected(const QString&)),this,SLOT(slotLoadSavedTrack(const QString&)));
+    connect(calendar,SIGNAL(calendarUpdated(const QDate&)),this,SLOT(slotCalendarUpdated(const QDate&)));
 
     connect(weather,SIGNAL(activated(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
     connect(quality,SIGNAL(activated(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
@@ -47,6 +50,7 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(activitytype,SIGNAL(activated(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
     connect(trackname,SIGNAL(textEdited(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
     connect(temperature,SIGNAL(textEdited(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
+    connect(mTrackCombo,SIGNAL(activated(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
     connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
 
     iconLabel->setPixmap(QPixmap("icons/kompassberg.png"));
@@ -71,12 +75,17 @@ SportsDiary::SportsDiary(QObject* parent)
     kwLabel->setText( QString("%1. KW %2").arg(calendarWidget->selectedDate().weekNumber()).arg(calendarWidget->selectedDate().year()) );
     calendarGroupBox->setHidden(true);
 
+    mNextDayButton->setEnabled(false);
+    mPrevDayButton->setEnabled(false);
+
     parser = 0;
     altitudeDiagram = 0;
     speedDiagram = 0;
     mCurrentTrack = 0;
-    currentAdx = "";
 
+    currentAdx = "";
+    nextAvailAdx = "";
+    previousAvailAdx = "";
 
 }
 
@@ -92,6 +101,7 @@ SportsDiary::~SportsDiary()
             break; 
          }
          case QMessageBox::No:
+            setWindowModified(false);
             break;
          default:
             break;
@@ -251,6 +261,24 @@ void SportsDiary::readSettings()
 
 }
 
+void SportsDiary::clearTrackInfos()
+{
+
+    //sadly theres no signal from QTextBrowser to divide between manual and programmed text changes.
+    disconnect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
+
+    weather->setCurrentIndex(0);
+    profil->setCurrentIndex(0);
+    quality->setCurrentIndex(0);
+    covering->setCurrentIndex(0);
+    activitytype->setCurrentIndex(0);
+    trackname->setText("");
+    descriptionTextBrowser->setText("");
+    temperature->setText("");
+
+    connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
+}
+
 /*#################### SLOTS ##################################################################################*/
 void SportsDiary::slotUpdateDownloadState(int queue)
 {
@@ -266,17 +294,19 @@ void SportsDiary::slotUpdateDownloadState(int queue)
 
 void SportsDiary::slotImportTrack()
 {
-  qDebug() << "importing track";
-  QString fileName = QFileDialog::getOpenFileName(this,
-                                                  tr("Open GPX File"), "./", tr("GPX Files (*.gpx)"));
+    qDebug() << "importing track";
+    QString fileName = QFileDialog::getOpenFileName(this,
+            tr("Open GPX File"), "./", tr("GPX Files (*.gpx)"));
 
-  if (!fileName.isEmpty()) {
-     QFileInfo info(fileName);
-     trackname->setText(info.baseName());
-     setWindowModified(true);
+    if (!fileName.isEmpty()) {
 
-     slotImportTrack(fileName);
-  }
+        clearTrackInfos();
+        QFileInfo info(fileName);
+        trackname->setText(info.baseName());
+        setWindowModified(true);
+
+        slotImportTrack(fileName);
+    }
 }
 
 void SportsDiary::slotImportTrack(QString fileName)
@@ -293,19 +323,31 @@ void SportsDiary::slotImportTrack(QString fileName)
         setWindowTitle(trackname->text() + "[*]" + " - ActivityDiary");
 
         if (tracks.size() > 1) {
-            qDebug() << "More than one track found.";
-            QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                    "More than one tracks where found in the file.\nShould they be treated as one single track?",
-                    QMessageBox::Yes | QMessageBox::No,this);
-            switch (msgBox.exec()) {
-                case QMessageBox::Yes: {
-                                           tracks = parser->getAllInOneTrack();
-                                           break; 
-                                       }
-                case QMessageBox::No:
-                                       break;
-                default:
-                                       break;
+            if (! (!currentAdx.isEmpty() && AdxParser::hasSetting(currentAdx,"allInOneTrack"))) {
+                qDebug() << "More than one track found.";
+                QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                        "More than one tracks where found in the file.\nShould they be treated as one single track?",
+                        QMessageBox::Yes | QMessageBox::No,this);
+                switch (msgBox.exec()) {
+                    case QMessageBox::Yes: {
+                        tracks = parser->getAllInOneTrack();
+                        break; 
+                        }
+                    case QMessageBox::No:
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                QString allInOneTrack = AdxParser::readSetting(currentAdx,"allInOneTrack");
+                if (allInOneTrack == "true")
+                    tracks = parser->getAllInOneTrack();
+                else if (allInOneTrack == "false") {
+                    int nr = AdxParser::readSetting(currentAdx,"selectedTrack").toInt();
+                    TrackList list;
+                    list.append(parser->getTracks()[nr]);
+                    tracks = list;
+                }
             }
         }
 
@@ -333,16 +375,27 @@ void SportsDiary::slotSelectCurrentTrack( int num )
 
     qDebug() << "Waypoints counter: " << mCurrentTrack->count_waypoints();
 
-    mDateLabel->setText( mCurrentTrack->at(0)->get_date().toString() );
+    mDateLabel->setText( mCurrentTrack->get_start_date().toString() );
     distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_overall_distance()) + " km");
-    timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time()) + " min");
+    if (mCurrentTrack->get_overall_time() > 60)
+        timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time() / 60) + " h");
+    else
+        timeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_time()) + " min");
     speedLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_avg_speed() * 3.6 ) + " km/h");
     altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_overall_avg_altitude()) + " m");
 
     mapFrame->setTrack( mCurrentTrack);
 
-
     drawGraph(mCurrentTrack->first(),mCurrentTrack->last());
+
+    nextAvailAdx = calendar->getNextActivityDay(mCurrentTrack->get_start_date());
+    previousAvailAdx = calendar->getPrevActivityDay(mCurrentTrack->get_start_date());
+
+    qDebug() << "next: " << nextAvailAdx << "prev: " << previousAvailAdx;
+
+    mPrevDayButton->setEnabled(!previousAvailAdx.isEmpty());
+    mNextDayButton->setEnabled(!nextAvailAdx.isEmpty());
+
   }
 }
 
@@ -448,6 +501,13 @@ void SportsDiary::slotSaveTrackInfos()
         if (! temperature->text().isEmpty() )
             trackSettings["temperature"] = temperature->text();
 
+        if (parser->getTracks().size() > 1 && mTrackCombo->count() == 1)
+            trackSettings["allInOneTrack"] = "true";
+        else if (parser->getTracks().size() > 1 && mTrackCombo->count() > 1 )
+            trackSettings["allInOneTrack"] = "false";
+        if (! mTrackCombo->currentText().isEmpty() )
+            trackSettings["selectedTrack"] = mTrackCombo->currentText().split("No. ")[1];
+
         AdxParser::writeSettings(filename, trackSettings);
 
         currentAdx = filename;
@@ -456,125 +516,68 @@ void SportsDiary::slotSaveTrackInfos()
     }
 }
 
-void SportsDiary::slotUpdateCurrentKW(const QDate& date)
+void SportsDiary::slotCalendarUpdated(const QDate& date)
 {
-    QString path = settings->value("TracksDir").toString() + "/" + QString::number(date.year()) + "/" + QString::number(date.weekNumber());
-    QDir kwDir(path);
-    QMap<int,QString> weekDaysHtml;
-    QString html;
 
     kwLabel->setText( QString("%1. KW %2").arg(date.weekNumber()).arg(date.year()) );
+    QMap<QString,double> summary = calendar->getWeekSummary(date);
+    totalWeekDistanceLabel->setText(QString::number(summary["distance"]) + " km");
 
-    for(int i= 0;i <= 6 ; i++) {
-        QDate myDate = date.addDays( -date.dayOfWeek() + i +1 );
-
-        html += ("<td bgcolor=#D0D0D0 align=center valign=middle>" + myDate.longDayName(myDate.dayOfWeek()) + "<br>");
-        html += (myDate.toString("dd.MM.") + "</td>");
-
-        weekDaysHtml[i] = html;
-        html = "";
-    }
-
-    if (kwDir.entryList(QStringList("*.adx")).size() > 0 ) {
-
-        foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
-
-            html = "";
-            QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
-            QString activityType = AdxParser::readSetting(path + "/" + filename,"activitytype");
-            QString activityIcon = settings->value("ActivityImgMap").toMap()[activityType].toString();
-            QString activityTime = AdxParser::readSetting(path + "/" + filename,"totaltime");
-            QString activityDistance = AdxParser::readSetting(path + "/" + filename,"distance");
-       
-            html += "<td bgcolor=#FFFFFF align=center valign=middle width=\"100%\"><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>";
-            html += activityType + "<br>";
-            html += activityTime + " min<br>";
-            html += activityDistance + " km</a></td>";
-
-            weekDaysHtml[ adxDate.dayOfWeek() -1 ] += html;
-
-        }
-        html = "";
-    }
+    if (summary["totaltime"] > 60) 
+        totalWeekTimeLabel->setText(roundNumberAsString(summary["totaltime"]/60) + " h");
     else
-    {
-        // add dummy entry to ensure proper table format even if no items are shown
-        weekDaysHtml[0] += "<td width=\"100%\">&nbsp;</td>";    
-    }
-
-    QString css = 
-        "a:link { text-decoration:none; color:black; } "
-        "a:visited { text-decoration:none; color:black; } "
-        "a:hover { text-decoration:none; color:black }"
-        "a:active { text-decoration:none; color:black } "
-        "a:focus { text-decoration:none; color:black; } "
-        ;
-
-
-
-    calendarTextBrowser->document()->addResource( QTextDocument::StyleSheetResource, QUrl( "format.css" ), css );
-
-        
-    html += "<html><head>";
-    html += "<link rel='stylesheet' type='text/css' href='format.css'>";
-    html += "</head><body>";
-
-    html += "<table align=\"center\" width=\"100%\">"; 
-    for(int day = 0; day <= 6; day++) {
-        html += "<tr>";
-        html += weekDaysHtml[day];
-        html += "</tr>";
-    }
-
-    html += "</table>";
-    html += "</body></html>";
-        
-    calendarTextBrowser->setHtml(html);
+        totalWeekTimeLabel->setText(roundNumberAsString(summary["totaltime"]) + " min");
 }
 
-void SportsDiary::slotTrackFromCalendarSelected(const QUrl& url)
+void SportsDiary::slotLoadSavedTrack(const QString& filenameAdx)
 {
-    if ( isWindowModified() ) {
-        QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                        "Save Changes for Track \"" + trackname->text() + "\" ?",
-                        QMessageBox::Yes | QMessageBox::No,this);
-        switch (msgBox.exec()) {
-         case QMessageBox::Yes: {
-            slotSaveTrackInfos();
-            break; 
-         }
-         case QMessageBox::No:
-            break;
-         default:
-            break;
-         }
+    if (!filenameAdx.isEmpty()) {
+        if ( isWindowModified() ) {
+            QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                    "Save Changes for Track \"" + trackname->text() + "\" ?",
+                    QMessageBox::Yes | QMessageBox::No,this);
+            switch (msgBox.exec()) {
+                case QMessageBox::Yes: {
+                    slotSaveTrackInfos();
+                    break; 
+                    }
+                case QMessageBox::No:
+                    setWindowModified(false);
+                    break;
+                default:
+                                       break;
+            }
+        }
+        clearTrackInfos();
+
+        currentAdx = filenameAdx;
+
+        qDebug() << "Loading Adx: " << filenameAdx;
+        QString filenameGpx = AdxParser::readSetting(filenameAdx,"trackfile");
+        qDebug() << "Loading GPX" << filenameGpx;
+
+        QMap<QString,QString> setts = AdxParser::readSettings(filenameAdx);
+
+        if (! setts["trackname"].isEmpty() )
+            trackname->setText( setts["trackname"]);
+        if (! setts["weather"].isEmpty() )
+            weather->setCurrentIndex( weather->findText(setts["weather"]));
+        if (! setts["profil"].isEmpty() )
+            profil->setCurrentIndex( profil->findText(setts["profil"]));
+        if (! setts["quality"].isEmpty() )
+            quality->setCurrentIndex( quality->findText(setts["quality"]));
+        if (! setts["covering"].isEmpty() )
+            covering->setCurrentIndex( covering->findText(setts["covering"]));
+        if (! setts["activitytype"].isEmpty() )
+            activitytype->setCurrentIndex( activitytype->findText(setts["activitytype"]));
+        if (! setts["description"].isEmpty() )
+            descriptionTextBrowser->setText( setts["description"]);
+        if (! setts["temperature"].isEmpty() )
+            temperature->setText( setts["temperature"]);
+
+        slotImportTrack(filenameGpx);
 
     }
-
-    QString filenameAdx = url.toString();
-    QString filenameGpx = AdxParser::readSetting(filenameAdx,"trackfile");
-
-    QMap<QString,QString> setts = AdxParser::readSettings(filenameAdx);
-
-    if (! setts["weather"].isEmpty() )
-        weather->setCurrentIndex( weather->findText(setts["weather"]));
-    if (! setts["profil"].isEmpty() )
-        profil->setCurrentIndex( profil->findText(setts["profil"]));
-    if (! setts["quality"].isEmpty() )
-        quality->setCurrentIndex( quality->findText(setts["quality"]));
-    if (! setts["covering"].isEmpty() )
-        covering->setCurrentIndex( covering->findText(setts["covering"]));
-    if (! setts["activitytype"].isEmpty() )
-        activitytype->setCurrentIndex( activitytype->findText(setts["activitytype"]));
-    if (! setts["trackname"].isEmpty() )
-        trackname->setText( setts["trackname"]);
-    if (! setts["description"].isEmpty() )
-        descriptionTextBrowser->setText( setts["description"]);
-    if (! setts["temperature"].isEmpty() )
-        temperature->setText( setts["temperature"]);
-
-    currentAdx = filenameAdx;
-    slotImportTrack(filenameGpx);
 
 }
 
@@ -589,14 +592,32 @@ void SportsDiary::slotSetWindowModifiedDesc()
 {
     if (! currentAdx.isEmpty()) {
         QString oldDesc = AdxParser::readSetting(currentAdx,"description");
-        if (oldDesc != descriptionTextBrowser->toPlainText())
+        if (oldDesc != descriptionTextBrowser->toPlainText()) {
+            qDebug() << "Description changed!";
             setWindowModified(true);
+        }
     }
 }
 
 void SportsDiary::slotSetWindowTitle(const QString & trackname)
 {
-    setWindowTitle(trackname + "[*]" + " - ActivityDiary");
+    if (trackname.isEmpty())
+        setWindowTitle("ActivityDiary[*]");
+    else
+        setWindowTitle(trackname + "[*]" + " - ActivityDiary");
+}
+
+void SportsDiary::slotLoadNextActivityDay()
+{
+
+    qDebug() << "nextAvailAdx " << nextAvailAdx;
+    slotLoadSavedTrack(nextAvailAdx);
+}
+
+void SportsDiary::slotLoadPrevActivityDay()
+{
+    qDebug() << "prevAvailAdx " << previousAvailAdx;
+    slotLoadSavedTrack(previousAvailAdx);
 }
 
 

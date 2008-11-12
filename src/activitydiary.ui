@@ -723,7 +723,7 @@
            <item row="2" column="3" colspan="2" >
             <layout class="QHBoxLayout" name="horizontalLayout_10" >
              <item>
-              <widget class="QLabel" name="ratingLabel" >
+              <widget class="QLabel" name="ratingLabel_1" >
                <property name="text" >
                 <string/>
                </property>
@@ -1568,7 +1568,7 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item>
-         <widget class="QTextBrowser" name="calendarTextBrowser" >
+         <widget class="Calendar" native="1" name="calendar" >
           <property name="palette" >
            <palette>
             <active>
@@ -1609,13 +1609,7 @@ p, li { white-space: pre-wrap; }
           <property name="autoFillBackground" >
            <bool>false</bool>
           </property>
-          <property name="frameShape" >
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Raised</enum>
-          </property>
-          <property name="lineWidth" >
+          <property name="lineWidth" stdset="0" >
            <number>0</number>
           </property>
          </widget>
@@ -1806,6 +1800,11 @@ p, li { white-space: pre-wrap; }
    <class>MapView</class>
    <extends>QWidget</extends>
    <header>mapview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Calendar</class>
+   <extends>QWidget</extends>
+   <header>calendar.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

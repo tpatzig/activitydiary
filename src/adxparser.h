@@ -20,6 +20,7 @@ public:
     static void writeSettings(QString filename, QMap<QString,QString> values);
     static QMap<QString,QString> readSettings(QString filename);
     static QString readSetting(QString filename, QString key);
+    static bool hasSetting(QString filename, QString key);
 
 
 };

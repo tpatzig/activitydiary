@@ -468,14 +468,14 @@ void SportsDiary::slotUpdateCurrentKW(const QDate& date)
     for(int i= 0;i <= 6 ; i++) {
         QDate myDate = date.addDays( -date.dayOfWeek() + i +1 );
 
-        html += ("<td>" + myDate.longDayName(myDate.dayOfWeek()) + "<br>");
-        html += (myDate.toString("dd.MM") + "</td>");
+        html += ("<td bgcolor=#D0D0D0 align=center valign=middle>" + myDate.longDayName(myDate.dayOfWeek()) + "<br>");
+        html += (myDate.toString("dd.MM.") + "</td>");
 
         weekDaysHtml[i] = html;
         html = "";
     }
 
-    if (kwDir.entryList(QStringList("*.adx")).size() > 0) {
+    if (kwDir.entryList(QStringList("*.adx")).size() > 0 ) {
 
         foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
 
@@ -486,27 +486,50 @@ void SportsDiary::slotUpdateCurrentKW(const QDate& date)
             QString activityTime = AdxParser::readSetting(path + "/" + filename,"totaltime");
             QString activityDistance = AdxParser::readSetting(path + "/" + filename,"distance");
        
-            html += ("<td><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>");
-            html += (activityType + "<br>");
-            html += (activityTime + " min<br>");
-            html += (activityDistance + " km</a></td>");
+            html += "<td bgcolor=#FFFFFF align=center valign=middle width=\"100%\"><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>";
+            html += activityType + "<br>";
+            html += activityTime + " min<br>";
+            html += activityDistance + " km</a></td>";
 
             weekDaysHtml[ adxDate.dayOfWeek() -1 ] += html;
 
         }
         html = "";
-
-        html += "<table align=\"center\" border=1>"; 
-        for(int day = 0; day <= 6; day++) {
-            html += "<tr>";
-            html += weekDaysHtml[day];
-            html += "</tr>";
-        }
-
-        html += ("</table>");
-        
-        calendarTextBrowser->setHtml(html);
     }
+    else
+    {
+        // add dummy entry to ensure proper table format even if no items are shown
+        weekDaysHtml[0] += "<td width=\"100%\">&nbsp;</td>";    
+    }
+
+    QString css = 
+        "a:link { text-decoration:none; color:black; } "
+        "a:visited { text-decoration:none; color:black; } "
+        "a:hover { text-decoration:none; color:black }"
+        "a:active { text-decoration:none; color:black } "
+        "a:focus { text-decoration:none; color:black; } "
+        ;
+
+
+
+    calendarTextBrowser->document()->addResource( QTextDocument::StyleSheetResource, QUrl( "format.css" ), css );
+
+        
+    html += "<html><head>";
+    html += "<link rel='stylesheet' type='text/css' href='format.css'>";
+    html += "</head><body>";
+
+    html += "<table align=\"center\" width=\"100%\">"; 
+    for(int day = 0; day <= 6; day++) {
+        html += "<tr>";
+        html += weekDaysHtml[day];
+        html += "</tr>";
+    }
+
+    html += "</table>";
+    html += "</body></html>";
+        
+    calendarTextBrowser->setHtml(html);
 }
 
 void SportsDiary::slotTrackFromCalendarSelected(const QUrl& url)

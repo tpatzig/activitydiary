@@ -46,15 +46,72 @@
         </property>
         <property name="maximumSize" >
          <size>
-          <width>400</width>
+          <width>325</width>
           <height>16777215</height>
          </size>
         </property>
         <property name="palette" >
          <palette>
-          <active/>
-          <inactive/>
-          <disabled/>
+          <active>
+           <colorrole role="Base" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
+              <red>255</red>
+              <green>255</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
+              <red>199</red>
+              <green>198</green>
+              <blue>198</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Base" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
+              <red>255</red>
+              <green>255</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
+              <red>199</red>
+              <green>198</green>
+              <blue>198</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Base" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
+              <red>199</red>
+              <green>198</green>
+              <blue>198</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
+              <red>199</red>
+              <green>198</green>
+              <blue>198</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
          </palette>
         </property>
         <property name="title" >
@@ -74,7 +131,7 @@
              <property name="sizeHint" stdset="0" >
               <size>
                <width>20</width>
-               <height>35</height>
+               <height>15</height>
               </size>
              </property>
             </spacer>
@@ -91,7 +148,7 @@
                </property>
                <property name="sizeHint" stdset="0" >
                 <size>
-                 <width>30</width>
+                 <width>20</width>
                  <height>56</height>
                 </size>
                </property>
@@ -170,7 +227,7 @@
              <property name="sizeHint" stdset="0" >
               <size>
                <width>20</width>
-               <height>35</height>
+               <height>20</height>
               </size>
              </property>
             </spacer>
@@ -395,7 +452,7 @@
              </property>
              <property name="minimumSize" >
               <size>
-               <width>300</width>
+               <width>250</width>
                <height>200</height>
               </size>
              </property>
@@ -1018,7 +1075,7 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>4</x>
                      <y>22</y>
-                     <width>332</width>
+                     <width>367</width>
                      <height>205</height>
                     </rect>
                    </property>

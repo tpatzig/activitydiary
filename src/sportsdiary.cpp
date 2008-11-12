@@ -244,15 +244,16 @@ void SportsDiary::readSettings()
          settings->setValue("TilesDir",QDir::homePath() + "/ActivityDiary/tiles");
     if (settings->value("TracksDir").toString().isEmpty())
          settings->setValue("TracksDir",QDir::homePath() + "/ActivityDiary/tracks");
-    if (!settings->contains("ActivityImgMap")) {
+//  if (!settings->contains("ActivityImgMap")) {
          QMap<QString,QVariant> activities;
          activities["Cycling - Racing Bike"] = "cycling.png";
          activities["Cycling - Mountain Bike"] = "cycling.png";
          activities["Running"] = "running.png";
          activities["Hiking"] = "hiking.png";
+         activities["default"] = "kompassberg_small.png";
 
          settings->setValue("ActivityImgMap",activities);
-    }
+//  }
 
     settings->beginGroup("MainWindow");
     resize(settings->value("size", QSize(800, 600)).toSize());

@@ -44,13 +44,20 @@ void Calendar::slotUpdateCurrentKW(const QDate& date)
     }
 
     if (kwDir.entryList(QStringList("*.adx")).size() > 0 ) {
+        QMap<QString,QVariant> iconMap = settings->value("ActivityImgMap").toMap();
 
         foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
 
             html = "";
+            QString activityIcon = "";
             QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
             QString activityType = AdxParser::readSetting(path + "/" + filename,"activitytype");
-            QString activityIcon = settings->value("ActivityImgMap").toMap()[activityType].toString();
+
+            if (iconMap.contains(activityType))
+                activityIcon = iconMap[activityType].toString();
+            else
+                activityIcon = iconMap["default"].toString();
+
             QString activityTime = AdxParser::readSetting(path + "/" + filename,"totaltime");
             QString activityDistance = AdxParser::readSetting(path + "/" + filename,"distance");
        

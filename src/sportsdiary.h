@@ -65,6 +65,7 @@ private:
   void writeSettings();
   void readSettings();
   void clearTrackInfos();
+  void closeEvent(QCloseEvent *event);
 
   Track *mCurrentTrack;
   TrackList tracks;

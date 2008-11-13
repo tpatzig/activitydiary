@@ -91,22 +91,6 @@ SportsDiary::SportsDiary(QObject* parent)
 
 SportsDiary::~SportsDiary()
 {
-    if ( isWindowModified() ) {
-        QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                        "Save Changes for Track \"" + trackname->text() + "\" ?",
-                        QMessageBox::Yes | QMessageBox::No,this);
-        switch (msgBox.exec()) {
-         case QMessageBox::Yes: {
-            slotSaveTrackInfos();
-            break; 
-         }
-         case QMessageBox::No:
-            setWindowModified(false);
-            break;
-         default:
-            break;
-         }
-    }
 
     if (altitudeDiagram) {
         delete altitudeDiagram;
@@ -278,6 +262,29 @@ void SportsDiary::clearTrackInfos()
     temperature->setText("");
 
     connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
+}
+
+void SportsDiary::closeEvent(QCloseEvent *event)
+{
+    if ( isWindowModified() ) {
+        QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                        "Save Changes for Track \"" + trackname->text() + "\" ?",
+                        QMessageBox::Yes | QMessageBox::No,this);
+        switch (msgBox.exec()) {
+         case QMessageBox::Yes: {
+             slotSaveTrackInfos();
+             event->accept();
+             break; 
+         }
+         case QMessageBox::No:
+             setWindowModified(false);
+             event->accept();
+             break;
+         default:
+             event->accept();
+             break;
+         }
+    }
 }
 
 /*#################### SLOTS ##################################################################################*/
@@ -620,5 +627,6 @@ void SportsDiary::slotLoadPrevActivityDay()
     qDebug() << "prevAvailAdx " << previousAvailAdx;
     slotLoadSavedTrack(previousAvailAdx);
 }
+
 
 

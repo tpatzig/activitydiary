@@ -1719,7 +1719,10 @@ p, li { white-space: pre-wrap; }
      <string>File</string>
     </property>
     <addaction name="actionImport" />
+    <addaction name="actionRemoveTrack" />
     <addaction name="actionSave" />
+    <addaction name="separator" />
+    <addaction name="actionClose" />
    </widget>
    <widget class="QMenu" name="menuView" >
     <property name="title" >
@@ -1786,6 +1789,16 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text" >
     <string>Show Calendar</string>
+   </property>
+  </action>
+  <action name="actionRemoveTrack" >
+   <property name="text" >
+    <string>RemoveTrack</string>
+   </property>
+  </action>
+  <action name="actionClose" >
+   <property name="text" >
+    <string>Close</string>
    </property>
   </action>
  </widget>
@@ -1870,6 +1883,22 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel" >
      <x>1349</x>
      <y>461</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionClose</sender>
+   <signal>triggered()</signal>
+   <receiver>SportsDiary</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>595</x>
+     <y>425</y>
     </hint>
    </hints>
   </connection>

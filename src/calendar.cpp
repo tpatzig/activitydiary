@@ -36,7 +36,7 @@ void Calendar::slotUpdateCurrentKW(const QDate& date)
     for(int i= 1;i <= 7 ; i++) {
         QDate myDate = date.addDays( -date.dayOfWeek() + i );
 
-        html += ("<td bgcolor=#D0D0D0 align=center valign=middle>" + myDate.longDayName(myDate.dayOfWeek()) + "<br>");
+        html += ("<td bgcolor=#D0D0D0 align=center valign=middle width=\"10%\">" + myDate.longDayName(myDate.dayOfWeek()) + "<br>");
         html += (myDate.toString("dd.MM.") + "</td>");
 
         weekDaysHtml[i] = html;
@@ -61,7 +61,7 @@ void Calendar::slotUpdateCurrentKW(const QDate& date)
             QString activityTime = AdxParser::readSetting(path + "/" + filename,"totaltime");
             QString activityDistance = AdxParser::readSetting(path + "/" + filename,"distance");
        
-            html += "<td bgcolor=#FFFFFF align=center valign=middle width=\"100%\"><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>";
+            html += "<td bgcolor=#FFFFFF align=center valign=middle ><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>";
             html += activityType + "<br>";
             html += activityDistance + " km<br>";
 
@@ -96,7 +96,7 @@ void Calendar::slotUpdateCurrentKW(const QDate& date)
     html += "<link rel='stylesheet' type='text/css' href='format.css'>";
     html += "</head><body>";
 
-    html += "<table align=\"center\" width=\"100%\">"; 
+    html += "<table align=\"center\" >"; 
     for(int day = 1; day <= 7; day++) {
         html += "<tr>";
         html += weekDaysHtml[day];

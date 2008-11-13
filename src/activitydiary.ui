@@ -1731,6 +1731,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionShow_TrackInfo" />
     <addaction name="actionShow_Diagram" />
     <addaction name="actionShow_Calendar" />
+    <addaction name="actionClear" />
    </widget>
    <addaction name="menuFile" />
    <addaction name="menuView" />
@@ -1799,6 +1800,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionClose" >
    <property name="text" >
     <string>Close</string>
+   </property>
+  </action>
+  <action name="actionClear" >
+   <property name="text" >
+    <string>Clear</string>
    </property>
   </action>
  </widget>

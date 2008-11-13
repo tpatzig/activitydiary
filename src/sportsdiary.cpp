@@ -38,6 +38,9 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(trackname,SIGNAL(textChanged(const QString&)),this,SLOT(slotSetWindowTitle(const QString &)));
     connect(mNextDayButton,SIGNAL(clicked()),this,SLOT(slotLoadNextActivityDay()));
     connect(mPrevDayButton,SIGNAL(clicked()),this,SLOT(slotLoadPrevActivityDay()));
+    connect(actionRemoveTrack,SIGNAL(triggered()),this,SLOT(slotRemoveTrack()));
+    connect(actionClear,SIGNAL(triggered()),this,SLOT(slotClearAll()));
+    connect( mTrackCombo, SIGNAL( activated( int ) ),this,SLOT( slotSelectCurrentTrack( int ) ) );
 
     connect(calendarWidget,SIGNAL(clicked(const QDate&)),calendar,SLOT(slotUpdateCurrentKW(const QDate&)));
     connect(calendar,SIGNAL(trackSelected(const QString&)),this,SLOT(slotLoadSavedTrack(const QString&)));
@@ -56,23 +59,10 @@ SportsDiary::SportsDiary(QObject* parent)
     iconLabel->setPixmap(QPixmap("icons/kompassberg.png"));
     abortButton->setEnabled(false);
     zoomSlider->setValue(mapFrame->zoom());
-    cadenceLabel->setText("");
-    heartrateLabel->setText("");
-    speedLabel->setText("");
-    altitudeLabel->setText("");
-    timeLabel->setText("");
-    distanceLabel->setText("");
-
-    connect( mTrackCombo, SIGNAL( activated( int ) ),
-             this,  SLOT( slotSelectCurrentTrack( int ) ) );
-
-    altitudeCheckBox->setChecked(true);
-    speedCheckBox->setChecked(true);
-    altitudeCheckBox->setEnabled(false);
-    speedCheckBox->setEnabled(false);
 
     rightGroupBox->setHidden(true);
     kwLabel->setText( QString("%1. KW %2").arg(calendarWidget->selectedDate().weekNumber()).arg(calendarWidget->selectedDate().year()) );
+    calendar->slotUpdateCurrentKW(calendarWidget->selectedDate());
     calendarGroupBox->setHidden(true);
 
     mNextDayButton->setEnabled(false);
@@ -86,6 +76,8 @@ SportsDiary::SportsDiary(QObject* parent)
     currentAdx = "";
     nextAvailAdx = "";
     previousAvailAdx = "";
+
+    slotClearAll();
 
 }
 
@@ -260,6 +252,7 @@ void SportsDiary::clearTrackInfos()
     trackname->setText("");
     descriptionTextBrowser->setText("");
     temperature->setText("");
+    mTrackCombo->clear();
 
     connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
 }
@@ -330,6 +323,9 @@ void SportsDiary::slotImportTrack(QString fileName)
 
         setWindowTitle(trackname->text() + "[*]" + " - ActivityDiary");
 
+        actionSave->setEnabled(true);
+        actionRemoveTrack->setEnabled(true);
+
         if (tracks.size() > 1) {
             if (! (!currentAdx.isEmpty() && AdxParser::hasSetting(currentAdx,"allInOneTrack"))) {
                 qDebug() << "More than one track found.";
@@ -340,7 +336,7 @@ void SportsDiary::slotImportTrack(QString fileName)
                     case QMessageBox::Yes: {
                         tracks = parser->getAllInOneTrack();
                         break; 
-                        }
+                    }
                     case QMessageBox::No:
                         break;
                     default:
@@ -522,6 +518,110 @@ void SportsDiary::slotSaveTrackInfos()
 
         setWindowModified(false);
     }
+}
+
+void SportsDiary::slotRemoveTrack()
+{
+    if (mCurrentTrack) {
+        QDate startdate = mCurrentTrack->at(0)->get_date();
+        QTime starttime = mCurrentTrack->at(0)->get_time();
+        QString filename = QString("%6/%1/%2/%1_%3_%4-%5.adx").arg(startdate.year())
+                                                            .arg(startdate.weekNumber())
+                                                            .arg(startdate.toString("MM"))
+                                                            .arg(startdate.toString("dd"))
+                                                            .arg(starttime.toString("HHmmss"))
+                                                            .arg(settings->value("TracksDir").toString());
+        if ( currentAdx == filename && QFile::exists(filename) ) {
+            QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                    "Relly remove Track \"" + trackname->text() + "\" from ActivityDiary ?",
+                    QMessageBox::Yes | QMessageBox::No,this);
+            switch (msgBox.exec()) {
+                case QMessageBox::Yes: {
+                    setWindowModified(false);
+                    QFile adxfile(currentAdx);
+                    QFile gpxfile(AdxParser::readSetting(currentAdx,"trackfile"));
+                    adxfile.remove();
+                    gpxfile.remove();
+                    if (calendarWidget->selectedDate().weekNumber() == QDate::fromString(mDateLabel->text()).weekNumber())
+                        calendar->slotUpdateCurrentKW(QDate::fromString(mDateLabel->text()));
+                    slotClearAll();
+                    break; 
+                }
+                case QMessageBox::No: {
+                    break;
+                }
+                default:
+                    break;
+            }
+        } else {
+            setWindowModified(false);
+            slotClearAll();
+        }
+    }
+}
+
+void SportsDiary::slotClearAll()
+{
+    if ( isWindowModified() ) {
+        QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                "Save Changes for Track \"" + trackname->text() + "\" ?",
+                QMessageBox::Yes | QMessageBox::No,this);
+        switch (msgBox.exec()) {
+            case QMessageBox::Yes: {
+                slotSaveTrackInfos();
+                break; 
+            }
+            case QMessageBox::No: {
+                setWindowModified(false);
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    clearTrackInfos();
+    mapFrame->clearMap();
+    mDateLabel->setText(QDate::currentDate().toString());
+
+    if (altitudeDiagram) {
+        delete altitudeDiagram;
+        altitudeDiagram = 0;
+    }
+    if (speedDiagram) {
+        delete speedDiagram;
+        speedDiagram = 0;
+    }
+
+    cadenceLabel->setText("");
+    heartrateLabel->setText("");
+    speedLabel->setText("");
+    altitudeLabel->setText("");
+    timeLabel->setText("");
+    distanceLabel->setText("");
+
+    altitudeCheckBox->setChecked(true);
+    speedCheckBox->setChecked(true);
+    altitudeCheckBox->setEnabled(false);
+    speedCheckBox->setEnabled(false);
+
+    actionSave->setEnabled(false);
+    actionRemoveTrack->setEnabled(false);
+
+    mCurrentTrack = 0;
+    if (parser) {
+        delete parser;
+        parser = 0;
+    }
+
+    currentAdx = "";
+
+    nextAvailAdx = calendar->getNextActivityDay(QDate::currentDate());
+    previousAvailAdx = calendar->getPrevActivityDay(QDate::currentDate());
+    mPrevDayButton->setEnabled(!previousAvailAdx.isEmpty());
+    mNextDayButton->setEnabled(!nextAvailAdx.isEmpty());
+
+
 }
 
 void SportsDiary::slotCalendarUpdated(const QDate& date)

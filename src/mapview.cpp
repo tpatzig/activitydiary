@@ -275,37 +275,38 @@ void MapView::wheelEvent( QWheelEvent* event )
 void MapView::setTrack (Track* t)
 {
     _track = t;
+    if (_track) {
+        _startWaypoint = _track->wayPoint( 0 );
+        _endWaypoint   = _track->wayPoint( _track->count_waypoints() -1 );
 
-    _startWaypoint = _track->wayPoint( 0 );
-    _endWaypoint   = _track->wayPoint( _track->count_waypoints() -1 );
+        QPointF n = _track->max_north();
+        QPointF s = _track->max_south();
+        QPointF w = _track->max_west();
+        QPointF e = _track->max_east();
 
-    QPointF n = _track->max_north();
-    QPointF s = _track->max_south();
-    QPointF w = _track->max_west();
-    QPointF e = _track->max_east();
-
-    // calculate zoom
-    QPointF p1( w.x(), n.y() );
-    QPointF p2( e.x(), s.y() );
+        // calculate zoom
+        QPointF p1( w.x(), n.y() );
+        QPointF p2( e.x(), s.y() );
 
 
-    int fzoom = MAXZOOM;
-    for (int z = MAXZOOM ; z >= MINZOOM; z--)
-    {
-        int tmpwidth = Calc::longitudeToXAtZoom(p2.x(), z) - Calc::longitudeToXAtZoom(p1.x(), z) ;
-        int tmpheight = Calc::latitudeToYAtZoom( p2.y(), z) - Calc::latitudeToYAtZoom( p1.y(), z) ;
-
-        if ( tmpwidth < width() && tmpheight < height() )
+        int fzoom = MAXZOOM;
+        for (int z = MAXZOOM ; z >= MINZOOM; z--)
         {
-            fzoom = z;
-            break;
-        }
-    }
-    setZoom(fzoom);
+            int tmpwidth = Calc::longitudeToXAtZoom(p2.x(), z) - Calc::longitudeToXAtZoom(p1.x(), z) ;
+            int tmpheight = Calc::latitudeToYAtZoom( p2.y(), z) - Calc::latitudeToYAtZoom( p1.y(), z) ;
 
-    // calculate center
-    QPointF c( w.x() + ((e.x() - w.x()) /2.0) , ( n.y() + (( s.y() - n.y()) / 2.0   )    ));
-    setCenter(c);
+            if ( tmpwidth < width() && tmpheight < height() )
+            {
+                fzoom = z;
+                break;
+            }
+        }
+        setZoom(fzoom);
+
+        // calculate center
+        QPointF c( w.x() + ((e.x() - w.x()) /2.0) , ( n.y() + (( s.y() - n.y()) / 2.0   )    ));
+        setCenter(c);
+    }
 
     repaint();
 }
@@ -363,3 +364,10 @@ void MapView::slotAbortDownload()
 
 }
 
+void MapView::clearMap()
+{
+    setTrack(0);
+    _startWaypoint = 0;
+    _endWaypoint = 0;
+    repaint();
+}

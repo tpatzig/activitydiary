@@ -32,6 +32,7 @@ class MapView : public QFrame
         void setTrack    ( Track* );
         void setCenter   ( QPointF );
         void setZoom     ( int );
+        void clearMap();
 
     signals:
         void pointSelected( Waypoint* );

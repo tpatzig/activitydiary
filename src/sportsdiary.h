@@ -57,6 +57,8 @@ public slots:
   void slotSetWindowTitle(const QString &);
   void slotLoadNextActivityDay();
   void slotLoadPrevActivityDay();
+  void slotRemoveTrack();
+  void slotClearAll();
 
 private:
 

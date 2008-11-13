@@ -96,7 +96,7 @@ void Calendar::slotUpdateCurrentKW(const QDate& date)
     html += "<link rel='stylesheet' type='text/css' href='format.css'>";
     html += "</head><body>";
 
-    html += "<table align=\"center\" >"; 
+    html += "<table align=\"center\" width=\"100%\">"; 
     for(int day = 1; day <= 7; day++) {
         html += "<tr>";
         html += weekDaysHtml[day];

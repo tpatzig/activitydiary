@@ -516,6 +516,10 @@ void SportsDiary::slotSaveTrackInfos()
 
         currentAdx = filename;
 
+        if (calendarWidget->selectedDate().weekNumber() == QDate::fromString(mDateLabel->text()).weekNumber())
+            calendar->slotUpdateCurrentKW(QDate::fromString(mDateLabel->text()));
+
+
         setWindowModified(false);
     }
 }

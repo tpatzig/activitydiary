@@ -10,7 +10,7 @@
 #include <QFileInfo>
 #include <QDir>
 
-class AdxParser
+class Q_DECL_EXPORT AdxParser
 {
 
 public:

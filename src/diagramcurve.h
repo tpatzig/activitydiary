@@ -7,7 +7,7 @@
 #include <qwt_plot_curve.h>
 #include <qwt_curve_fitter.h>
 
-class DiagramCurve : public QWidget
+class Q_DECL_EXPORT DiagramCurve : public QWidget
 {
     Q_OBJECT
 

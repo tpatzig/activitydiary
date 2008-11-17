@@ -1,6 +1,6 @@
 #include "diagramcurve.h"
 
-DiagramCurve::DiagramCurve(QwtPlot* parent, QString dia_name) : name(dia_name), parent(parent)
+DiagramCurve::DiagramCurve(QwtPlot* parent, QString dia_name) : parent(parent), name(dia_name)
 {
     setParent(parent);
     curve = new QwtPlotCurve(name);

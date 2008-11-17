@@ -24,6 +24,7 @@ set(map_SRCS
         calendar.cpp
 )
 
+# for code coverage
 SET( CMAKE_CXX_FLAGS_COVERAGE "-fprofile-arcs -ftest-coverage" CACHE STRING "Profiling Compiler Flags" )
 
 kde4_add_ui_files(map_SRCS
@@ -31,8 +32,7 @@ kde4_add_ui_files(map_SRCS
 
 kde4_add_executable(activitydiary ${map_SRCS})
 
-#kde4_add_library(activitydiarylib SHARED ${map_SRCS})
-
+# for the unit tests
 kde4_add_library(activitydiarylib SHARED ${map_SRCS})
 
 target_link_libraries(activitydiary

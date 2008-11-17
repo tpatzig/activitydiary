@@ -40,6 +40,9 @@ target_link_libraries(activitydiary
 target_link_libraries(activitydiarylib
                       ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
 
-#install(TARGETS mapview
-#        DESTINATION ${KDE4_BIN_INSTALL_DIR})
+install(TARGETS activitydiary
+        DESTINATION /opt/activitydiary)
+
+install(FILES activitydiary.sh
+        DESTINATION /opt/activitydiary)
 

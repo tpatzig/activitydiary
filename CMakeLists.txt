@@ -2,7 +2,7 @@ set(PACKAGE "activitydiary")
 project(${PACKAGE})
 
 
-include( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
+include( ${CMAKE_SOURCE_DIR}/package/VERSION.cmake )
 set ( VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
 set(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
@@ -20,7 +20,9 @@ set (CPACK_SOURCE_IGNORE_FILES
 "/CVS/;/.svn/;/.git/;/.libs/;/.deps/;.swp$;.#;/#;/build/"
 "~$"
 "\\\\.cvsignore$"
-#"/package"
+"/package"
+"BUILD_COVERAGE.sh"
+"/src/coverage.sh"
 "\\\\.bz2$"
 "\\\\.gz$"
 "Makefile\\\\.in$"
@@ -59,7 +61,7 @@ add_subdirectory ( src )
 add_subdirectory ( icons )
 
 message(STATUS "Writing spec file...")
-configure_file(${CMAKE_SOURCE_DIR}/${PACKAGE}.spec.in ${CMAKE_BINARY_DIR}/package/${PACKAGE}.spec @ONLY)
+configure_file(${CMAKE_SOURCE_DIR}/package/${PACKAGE}.spec.in ${CMAKE_BINARY_DIR}/package/${PACKAGE}.spec @ONLY)
 
 #set( AUTOBUILD_COMMAND
 #COMMAND ${CMAKE_MAKE_PROGRAM} package_source

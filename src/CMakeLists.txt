@@ -6,7 +6,7 @@ include_directories(
    )
 
 
-#add_subdirectory(test)
+add_subdirectory(test)
  
 set(map_SRCS 
 	main.cpp
@@ -24,15 +24,22 @@ set(map_SRCS
         calendar.cpp
 )
 
+SET( CMAKE_CXX_FLAGS_COVERAGE "-fprofile-arcs -ftest-coverage" CACHE STRING "Profiling Compiler Flags" )
 
 kde4_add_ui_files(map_SRCS
 			activitydiary.ui)
 
 kde4_add_executable(activitydiary ${map_SRCS})
 
+#kde4_add_library(activitydiarylib SHARED ${map_SRCS})
+
+kde4_add_library(activitydiarylib SHARED ${map_SRCS})
+
 target_link_libraries(activitydiary
                       ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
- 
+target_link_libraries(activitydiarylib
+                      ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
+
 #install(TARGETS mapview
 #        DESTINATION ${KDE4_BIN_INSTALL_DIR})
 

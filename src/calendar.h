@@ -5,7 +5,7 @@
 
 #include "adxparser.h"
 
-class Calendar : public QTextBrowser
+class Q_DECL_EXPORT Calendar : public QTextBrowser
 {
     Q_OBJECT
 

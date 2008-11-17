@@ -1,0 +1,60 @@
+Name:           @PACKAGE@
+BuildRequires:  libkde4-devel
+BuildRequires:  libqwt5-devel
+BuildRequires:  cmake >= 2.4.6
+License:        GPL
+Group:          System/Management
+Summary:        ad
+Version:        @VERSION@
+Release:        1
+URL:            http://en.opensuse.org/
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+Source0:        %{name}-%{version}.tar.bz2
+Requires:       libqwt5
+
+
+%description
+activitydiary
+
+Authors:
+--------
+    Tom Patzig <tpatzig@suse.de>
+    Thomas Goettlicher <tgoettlicher@suse.de>
+
+%prep
+%setup -q -n %{name}-%{version} 
+
+%build
+%cmake_kde4 -d build
+%make_jobs
+
+%install
+cd build
+%makeinstall
+cd ..
+
+%kde_post_install
+
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+
+%attr(755,root,root)    /opt/activitydiary/activitydiary.sh
+/opt/activitydiary/activitydiary
+/opt/activitydiary/icons/calendar.png
+/opt/activitydiary/icons/cycling.png
+/opt/activitydiary/icons/end.gif
+/opt/activitydiary/icons/hiking.png
+/opt/activitydiary/icons/kompassberg.png
+/opt/activitydiary/icons/kompassberg_small.png
+/opt/activitydiary/icons/loading.png
+/opt/activitydiary/icons/running.png
+/opt/activitydiary/icons/start.gif
+
+
+
+%changelog
+

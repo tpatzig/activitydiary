@@ -9,6 +9,7 @@ SportsDiary::SportsDiary(QObject* parent)
 
     setupUi(this);
 
+    setWindowIcon(QIcon("icons/logo_64.png"));
     settings = new QSettings();
 
     legend = new QwtLegend;
@@ -78,7 +79,6 @@ SportsDiary::SportsDiary(QObject* parent)
     previousAvailAdx = "";
 
     slotClearAll();
-
 }
 
 SportsDiary::~SportsDiary()

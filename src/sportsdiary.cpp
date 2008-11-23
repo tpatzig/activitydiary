@@ -483,6 +483,7 @@ void SportsDiary::slotSaveTrackInfos()
                                                             .arg(startdate.toString("dd"))
                                                             .arg(starttime.toString("HHmmss"))
                                                             .arg(settings->value("TracksDir").toString());
+        QFileInfo info(filename);                                                            
 
         trackSettings["trackfile"] = parser->getFileName();
         if (! trackname->text().isEmpty() )
@@ -504,13 +505,20 @@ void SportsDiary::slotSaveTrackInfos()
             trackSettings["description"] = descriptionTextBrowser->toPlainText();
         if (! temperature->text().isEmpty() )
             trackSettings["temperature"] = temperature->text();
+        
+        if (info.exists()) {
+            trackSettings["selectedTrack"] = AdxParser::readSetting(filename,"selectedTrack");
+            trackSettings["allInOneTrack"] = AdxParser::readSetting(filename,"allInOneTrack");
+        } else { 
 
-        if (parser->getTracks().size() > 1 && mTrackCombo->count() == 1)
-            trackSettings["allInOneTrack"] = "true";
-        else if (parser->getTracks().size() > 1 && mTrackCombo->count() > 1 )
-            trackSettings["allInOneTrack"] = "false";
-        if (! mTrackCombo->currentText().isEmpty() )
-            trackSettings["selectedTrack"] = mTrackCombo->currentText().split("No. ")[1];
+            if (parser->getTracks().size() > 1 && mTrackCombo->count() == 1)
+                trackSettings["allInOneTrack"] = "true";
+            else if (parser->getTracks().size() > 1 && mTrackCombo->count() > 1 )
+                trackSettings["allInOneTrack"] = "false";
+           
+            if (! mTrackCombo->currentText().isEmpty() )
+                trackSettings["selectedTrack"] = mTrackCombo->currentText().split("No. ")[1];
+        }
 
         AdxParser::writeSettings(filename, trackSettings);
 
@@ -624,7 +632,6 @@ void SportsDiary::slotClearAll()
     previousAvailAdx = calendar->getPrevActivityDay(QDate::currentDate());
     mPrevDayButton->setEnabled(!previousAvailAdx.isEmpty());
     mNextDayButton->setEnabled(!nextAvailAdx.isEmpty());
-
 
 }
 

@@ -1,4 +1,4 @@
 #/bin/bash
 
 cd /opt/activitydiary
-activitydiary
+./activitydiary

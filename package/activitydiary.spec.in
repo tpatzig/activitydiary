@@ -2,6 +2,7 @@ Name:           @PACKAGE@
 BuildRequires:  libkde4-devel
 BuildRequires:  libqwt5-devel
 BuildRequires:  cmake >= 2.4.6
+BuildRequires: -post-build-checks  
 License:        GPL
 Group:          System/Management
 Summary:        ad
@@ -53,6 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/activitydiary/icons/loading.png
 /opt/activitydiary/icons/running.png
 /opt/activitydiary/icons/start.gif
+/opt/activitydiary 
 
 
 

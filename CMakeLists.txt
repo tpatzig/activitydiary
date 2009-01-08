@@ -20,7 +20,7 @@ set (CPACK_SOURCE_IGNORE_FILES
 "/CVS/;/.svn/;/.git/;/.libs/;/.deps/;.swp$;.#;/#;/build/"
 "~$"
 "\\\\.cvsignore$"
-"/package"
+#"/package"
 "BUILD_COVERAGE.sh"
 "/src/coverage.sh"
 "\\\\.bz2$"

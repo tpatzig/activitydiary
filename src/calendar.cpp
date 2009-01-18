@@ -169,7 +169,7 @@ QString Calendar::getNextActivityDay(const QDate& date)
             if (dirname.toInt() > date.year()) {
                 QDir tmpDir(baseDir.path() + "/" + dirname);
                 if (tmpDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
-                    QDir tmpKwDir(tmpDir.path() + "/" + tmpDir.entryList(QStringList("*"),QDir::Dirs,QDir::Name)[0]);
+                    QDir tmpKwDir(tmpDir.path() + "/" + tmpDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name)[0]);
                     if (tmpKwDir.entryList(QStringList("*.adx")).size() > 0 )
                         return tmpKwDir.path() + "/" + tmpKwDir.entryList(QStringList("*.adx"),QDir::Files,QDir::Name)[0];
                 }
@@ -215,7 +215,7 @@ QString Calendar::getPrevActivityDay(const QDate& date)
             if (dirname.toInt() < date.year()) {
                 QDir tmpDir(baseDir.path() + "/" + dirname);
                 if (tmpDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
-                    QDir tmpKwDir(tmpDir.path() + "/" + tmpDir.entryList(QStringList("*"),QDir::Dirs,QDir::Name | QDir::Reversed)[0]);
+                    QDir tmpKwDir(tmpDir.path() + "/" + tmpDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::Reversed)[0]);
                     if (tmpKwDir.entryList(QStringList("*.adx")).size() > 0 )
                         return tmpKwDir.path() + "/" + tmpKwDir.entryList(QStringList("*.adx"),QDir::Files,QDir::Name | QDir::Reversed)[0];
                 }

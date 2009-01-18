@@ -344,6 +344,11 @@
                <string>Running</string>
               </property>
              </item>
+             <item>
+              <property name="text">
+               <string>Skiing</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>

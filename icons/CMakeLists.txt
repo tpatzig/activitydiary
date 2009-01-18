@@ -8,6 +8,7 @@ install( FILES
     loading.png
     running.png
     start.gif
+    skiing.png
    DESTINATION /opt/activitydiary/icons
 )
 

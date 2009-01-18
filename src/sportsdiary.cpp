@@ -226,6 +226,7 @@ void SportsDiary::readSettings()
          activities["Cycling - Mountain Bike"] = "cycling.png";
          activities["Running"] = "running.png";
          activities["Hiking"] = "hiking.png";
+         activities["Skiing"] = "skiing.png";
          activities["default"] = "kompassberg_small.png";
 
          settings->setValue("ActivityImgMap",activities);
@@ -296,6 +297,25 @@ void SportsDiary::slotUpdateDownloadState(int queue)
 void SportsDiary::slotImportTrack()
 {
     qDebug() << "importing track";
+
+    if ( isWindowModified() ) {
+        QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                "Save Changes for Track \"" + trackname->text() + "\" ?",
+                QMessageBox::Yes | QMessageBox::No,this);
+        switch (msgBox.exec()) {
+            case QMessageBox::Yes: {
+                slotSaveTrackInfos();
+                break; 
+            }
+            case QMessageBox::No: {
+                setWindowModified(false);
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Open GPX File"), "./", tr("GPX Files (*.gpx)"));
 

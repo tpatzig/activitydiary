@@ -19,6 +19,7 @@ SportsDiary::SportsDiary(QObject* parent)
     
     calendarWidget->setFirstDayOfWeek(Qt::Monday);
     calToolButton->setIcon(QIcon("icons/calendar.png"));
+    propsButton->setIcon(QIcon("icons/logo_32.png"));
 
     readSettings();
 
@@ -36,7 +37,9 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(diagramDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetDiagramWidgetVisibility(bool)));
     connect(infoDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetInfoWidgetVisibility(bool)));
     connect(actionSave,SIGNAL(triggered()),this,SLOT(slotSaveTrackInfos()));
+    connect(actionShow_Track_Settings,SIGNAL(toggled(bool)),leftGroupBox,SLOT(setVisible(bool)));
     connect(trackname,SIGNAL(textChanged(const QString&)),this,SLOT(slotSetWindowTitle(const QString &)));
+    connect(propsButton,SIGNAL(clicked(bool)),this,SLOT(slotShowTrackProperties(bool)));
     connect(mNextDayButton,SIGNAL(clicked()),this,SLOT(slotLoadNextActivityDay()));
     connect(mPrevDayButton,SIGNAL(clicked()),this,SLOT(slotLoadPrevActivityDay()));
     connect(actionRemoveTrack,SIGNAL(triggered()),this,SLOT(slotRemoveTrack()));
@@ -472,6 +475,12 @@ void SportsDiary::slotShowCalendarWidget(bool /*check*/ )
 {
        rightGroupBox->setVisible(!rightGroupBox->isVisible());
        actionShow_Calendar->setChecked(rightGroupBox->isVisible());
+}
+
+void SportsDiary::slotShowTrackProperties(bool /*check*/ )
+{
+       leftGroupBox->setVisible(!leftGroupBox->isVisible());
+       actionShow_Track_Settings->setChecked(leftGroupBox->isVisible());
 }
 
 void SportsDiary::slotShowCalendar(bool /*check*/ )

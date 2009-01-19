@@ -47,6 +47,7 @@ public slots:
   void slotSpeedCheck(bool);
   void slotShowCalendar(bool);
   void slotShowCalendarWidget(bool);
+  void slotShowTrackProperties(bool);
   void slotSetDiagramWidgetVisibility(bool);
   void slotSetInfoWidgetVisibility(bool);
   void slotSaveTrackInfos();

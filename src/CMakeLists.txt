@@ -25,7 +25,7 @@ set(map_SRCS
 )
 
 # for code coverage
-SET( CMAKE_CXX_FLAGS_COVERAGE "-fprofile-arcs -ftest-coverage" CACHE STRING "Profiling Compiler Flags" )
+# SET( CMAKE_CXX_FLAGS_COVERAGE "-fprofile-arcs -ftest-coverage" CACHE STRING "Profiling Compiler Flags" )
 
 kde4_add_ui_files(map_SRCS
 			activitydiary.ui)

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=ActivityDiary
+Name[x-test]=xxActivityDiaryxx
+Exec=/opt/activitydiary/activitydiary
+Icon=activitydiary
+Type=Application
+Terminal=false
+Categories=Qt;KDE;Network;
+Comment=ActivityDiary - A GPS Track Diary
+X-DBUS-StartupType=Unique
+X-KDE-StartupNotify=false

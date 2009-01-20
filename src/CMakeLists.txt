@@ -46,3 +46,4 @@ install(TARGETS activitydiary
 install(FILES activitydiary.sh
         DESTINATION /opt/activitydiary)
 
+install(FILES activitydiary.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

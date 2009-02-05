@@ -49,19 +49,19 @@ void Calendar::slotUpdateCurrentKW(const QDate& date)
         foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
 
             html = "";
-            QString activityIcon = "";
+            QString activityIcon = settings->value("ActivityIconDir").toString();
             QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
             QString activityType = AdxParser::readSetting(path + "/" + filename,"activitytype");
 
             if (iconMap.contains(activityType))
-                activityIcon = iconMap[activityType].toString();
+                activityIcon += iconMap[activityType].toString();
             else
-                activityIcon = iconMap["default"].toString();
+                activityIcon += iconMap["default"].toString();
 
             QString activityTime = AdxParser::readSetting(path + "/" + filename,"totaltime");
             QString activityDistance = AdxParser::readSetting(path + "/" + filename,"distance");
        
-            html += "<td bgcolor=#FFFFFF align=center valign=middle ><a href= \"" + path + "/" + filename + "\"><img src=\"icons/" + activityIcon + "\"><br>";
+            html += "<td bgcolor=#FFFFFF align=center valign=middle ><a href= \"" + path + "/" + filename + "\"><img src=\"" + activityIcon + "\"><br>";
             html += activityType + "<br>";
             html += activityDistance + " km<br>";
 

@@ -6,7 +6,7 @@ include_directories(
    )
 
 
-add_subdirectory(test)
+#add_subdirectory(test)
  
 set(map_SRCS 
 	main.cpp
@@ -25,25 +25,25 @@ set(map_SRCS
 )
 
 # for code coverage
-# SET( CMAKE_CXX_FLAGS_COVERAGE "-fprofile-arcs -ftest-coverage" CACHE STRING "Profiling Compiler Flags" )
+#SET( CMAKE_CXX_FLAGS_COVERAGE "-fprofile-arcs -ftest-coverage" CACHE STRING "Profiling Compiler Flags" )
 
 kde4_add_ui_files(map_SRCS
 			activitydiary.ui)
 
-kde4_add_executable(activitydiary ${map_SRCS})
-
 # for the unit tests
-kde4_add_library(activitydiarylib SHARED ${map_SRCS})
+#kde4_add_library(activitydiarylib SHARED ${map_SRCS})
+
+SET(App_RCCS ../icons.qrc)
+QT4_ADD_RESOURCES(App_RCCS_SRCS ${App_RCCS})
+
+kde4_add_executable(activitydiary ${map_SRCS} ${App_RCCS_SRCS})
 
 target_link_libraries(activitydiary
                       ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
-target_link_libraries(activitydiarylib
-                      ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
+#target_link_libraries(activitydiarylib
+#                      ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
 
 install(TARGETS activitydiary
-        DESTINATION /opt/activitydiary)
-
-install(FILES activitydiary.sh
-        DESTINATION /opt/activitydiary)
+        DESTINATION ${BIN_INSTALL_DIR})
 
 install(FILES activitydiary.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

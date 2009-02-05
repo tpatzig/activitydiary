@@ -9,8 +9,6 @@ include_directories(
    )
 
 
-
-
 SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 KDE4_ADD_UNIT_TEST(calendar_test test_calendar.cpp)

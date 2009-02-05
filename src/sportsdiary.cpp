@@ -8,8 +8,9 @@ SportsDiary::SportsDiary(QObject* parent)
     Q_UNUSED(parent);
 
     setupUi(this);
+//    QDir::addResourceSearchPath("/usr/share/activtydiary");
 
-    setWindowIcon(QIcon("icons/logo_64.png"));
+    setWindowIcon(QIcon(":/icons/logo_64.png"));
     settings = new QSettings();
 
     legend = new QwtLegend;
@@ -18,8 +19,8 @@ SportsDiary::SportsDiary(QObject* parent)
 
     
     calendarWidget->setFirstDayOfWeek(Qt::Monday);
-    calToolButton->setIcon(QIcon("icons/calendar.png"));
-    propsButton->setIcon(QIcon("icons/logo_32.png"));
+    calToolButton->setIcon(QIcon(":/icons/calendar.png"));
+    propsButton->setIcon(QIcon(":/icons/logo_32.png"));
 
     readSettings();
 
@@ -60,7 +61,7 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mTrackCombo,SIGNAL(activated(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
     connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
 
-    iconLabel->setPixmap(QPixmap("icons/kompassberg.png"));
+    iconLabel->setPixmap(QPixmap(":/icons/kompassberg.png"));
     abortButton->setEnabled(false);
     zoomSlider->setValue(mapFrame->zoom());
 
@@ -233,6 +234,9 @@ void SportsDiary::readSettings()
          activities["default"] = "kompassberg_small.png";
 
          settings->setValue("ActivityImgMap",activities);
+         if (!settings->contains("ActivityIconDir")) {
+            settings->setValue("ActivityIconDir",QString("/usr/share/activitydiary/icons/"));
+         }
 //  }
 
     settings->beginGroup("MainWindow");

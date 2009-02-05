@@ -44,7 +44,7 @@ find_package(Qwt REQUIRED)
 include(KDE4Defaults)
 include(MacroLibrary)
 
-set(KDE4_BUILD_TESTS ON)
+#set(KDE4_BUILD_TESTS ON)
  
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(

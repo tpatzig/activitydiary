@@ -9,7 +9,7 @@ install( FILES
     running.png
     start.gif
     skiing.png
-   DESTINATION /opt/activitydiary/icons
+   DESTINATION /usr/share/activitydiary/icons
 )
 
 install( FILES hi128-app-activitydiary.png DESTINATION /usr/share/icons/hicolor/128x128/apps RENAME activitydiary.png)

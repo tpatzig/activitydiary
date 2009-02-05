@@ -578,7 +578,7 @@ void SportsDiary::slotRemoveTrack()
                                                             .arg(settings->value("TracksDir").toString());
         if ( currentAdx == filename && QFile::exists(filename) ) {
             QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                    "Relly remove Track \"" + trackname->text() + "\" from ActivityDiary ?",
+                    "Really remove Track \"" + trackname->text() + "\" from ActivityDiary ?",
                     QMessageBox::Yes | QMessageBox::No,this);
             switch (msgBox.exec()) {
                 case QMessageBox::Yes: {

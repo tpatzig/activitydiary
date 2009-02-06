@@ -22,6 +22,8 @@ set(map_SRCS
         diagramcurve.cpp
         adxparser.cpp
         calendar.cpp
+	Physical.cpp
+	hrmparser.cpp
 )
 
 # for code coverage

@@ -1101,6 +1101,13 @@ p, li { white-space: pre-wrap; }
                        </widget>
                       </item>
                       <item>
+                       <widget class="QCheckBox" name="hrCheckBox">
+                        <property name="text">
+                         <string>Heart Rate</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
                        <spacer name="horizontalSpacer_7">
                         <property name="orientation">
                          <enum>Qt::Horizontal</enum>
@@ -1711,6 +1718,7 @@ p, li { white-space: pre-wrap; }
      <string>File</string>
     </property>
     <addaction name="actionImport"/>
+    <addaction name="actionImportPhysical"/>
     <addaction name="actionRemoveTrack"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
@@ -1736,6 +1744,14 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionImportPhysical">
+   <property name="text">
+    <string>Import Physical Data...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
   <action name="actionSave">

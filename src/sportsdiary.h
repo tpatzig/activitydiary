@@ -15,6 +15,8 @@
 #include "waypoint.h"
 #include "diagramcurve.h"
 #include "adxparser.h"
+#include "Physical.h"
+#include "hrmparser.h"
 
 
 
@@ -38,6 +40,8 @@ public slots:
   void slotUpdateDownloadState(int);
   void slotImportTrack();
   void slotImportTrack(QString);
+  void slotImportPhysical();
+  void slotImportPhysical(QString);
   void slotSetZoom(int);
   void slotSetSliderValue(int);
   void slotWaypointSelected(Waypoint*);
@@ -45,6 +49,7 @@ public slots:
   void slotSelectCurrentTrack( int );
   void slotAltitudeCheck(bool);
   void slotSpeedCheck(bool);
+  void slotHrCheck(bool checked);
   void slotShowCalendar(bool);
   void slotShowCalendarWidget(bool);
   void slotShowTrackProperties(bool);
@@ -72,11 +77,13 @@ private:
 
   Track *mCurrentTrack;
   TrackList tracks;
+  Physical _physical;
   GPXParser* parser;
   QwtLegend* legend;
   QString roundNumberAsString(double f);
   DiagramCurve* altitudeDiagram;
   DiagramCurve* speedDiagram;
+  DiagramCurve* hrDiagram;
   QSettings* settings;
   QString currentAdx;
   QString nextAvailAdx;

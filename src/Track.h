@@ -62,6 +62,7 @@ class Track
     private:
 
         WaypointList waypoint_list;
+	
 
         Waypoint* wpt;
 

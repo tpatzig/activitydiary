@@ -30,9 +30,11 @@ SportsDiary::SportsDiary(QObject* parent)
 
     connect(abortButton,SIGNAL(clicked()),mapFrame,SLOT(slotAbortDownload()));
     connect(actionImport,SIGNAL(triggered()),this,SLOT(slotImportTrack()));
+    connect(actionImportPhysical,SIGNAL(triggered()),this,SLOT(slotImportPhysical()));
     connect(zoomSlider,SIGNAL(sliderMoved(int)),this,SLOT(slotSetZoom(int)));
     connect(altitudeCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotAltitudeCheck(bool)));
     connect(speedCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotSpeedCheck(bool)));
+    connect(hrCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotHrCheck(bool)));
     connect(mCalendarButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendarWidget(bool)));
     connect(calToolButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendar(bool)));
     connect(diagramDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetDiagramWidgetVisibility(bool)));
@@ -76,6 +78,7 @@ SportsDiary::SportsDiary(QObject* parent)
     parser = 0;
     altitudeDiagram = 0;
     speedDiagram = 0;
+    hrDiagram = 0;
     mCurrentTrack = 0;
 
     currentAdx = "";
@@ -96,6 +99,11 @@ SportsDiary::~SportsDiary()
         delete speedDiagram;
         speedDiagram = 0;
     }
+    if (hrDiagram) {
+        delete hrDiagram;
+        hrDiagram = 0;
+    }
+
 
     if (parser)
         delete parser;
@@ -119,6 +127,7 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     QVector<double> timeValues;
     QVector<double> altitudeValues;
     QVector<double> speedValues;
+    QVector<double> hrValues;
     int tmpTime = 0;
     int startIndex = mCurrentTrack->indexOf(start);
 
@@ -136,6 +145,14 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
                  altitudeValues << it->get_altitude();
 
                  speedValues << mCurrentTrack->get_wp_speed(tmpWp,it) * 3.6;
+		 if ( _physical.size() > 0 )
+		 {
+		    PhysicalElement* pe = _physical.atSec(start->get_time().secsTo(it->get_time()));
+		    if (pe)
+			hrValues << pe->hr();
+		    else
+			hrValues << 0;
+		 }
 
                  timeValues << (start->get_time().secsTo(it->get_time())) / 60;
                  tmpTime += 60;
@@ -146,7 +163,7 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 
     if (!altitudeDiagram) {
         altitudeDiagram = new DiagramCurve(diagram,"Altitude");
-        altitudeDiagram->setColor(QColor(255,0,0));
+        altitudeDiagram->setColor(QColor(0,0,255));
         slotAltitudeCheck(altitudeCheckBox->isChecked());
     }
     if (!speedDiagram) {
@@ -154,17 +171,24 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
         speedDiagram->setColor(QColor(0,255,0));
         slotSpeedCheck(speedCheckBox->isChecked());
     }
+    if (!hrDiagram) {
+        hrDiagram = new DiagramCurve(diagram,"Heart Rate");
+        hrDiagram->setColor(QColor(255,0,0));
+        slotHrCheck(hrCheckBox->isChecked());
+    } 
 
     diagram->setAxisTitle(QwtPlot::xBottom,"Time in min");
 
     altitudeDiagram->setValues(timeValues,altitudeValues);
     speedDiagram->setValues(timeValues,speedValues);
+    hrDiagram->setValues(timeValues,hrValues);
 
 
     diagram->replot();
 
     altitudeCheckBox->setEnabled(true);
     speedCheckBox->setEnabled(true);
+    hrCheckBox->setEnabled(true);
 
 
 
@@ -337,6 +361,28 @@ void SportsDiary::slotImportTrack()
     }
 }
 
+void SportsDiary::slotImportPhysical()
+{
+    qDebug() << "importing physical data";
+
+    QString fileName = QFileDialog::getOpenFileName(this,
+            tr("Open HRM File"), "./", tr("Phy Files (*.hrm)"));
+
+    if (!fileName.isEmpty()) {
+        slotImportPhysical(fileName);
+    }
+}
+
+void SportsDiary::slotImportPhysical(QString fileName)
+{
+    _physical = HRMParser::read(fileName);
+
+    qDebug() << _physical[2]->hr();
+
+
+}
+
+
 void SportsDiary::slotImportTrack(QString fileName)
 {
     if ( parser ) delete parser;
@@ -474,6 +520,13 @@ void SportsDiary::slotSpeedCheck(bool checked)
     enableDisableDiagram(checked,speedDiagram,"Speed in km/h");
 
 }
+
+void SportsDiary::slotHrCheck(bool checked)
+{
+    enableDisableDiagram(checked,hrDiagram,"Heart Rate in 1/min");
+
+}
+
 
 void SportsDiary::slotShowCalendarWidget(bool /*check*/ )
 {
@@ -637,6 +690,11 @@ void SportsDiary::slotClearAll()
         delete speedDiagram;
         speedDiagram = 0;
     }
+    if (hrDiagram) {
+        delete hrDiagram;
+        hrDiagram = 0;
+    }
+
 
     cadenceLabel->setText("");
     heartrateLabel->setText("");
@@ -647,8 +705,10 @@ void SportsDiary::slotClearAll()
 
     altitudeCheckBox->setChecked(true);
     speedCheckBox->setChecked(true);
+    hrCheckBox->setChecked(true);
     altitudeCheckBox->setEnabled(false);
     speedCheckBox->setEnabled(false);
+    hrCheckBox->setEnabled(false);
 
     actionSave->setEnabled(false);
     actionRemoveTrack->setEnabled(false);

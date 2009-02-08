@@ -72,6 +72,8 @@ class MapView : public QFrame
 
         Waypoint* findWaypointNear(QPoint mpos);
 
+        QString iconDir;
+
 
     public slots:
             void slotNewTileDownloaded(QString filename); 

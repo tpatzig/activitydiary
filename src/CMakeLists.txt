@@ -1,8 +1,10 @@
 include_directories(
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}
-   ${KDE4_INCLUDES}
+#   ${KDE4_INCLUDES}
+   ${QT4_INCLUDES}
    ${QWT_INCLUDE_DIR}
+   ${CMAKE_CURRENT_BINARY_DIR}
    )
 
 
@@ -29,8 +31,13 @@ set(map_SRCS
 # for code coverage
 #SET( CMAKE_CXX_FLAGS_COVERAGE "-fprofile-arcs -ftest-coverage" CACHE STRING "Profiling Compiler Flags" )
 
-kde4_add_ui_files(map_SRCS
-			activitydiary.ui)
+#kde4_add_ui_files(map_SRCS
+#			activitydiary.ui)
+
+set(activity_UIS
+	activitydiary.ui)
+QT4_WRAP_UI(activity_UIS_H ${activity_UIS})
+
 
 # for the unit tests
 #kde4_add_library(activitydiarylib SHARED ${map_SRCS})
@@ -38,14 +45,19 @@ kde4_add_ui_files(map_SRCS
 SET(App_RCCS ../icons.qrc)
 QT4_ADD_RESOURCES(App_RCCS_SRCS ${App_RCCS})
 
-kde4_add_executable(activitydiary ${map_SRCS} ${App_RCCS_SRCS})
+add_executable(activitydiary ${map_SRCS} ${activity_UIS_H} ${App_RCCS_SRCS})
 
 target_link_libraries(activitydiary
-                      ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
+                      ${QT4_LIBS} ${QWT_LIBRARY})
 #target_link_libraries(activitydiarylib
 #                      ${KDE4_KDEUI_LIBS} ${QWT_LIBRARY})
 
+IF (UNIX AND NOT APPLE)
 install(TARGETS activitydiary
         DESTINATION ${BIN_INSTALL_DIR})
+     install(FILES activitydiary.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+ENDIF (UNIX AND NOT APPLE)
 
-install(FILES activitydiary.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+IF (APPLE)
+     install (TARGETS activitydiary RUNTIME DESTINATION bin)
+ENDIF (APPLE)

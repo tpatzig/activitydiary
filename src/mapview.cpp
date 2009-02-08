@@ -24,6 +24,8 @@ MapView::MapView( QWidget* parent) : QFrame(parent)
 
     setFrameStyle(QFrame::Panel | QFrame::Sunken);
     setLineWidth(2);
+    QSettings settings;
+    iconDir = settings.value("ActivityIconDir").toString();
 
 }
 
@@ -75,10 +77,10 @@ void MapView::drawPin( QPointF pin, QString pixmapName)
 void MapView::drawPins()
 {
     if (_startWaypoint)
-        drawPin(QPointF (_startWaypoint->get_longitude(), _startWaypoint->get_latitude()), "icons/start.gif");
+        drawPin(QPointF (_startWaypoint->get_longitude(), _startWaypoint->get_latitude()), QString (iconDir + "icons/start.gif"));
 
     if (_endWaypoint)
-        drawPin(QPointF (_endWaypoint->get_longitude(), _endWaypoint->get_latitude()), "icons/end.gif");
+        drawPin(QPointF (_endWaypoint->get_longitude(), _endWaypoint->get_latitude()), QString (iconDir + "icons/end.gif"));
 
 }
 

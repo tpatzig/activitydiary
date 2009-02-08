@@ -3,7 +3,6 @@
 
 #include <QMainWindow> 
 #include <QtGui> 
-#include <klocalizedstring.h> 
 #include <QObject>
 #include <qwt_legend.h>
 
@@ -88,7 +87,7 @@ private:
   QString currentAdx;
   QString nextAvailAdx;
   QString previousAvailAdx;
-
+  QString iconDir;
 
 
 };

@@ -1,6 +1,9 @@
-FIND_PATH(QWT_INCLUDE_DIR  qwt_plot.h /usr/include/qwt /usr/local/include/qwt /usr/qwt/include NO_DEFAULT_PATH)
+FIND_PATH(QWT_INCLUDE_DIR  qwt_plot.h /usr/include/qwt /usr/local/include/qwt /usr/qwt/include /usr/local/qwt/include NO_DEFAULT_PATH)
 
-FIND_LIBRARY(QWT_LIBRARY NAMES qwt PATH /usr/lib /usr/local/lib /usr/lib64 /usr/local/lib64 /usr/qwt/lib) 
+FIND_LIBRARY(QWT_LIBRARY NAMES qwt PATH /usr/lib /usr/local/lib /usr/lib64 /usr/local/lib64 /usr/qwt/lib /usr/local/qwt/lib)  
+IF (APPLE)
+     FIND_LIBRARY(QWT_LIBRARY libqwt.dylib PATH /usr/lib /usr/local/lib /usr/lib64 /usr/local/lib64 /usr/qwt/lib /usr/local/qwt/lib)  
+ENDIF (APPLE)
 
 IF (QWT_INCLUDE_DIR AND QWT_LIBRARY)
    SET(QWT_FOUND TRUE)

@@ -38,19 +38,19 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
 set (CMAKE_INSTALL_PREFIX /usr)
 
 # Find the required Libaries
-find_package(KDE4 REQUIRED)
+#find_package(KDE4 REQUIRED)
 find_package(Qt4 REQUIRED)
 find_package(Qwt REQUIRED)
-include(KDE4Defaults)
-include(MacroLibrary)
+#include(KDE4Defaults)
+#include(MacroLibrary)
 
 #set(KDE4_BUILD_TESTS ON)
  
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+add_definitions (${QT_DEFINITIONS})
 include_directories(
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}
-   ${KDE4_INCLUDES}
+#   ${KDE4_INCLUDES}
    ${QT4_INCLUDES}
    ${QWT_INCLUDE_DIR}
     

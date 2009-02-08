@@ -8,21 +8,21 @@ SportsDiary::SportsDiary(QObject* parent)
     Q_UNUSED(parent);
 
     setupUi(this);
-//    QDir::addResourceSearchPath("/usr/share/activtydiary");
+    //QDir::addResourceSearchPath("/usr/share/activtydiary");
 
-    setWindowIcon(QIcon(":/icons/logo_64.png"));
     settings = new QSettings();
+    readSettings();
+
+    setWindowIcon(QIcon(iconDir + "logo_64.png"));
+    qDebug() << settings->fileName();
 
     legend = new QwtLegend;
     legend->setFrameStyle(QFrame::NoFrame|QFrame::Raised);
     diagram->insertLegend(legend, QwtPlot::RightLegend);
-
     
     calendarWidget->setFirstDayOfWeek(Qt::Monday);
-    calToolButton->setIcon(QIcon(":/icons/calendar.png"));
-    propsButton->setIcon(QIcon(":/icons/logo_32.png"));
-
-    readSettings();
+    calToolButton->setIcon(QIcon(iconDir + "calendar.png"));
+    propsButton->setIcon(QIcon(iconDir + "logo_32.png"));
 
     connect(mapFrame,SIGNAL(downloadState(int)),this,SLOT(slotUpdateDownloadState(int)));
     connect(mapFrame,SIGNAL(zoomChanged(int)),this,SLOT(slotSetSliderValue(int)));
@@ -63,7 +63,7 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mTrackCombo,SIGNAL(activated(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
     connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
 
-    iconLabel->setPixmap(QPixmap(":/icons/kompassberg.png"));
+    iconLabel->setPixmap(QPixmap(iconDir + "kompassberg.png"));
     abortButton->setEnabled(false);
     zoomSlider->setValue(mapFrame->zoom());
 
@@ -261,6 +261,7 @@ void SportsDiary::readSettings()
          if (!settings->contains("ActivityIconDir")) {
             settings->setValue("ActivityIconDir",QString("/usr/share/activitydiary/icons/"));
          }
+         iconDir = settings->value("ActivityIconDir").toString();
 //  }
 
     settings->beginGroup("MainWindow");
@@ -433,7 +434,7 @@ void SportsDiary::slotImportTrack(QString fileName)
         QListIterator<Track*> it( tracks );
         qDebug() << "Size TrackList: " << tracks.size();
         while ( it.hasNext() ) {
-            mTrackCombo->addItem( i18n( "Track No. %1" ).arg( cnt++ ) );
+            mTrackCombo->addItem( QString( "Track No. %1" ).arg( cnt++ ) );
             it.next();
         }
 

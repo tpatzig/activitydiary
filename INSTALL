@@ -1,0 +1,6 @@
+Build on Mac OS X
+==================================
+1. install qwt ( libqwt.dylib has to be in /usr/lib )
+2. qmake -spec macx-g++ activitydiary.pro
+3. make
+4. mv icons to /usr/share/activitydiary/icons

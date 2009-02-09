@@ -6,7 +6,14 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += . src
 INCLUDEPATH += . src
-INCLUDEPATH += /usr/local/qwt/include
+macx {
+    INCLUDEPATH += /usr/local/qwt/include
+    LIBS += /usr/lib/libqwt.dylib
+}
+else:unix {
+    INCLUDEPATH += /usr/include/qwt
+    LIBS += /usr/lib/libqwt.so
+}
 
 # Input
 HEADERS += src/adxparser.h \
@@ -41,6 +48,5 @@ SOURCES += src/adxparser.cpp \
            src/waypoint.cpp \
 #RESOURCES += icons.qrc
 
-LIBS += /usr/lib/libqwt.dylib
 
 QT += xml network

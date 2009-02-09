@@ -64,12 +64,16 @@ icon32.files = icons/32x32/*
 
 target.path = /usr/bin/
 
+desktopfile.path = /usr/share/applications/kde4
+desktopfile.files = src/activitydiary.desktop
+
 INSTALLS += target
 INSTALLS += icons \
             icon128 \
             icon64 \
             icon48 \
-            icon32
+            icon32 \
+            desktopfile
 
 QT += xml network
 

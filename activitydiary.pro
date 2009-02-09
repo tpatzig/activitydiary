@@ -47,10 +47,10 @@ SOURCES += src/adxparser.cpp \
            src/Track.cpp \
            src/waypoint.cpp \
 
-icons.path = /opt/activitydiary/icons
+icons.path = /usr/share/activitydiary/icons
 icons.files = icons/*
 
-target.path = /opt/activitydiary
+target.path = /usr/bin/
 INSTALLS += target
 INSTALLS += icons
 

@@ -808,8 +808,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>94</width>
-              <height>70</height>
+              <width>272</width>
+              <height>194</height>
              </rect>
             </property>
             <attribute name="label" >
@@ -855,6 +855,9 @@ p, li { white-space: pre-wrap; }
           <layout class="QHBoxLayout" name="horizontalLayout_7" >
            <item>
             <widget class="QToolButton" name="propsButton" >
+             <property name="toolTip" >
+              <string>Hide Track Information Panel</string>
+             </property>
              <property name="text" >
               <string/>
              </property>
@@ -906,6 +909,9 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QPushButton" name="mPrevDayButton" >
+             <property name="toolTip" >
+              <string>Jump to previous saved Track</string>
+             </property>
              <property name="text" >
               <string>prev</string>
              </property>
@@ -925,6 +931,9 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QPushButton" name="mNextDayButton" >
+             <property name="toolTip" >
+              <string>Jump to next saved Track</string>
+             </property>
              <property name="text" >
               <string>next</string>
              </property>
@@ -932,6 +941,9 @@ p, li { white-space: pre-wrap; }
            </item>
            <item>
             <widget class="QPushButton" name="mCalendarButton" >
+             <property name="toolTip" >
+              <string>Show Calendar Panel</string>
+             </property>
              <property name="text" >
               <string>Calendar</string>
              </property>
@@ -1609,6 +1621,9 @@ p, li { white-space: pre-wrap; }
           </item>
           <item>
            <widget class="QToolButton" name="calToolButton" >
+            <property name="toolTip" >
+             <string>Hide Day Selection</string>
+            </property>
             <property name="text" >
              <string/>
             </property>

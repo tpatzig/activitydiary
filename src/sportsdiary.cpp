@@ -552,17 +552,30 @@ void SportsDiary::slotShowCalendarWidget(bool /*check*/ )
 {
        rightGroupBox->setVisible(!rightGroupBox->isVisible());
        actionShow_Calendar->setChecked(rightGroupBox->isVisible());
+       if ( rightGroupBox->isVisible() )
+           mCalendarButton->setToolTip("Hide Calendar Panel");
+       else
+           mCalendarButton->setToolTip("Show Calendar Panel");
 }
 
 void SportsDiary::slotShowTrackProperties(bool /*check*/ )
 {
        leftGroupBox->setVisible(!leftGroupBox->isVisible());
        actionShow_Track_Settings->setChecked(leftGroupBox->isVisible());
+       if (leftGroupBox->isVisible())
+           propsButton->setToolTip("Hide Track Information Panel");
+        else
+           propsButton->setToolTip("Show Track Information Panel");
+
 }
 
 void SportsDiary::slotShowCalendar(bool /*check*/ )
 {
     calendarGroupBox->setVisible(!calendarGroupBox->isVisible());
+    if (calendarGroupBox->isVisible())
+        calToolButton->setToolTip("Hide Day Selection");
+    else
+        calToolButton->setToolTip("Show Day Selection");
 }
 
 void SportsDiary::slotSetDiagramWidgetVisibility(bool /*state*/)

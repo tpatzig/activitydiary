@@ -46,7 +46,6 @@ SOURCES += src/adxparser.cpp \
            src/sportsdiary.cpp \
            src/Track.cpp \
            src/waypoint.cpp \
-#RESOURCES += icons.qrc
 
 
 QT += xml network

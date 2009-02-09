@@ -64,6 +64,7 @@ public slots:
   void slotLoadPrevActivityDay();
   void slotRemoveTrack();
   void slotClearAll();
+  void slotRatingClicked(const QString&);
 
 private:
 
@@ -73,6 +74,9 @@ private:
   void readSettings();
   void clearTrackInfos();
   void closeEvent(QCloseEvent *event);
+  void enableRating(int);
+  void disableRating(int);
+
 
   Track *mCurrentTrack;
   TrackList tracks;
@@ -88,7 +92,8 @@ private:
   QString nextAvailAdx;
   QString previousAvailAdx;
   QString iconDir;
-
+  QMap<QString,QVariant> iconMap;
+  int trackRating;
 
 };
 

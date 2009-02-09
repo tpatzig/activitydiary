@@ -8,10 +8,17 @@ SportsDiary::SportsDiary(QObject* parent)
     Q_UNUSED(parent);
 
     setupUi(this);
-    //QDir::addResourceSearchPath("/usr/share/activtydiary");
 
     settings = new QSettings();
     readSettings();
+    
+    activitytype->addItem(QIcon(iconDir + iconMap["default"].toString()), "Select your Activity...");
+    foreach (QString key, iconMap.keys()) {
+        if (key == "default")
+            break;
+        else
+            activitytype->addItem(QIcon(iconDir + iconMap[key].toString()), key);
+    }
 
     setWindowIcon(QIcon(iconDir + "logo_64.png"));
     qDebug() << settings->fileName();
@@ -63,14 +70,23 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mTrackCombo,SIGNAL(activated(const QString&)),this,SLOT(slotSetWindowModified(const QString &)));
     connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
 
-    iconLabel->setPixmap(QPixmap(iconDir + "kompassberg.png"));
+    iconLabel->setPixmap(QPixmap(iconDir + "kompassberg_medium.png"));
+    ratingLabel_1->setText(QString("<a href=\"enablerating_1\"><img src=\"" + iconDir + "star_small_gray.png" + "\"></a>"));
+    ratingLabel_2->setText(QString("<a href=\"enablerating_2\"><img src=\"" + iconDir + "star_small_gray.png" + "\"></a>"));
+    ratingLabel_3->setText(QString("<a href=\"enablerating_3\"><img src=\"" + iconDir + "star_small_gray.png" + "\"></a>"));
+    ratingLabel_4->setText(QString("<a href=\"enablerating_4\"><img src=\"" + iconDir + "star_small_gray.png" + "\"></a>"));
+    connect(ratingLabel_1,SIGNAL(linkActivated(const QString&)),this,SLOT(slotRatingClicked(const QString&)));
+    connect(ratingLabel_2,SIGNAL(linkActivated(const QString&)),this,SLOT(slotRatingClicked(const QString&)));
+    connect(ratingLabel_3,SIGNAL(linkActivated(const QString&)),this,SLOT(slotRatingClicked(const QString&)));
+    connect(ratingLabel_4,SIGNAL(linkActivated(const QString&)),this,SLOT(slotRatingClicked(const QString&)));
+
     abortButton->setEnabled(false);
     zoomSlider->setValue(mapFrame->zoom());
 
     rightGroupBox->setHidden(true);
     kwLabel->setText( QString("%1. KW %2").arg(calendarWidget->selectedDate().weekNumber()).arg(calendarWidget->selectedDate().year()) );
     calendar->slotUpdateCurrentKW(calendarWidget->selectedDate());
-    calendarGroupBox->setHidden(true);
+    //calendarGroupBox->setHidden(true);
 
     mNextDayButton->setEnabled(false);
     mPrevDayButton->setEnabled(false);
@@ -80,6 +96,7 @@ SportsDiary::SportsDiary(QObject* parent)
     speedDiagram = 0;
     hrDiagram = 0;
     mCurrentTrack = 0;
+    trackRating = 0;
 
     currentAdx = "";
     nextAvailAdx = "";
@@ -148,9 +165,10 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 		 if ( _physical.size() > 0 )
 		 {
 		    PhysicalElement* pe = _physical.atSec(start->get_time().secsTo(it->get_time()));
-		    if (pe)
+		    if (pe) {
 			hrValues << pe->hr();
-		    else
+                        qDebug() << pe->hr();
+		    } else
 			hrValues << 0;
 		 }
 
@@ -258,6 +276,7 @@ void SportsDiary::readSettings()
          activities["default"] = "kompassberg_small.png";
 
          settings->setValue("ActivityImgMap",activities);
+         iconMap = activities;
          if (!settings->contains("ActivityIconDir")) {
             settings->setValue("ActivityIconDir",QString("/usr/share/activitydiary/icons/"));
          }
@@ -286,6 +305,7 @@ void SportsDiary::clearTrackInfos()
     descriptionTextBrowser->setText("");
     temperature->setText("");
     mTrackCombo->clear();
+    disableRating(0);
 
     connect(descriptionTextBrowser,SIGNAL(textChanged()),this,SLOT(slotSetWindowModifiedDesc()));
 }
@@ -377,9 +397,8 @@ void SportsDiary::slotImportPhysical()
 void SportsDiary::slotImportPhysical(QString fileName)
 {
     _physical = HRMParser::read(fileName);
-
+     
     qDebug() << _physical[2]->hr();
-
 
 }
 
@@ -592,6 +611,8 @@ void SportsDiary::slotSaveTrackInfos()
             trackSettings["description"] = descriptionTextBrowser->toPlainText();
         if (! temperature->text().isEmpty() )
             trackSettings["temperature"] = temperature->text();
+        if (trackRating > 0 && trackRating < 5)
+            trackSettings["rating"] = QString::number(trackRating);
         
         if (info.exists()) {
             trackSettings["selectedTrack"] = AdxParser::readSetting(filename,"selectedTrack");
@@ -787,6 +808,8 @@ void SportsDiary::slotLoadSavedTrack(const QString& filenameAdx)
             descriptionTextBrowser->setText( setts["description"]);
         if (! setts["temperature"].isEmpty() )
             temperature->setText( setts["temperature"]);
+        if (! setts["rating"].isEmpty() )
+            enableRating(setts["rating"].toInt());
 
         slotImportTrack(filenameGpx);
 
@@ -833,5 +856,49 @@ void SportsDiary::slotLoadPrevActivityDay()
     slotLoadSavedTrack(previousAvailAdx);
 }
 
+void SportsDiary::slotRatingClicked(const QString& link)
+{
+    int star = link.split('_')[1].toInt();
+    QString action = link.split('_')[0];
+    if (action == "enablerating")
+        enableRating(star);
+    else
+        disableRating(star);
+}
 
+void SportsDiary::enableRating(int star)
+{
+    switch (star) {
+            case 1:
+                ratingLabel_1->setText(QString("<a href=\"disablerating_1\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                break;
+            case 2:
+                ratingLabel_1->setText(QString("<a href=\"disablerating_1\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                ratingLabel_2->setText(QString("<a href=\"disablerating_2\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                break;
+            case 3:
+                ratingLabel_1->setText(QString("<a href=\"disablerating_1\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                ratingLabel_2->setText(QString("<a href=\"disablerating_2\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                ratingLabel_3->setText(QString("<a href=\"disablerating_3\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                break;
+            case 4:
+                ratingLabel_1->setText(QString("<a href=\"disablerating_1\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                ratingLabel_2->setText(QString("<a href=\"disablerating_2\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                ratingLabel_3->setText(QString("<a href=\"disablerating_3\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                ratingLabel_4->setText(QString("<a href=\"disablerating_4\"><img src=\"" + iconDir + "star_small_yellow.png" + "\"></a>"));;
+                break;
+    }
+    if (star > 0 && star < 5) {
+        trackRating = star;
+        slotSetWindowModified("");
+    }
+}
+
+void SportsDiary::disableRating(int /*star*/)
+{
+    ratingLabel_1->setText(QString("<a href=\"enablerating_1\"><img src=\"" + iconDir + "star_small_gray.png" + "\"></a>"));;
+    ratingLabel_2->setText(QString("<a href=\"enablerating_2\"><img src=\"" + iconDir + "star_small_gray.png" + "\"></a>"));;
+    ratingLabel_3->setText(QString("<a href=\"enablerating_3\"><img src=\"" + iconDir + "star_small_gray.png" + "\"></a>"));;
+    ratingLabel_4->setText(QString("<a href=\"enablerating_4\"><img src=\"" + iconDir + "star_small_gray.png" + "\"></a>"));;
+}
 

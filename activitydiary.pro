@@ -47,6 +47,12 @@ SOURCES += src/adxparser.cpp \
            src/Track.cpp \
            src/waypoint.cpp \
 
+icons.path = /opt/activitydiary/icons
+icons.files = icons/*
+
+target.path = /opt/activitydiary
+INSTALLS += target
+INSTALLS += icons
 
 QT += xml network
 

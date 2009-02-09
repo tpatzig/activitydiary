@@ -1,6 +1,7 @@
 Name:           activitydiary  
 BuildRequires:  libkde4-devel  
 BuildRequires:  libqwt5-devel  
+BuildRequires:  libqwt5  
 BuildRequires: -post-build-checks    
 License:        GPL  
 Group:          System/Management  
@@ -12,39 +13,36 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Source0:        %{name}.tar.bz2  
 # tar cjf  activitydiary.tar.bz2  ../../activitydiary/
 Requires:       libqwt5  
-   
 
-   
+
+
 %description  
 activitydiary  
-   
+
 Authors:  
 --------  
-    Tom Patzig <tpatzig@suse.de>  
-    Thomas Goettlicher <tgoettlicher@suse.de>  
-   
+Tom Patzig <tpatzig@suse.de>  
+Thomas Goettlicher <tgoettlicher@suse.de>  
+
 %prep  
 #%setup -q -n %{name}-%{version}   
 %setup -q -n %{name}  
-   
+
 %build  
 qmake activitydiary.pro  
 make  
-   
-%install  
-mkdir /opt/activitydiary/  
-cp activitydiary /opt/activitydiary/  
-cp -r icons /opt/activitydiary/  
-   
+
+%makeinstall  
+
 %kde_post_install  
-  
-   
+
+
 %clean  
 rm -rf $RPM_BUILD_ROOT  
-   
+
 %files  
 %defattr(-,root,root)  
-   
+
 /opt/activitydiary/activitydiary  
 /opt/activitydiary/icons/calendar.png  
 /opt/activitydiary/icons/cycling.png  
@@ -56,9 +54,10 @@ rm -rf $RPM_BUILD_ROOT
 /opt/activitydiary/icons/running.png  
 /opt/activitydiary/icons/start.gif  
 /opt/activitydiary   
-  
-   
-   
+
+
+
 %changelog  
-  
-   
+
+
+

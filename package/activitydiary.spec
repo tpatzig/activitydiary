@@ -10,8 +10,10 @@ Release:        1
 URL:            http://en.opensuse.org/  
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build  
 Source0:        %{name}.tar.bz2  
+# tar cjf  activitydiary.tar.bz2  ../../activitydiary/
 Requires:       libqwt5  
    
+
    
 %description  
 activitydiary  

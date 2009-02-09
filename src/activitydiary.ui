@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1154</width>
-    <height>641</height>
+    <width>1231</width>
+    <height>748</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -38,7 +38,7 @@
         </property>
         <property name="minimumSize" >
          <size>
-          <width>300</width>
+          <width>330</width>
           <height>0</height>
          </size>
         </property>
@@ -433,7 +433,7 @@
            <property name="minimumSize" >
             <size>
              <width>0</width>
-             <height>291</height>
+             <height>335</height>
             </size>
            </property>
            <property name="currentIndex" >
@@ -444,8 +444,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>272</width>
-              <height>194</height>
+              <width>300</width>
+              <height>230</height>
              </rect>
             </property>
             <attribute name="label" >
@@ -764,8 +764,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>260</width>
-              <height>210</height>
+              <width>300</width>
+              <height>230</height>
              </rect>
             </property>
             <attribute name="label" >
@@ -808,8 +808,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>272</width>
-              <height>194</height>
+              <width>106</width>
+              <height>106</height>
              </rect>
             </property>
             <attribute name="label" >
@@ -836,8 +836,8 @@
                   <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 &lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Lucida Grande'; font-size:13pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:10pt;">&lt;/p>&lt;/body>&lt;/html></string>
                  </property>
                 </widget>
                </item>
@@ -1819,8 +1819,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1154</width>
-     <height>25</height>
+     <width>1231</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >

@@ -49,31 +49,33 @@ SOURCES += src/adxparser.cpp \
 
 icons.path = /usr/share/activitydiary/icons
 icons.files = icons/*.png
-
-icon128.path = /usr/share/icons/hicolor/128x128/apps
-icon128.files = icons/128x128/*
-
-icon64.path = /usr/share/icons/hicolor/64x64/apps
-icon64.files = icons/64x64/*
-
-icon48.path = /usr/share/icons/hicolor/48x48/apps
-icon48.files = icons/48x48/*
-
-icon32.path = /usr/share/icons/hicolor/32x32/apps
-icon32.files = icons/32x32/*
-
 target.path = /usr/bin/
 
-desktopfile.path = /usr/share/applications/kde4
-desktopfile.files = src/activitydiary.desktop
+linux-g++{
+     icon128.path = /usr/share/icons/hicolor/128x128/apps
+     icon128.files = icons/128x128/*
+
+     icon64.path = /usr/share/icons/hicolor/64x64/apps
+     icon64.files = icons/64x64/*
+
+     icon48.path = /usr/share/icons/hicolor/48x48/apps
+     icon48.files = icons/48x48/*
+
+     icon32.path = /usr/share/icons/hicolor/32x32/apps
+     icon32.files = icons/32x32/*
+
+     desktopfile.path = /usr/share/applications/kde4
+     desktopfile.files = src/activitydiary.desktop
+
+     INSTALLS += icon128 \
+                 icon64 \
+                 icon48 \
+                 icon32 \
+                 desktopfile
+}
 
 INSTALLS += target
-INSTALLS += icons \
-            icon128 \
-            icon64 \
-            icon48 \
-            icon32 \
-            desktopfile
+INSTALLS += icons
 
 QT += xml network
 

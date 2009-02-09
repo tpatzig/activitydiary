@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = activitydiary 
 DEPENDPATH += . src
 INCLUDEPATH += . src
 macx {
@@ -12,7 +12,7 @@ macx {
 }
 else:unix {
     INCLUDEPATH += /usr/include/qwt
-    LIBS += /usr/lib/libqwt.so
+    LIBS += -L/usr/lib -L/usr/lib64 -lqwt
 }
 
 # Input
@@ -49,3 +49,4 @@ SOURCES += src/adxparser.cpp \
 
 
 QT += xml network
+

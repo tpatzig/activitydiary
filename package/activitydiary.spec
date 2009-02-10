@@ -33,7 +33,7 @@ qmake activitydiary.pro
 make    
    
 %install    
-make install DESTDIR=%{buildroot}  
+make install INSTALL_ROOT=%{buildroot}  
    
    
 %kde_post_install    
@@ -47,6 +47,13 @@ rm -rf $RPM_BUILD_ROOT
    
 /usr/bin/activitydiary  
 /usr/share/activitydiary/icons  
+/usr/share/applications/kde4/activitydiary.desktop
+/usr/share/icons/hicolor/128x128/apps/activitydiary.png
+/usr/share/icons/hicolor/32x32/apps/activitydiary.png
+/usr/share/icons/hicolor/48x48/apps/activitydiary.png
+/usr/share/icons/hicolor/64x64/apps/activitydiary.png
+/usr/share/activitydiary
+
 #/opt/activitydiary/icons/cycling.png    
 #/opt/activitydiary/icons/end.gif    
 #/opt/activitydiary/icons/hiking.png    
@@ -56,7 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 #/opt/activitydiary/icons/running.png    
 #/opt/activitydiary/icons/start.gif    
 #/opt/activitydiary     
-   
    
   
 %changelog    

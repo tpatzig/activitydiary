@@ -15,6 +15,7 @@ else:unix {
     LIBS += -L/usr/lib -L/usr/lib64 -lqwt
 }
 
+
 # Input
 HEADERS += src/adxparser.h \
            src/Calc.h \
@@ -51,7 +52,8 @@ icons.path = /usr/share/activitydiary/icons
 icons.files = icons/*.png
 target.path = /usr/bin/
 
-linux-g++{
+!macx and unix {
+
      icon128.path = /usr/share/icons/hicolor/128x128/apps
      icon128.files = icons/128x128/*
 

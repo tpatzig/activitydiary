@@ -53,7 +53,7 @@ public slots:
   void slotShowCalendarWidget(bool);
   void slotShowTrackProperties(bool);
   void slotSetDiagramWidgetVisibility(bool);
-  void slotSetInfoWidgetVisibility(bool);
+//  void slotSetInfoWidgetVisibility(bool);
   void slotSaveTrackInfos();
   void slotCalendarUpdated(const QDate&);
   void slotLoadSavedTrack(const QString&);

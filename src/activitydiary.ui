@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1231</width>
-    <height>748</height>
+    <width>1183</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -115,7 +115,7 @@
         <property name="title" >
          <string/>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_22" >
+        <layout class="QVBoxLayout" name="verticalLayout_12" >
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_5" >
            <item>
@@ -286,7 +286,7 @@
            <item>
             <widget class="QComboBox" name="mTrackCombo" >
              <property name="sizePolicy" >
-              <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -372,7 +372,7 @@
            <item>
             <widget class="QComboBox" name="activitytype" >
              <property name="sizePolicy" >
-              <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -444,20 +444,33 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>300</width>
-              <height>230</height>
+              <width>302</width>
+              <height>249</height>
              </rect>
             </property>
             <attribute name="label" >
-             <string>Track Details</string>
+             <string>Activity Details</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_13" >
+             <item>
+              <spacer name="verticalSpacer_10" >
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_18" >
                <item>
                 <widget class="QLabel" name="label_20" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -476,7 +489,7 @@
                <item>
                 <widget class="QComboBox" name="weather" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -515,7 +528,7 @@
                <item>
                 <widget class="QLabel" name="label_29" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -534,7 +547,7 @@
                <item>
                 <widget class="QLineEdit" name="temperature" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -548,7 +561,7 @@
                <item>
                 <widget class="QLabel" name="label_19" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -567,7 +580,7 @@
                <item>
                 <widget class="QComboBox" name="covering" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -606,7 +619,7 @@
                <item>
                 <widget class="QLabel" name="label_18" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -625,7 +638,7 @@
                <item>
                 <widget class="QComboBox" name="profil" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -654,7 +667,7 @@
                <item>
                 <widget class="QLabel" name="label_22" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -673,7 +686,7 @@
                <item>
                 <widget class="QComboBox" name="quality" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -707,7 +720,7 @@
                <item>
                 <widget class="QLabel" name="label_17" >
                  <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -757,6 +770,356 @@
                </item>
               </layout>
              </item>
+             <item>
+              <spacer name="verticalSpacer_6" >
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_4" >
+            <property name="geometry" >
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>302</width>
+              <height>209</height>
+             </rect>
+            </property>
+            <attribute name="label" >
+             <string>Track Details</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_22" >
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout" >
+               <item>
+                <spacer name="verticalSpacer" >
+                 <property name="orientation" >
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType" >
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0" >
+                  <size>
+                   <width>138</width>
+                   <height>15</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout" >
+                 <item row="0" column="0" >
+                  <widget class="QLabel" name="label_5" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="font" >
+                    <font>
+                     <weight>50</weight>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string>Distance:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1" >
+                  <widget class="QLabel" name="distanceLabel" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="text" >
+                    <string>40km</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" >
+                  <widget class="QLabel" name="label_7" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="font" >
+                    <font>
+                     <weight>50</weight>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string>Time:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1" >
+                  <widget class="QLabel" name="timeLabel" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="text" >
+                    <string>56min</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0" >
+                  <widget class="QLabel" name="label_13" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="font" >
+                    <font>
+                     <weight>50</weight>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string>Average Speed:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1" >
+                  <widget class="QLabel" name="speedLabel" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="text" >
+                    <string>12km/h</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0" >
+                  <widget class="QLabel" name="label_6" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="font" >
+                    <font>
+                     <weight>50</weight>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string>Average Altitude:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" >
+                  <widget class="QLabel" name="altitudeLabel" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="text" >
+                    <string>305m</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0" >
+                  <widget class="QLabel" name="label_15" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="font" >
+                    <font>
+                     <weight>50</weight>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string>Average Heartrate:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1" >
+                  <widget class="QLabel" name="heartrateLabel" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="text" >
+                    <string>161</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="0" >
+                  <widget class="QLabel" name="label_8" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="font" >
+                    <font>
+                     <weight>50</weight>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="text" >
+                    <string>Average Cadence:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1" >
+                  <widget class="QLabel" name="cadenceLabel" >
+                   <property name="minimumSize" >
+                    <size>
+                     <width>0</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize" >
+                    <size>
+                     <width>16777215</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="text" >
+                    <string>83</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_2" >
+                 <property name="orientation" >
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType" >
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0" >
+                  <size>
+                   <width>128</width>
+                   <height>15</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="page_2" >
@@ -764,8 +1127,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>276</width>
-              <height>226</height>
+              <width>302</width>
+              <height>210</height>
              </rect>
             </property>
             <attribute name="label" >
@@ -808,8 +1171,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>106</width>
-              <height>106</height>
+              <width>302</width>
+              <height>209</height>
              </rect>
             </property>
             <attribute name="label" >
@@ -836,8 +1199,8 @@
                   <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
 &lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Lucida Grande'; font-size:13pt; font-weight:400; font-style:normal;">
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:10pt;">&lt;/p>&lt;/body>&lt;/html></string>
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
                  </property>
                 </widget>
                </item>
@@ -1014,6 +1377,9 @@ p, li { white-space: pre-wrap; }
                       </item>
                       <item>
                        <widget class="QPushButton" name="abortButton" >
+                        <property name="toolTip" >
+                         <string>Abort Download of Map tiles</string>
+                        </property>
                         <property name="text" >
                          <string>Abort</string>
                         </property>
@@ -1145,7 +1511,7 @@ p, li { white-space: pre-wrap; }
                     <item>
                      <widget class="QwtPlot" name="diagram" >
                       <property name="sizePolicy" >
-                       <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
+                       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
@@ -1153,7 +1519,7 @@ p, li { white-space: pre-wrap; }
                       <property name="minimumSize" >
                        <size>
                         <width>0</width>
-                        <height>100</height>
+                        <height>180</height>
                        </size>
                       </property>
                      </widget>
@@ -1165,334 +1531,17 @@ p, li { white-space: pre-wrap; }
                </widget>
               </item>
               <item>
-               <widget class="QDockWidget" name="infoDockWidget" >
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
+               <spacer name="verticalSpacer_9" >
+                <property name="orientation" >
+                 <enum>Qt::Vertical</enum>
                 </property>
-                <property name="maximumSize" >
+                <property name="sizeHint" stdset="0" >
                  <size>
-                  <width>524287</width>
-                  <height>524287</height>
+                  <width>20</width>
+                  <height>40</height>
                  </size>
                 </property>
-                <property name="features" >
-                 <set>QDockWidget::AllDockWidgetFeatures</set>
-                </property>
-                <property name="windowTitle" >
-                 <string>Trackinfo</string>
-                </property>
-                <widget class="QWidget" name="dockWidgetContents" >
-                 <layout class="QVBoxLayout" name="verticalLayout_12" >
-                  <item>
-                   <layout class="QVBoxLayout" name="verticalLayout" >
-                    <item>
-                     <spacer name="verticalSpacer" >
-                      <property name="orientation" >
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType" >
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0" >
-                       <size>
-                        <width>138</width>
-                        <height>15</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <layout class="QGridLayout" name="gridLayout" >
-                      <item row="0" column="0" >
-                       <widget class="QLabel" name="label_5" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="font" >
-                         <font>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text" >
-                         <string>Distance:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="1" >
-                       <widget class="QLabel" name="distanceLabel" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="text" >
-                         <string>40km</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="0" >
-                       <widget class="QLabel" name="label_7" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="font" >
-                         <font>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text" >
-                         <string>Time:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="1" >
-                       <widget class="QLabel" name="timeLabel" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="text" >
-                         <string>56min</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="0" >
-                       <widget class="QLabel" name="label_13" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="font" >
-                         <font>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text" >
-                         <string>Avg. Speed:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="1" >
-                       <widget class="QLabel" name="speedLabel" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="text" >
-                         <string>12km/h</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="0" >
-                       <widget class="QLabel" name="label_6" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="font" >
-                         <font>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text" >
-                         <string>Avg. Altitude:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="1" >
-                       <widget class="QLabel" name="altitudeLabel" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="text" >
-                         <string>305m</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="4" column="0" >
-                       <widget class="QLabel" name="label_15" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="font" >
-                         <font>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text" >
-                         <string>Avg. Heartrate:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="4" column="1" >
-                       <widget class="QLabel" name="heartrateLabel" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="text" >
-                         <string>161</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="5" column="0" >
-                       <widget class="QLabel" name="label_8" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="font" >
-                         <font>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="text" >
-                         <string>Avg. Cadence:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="5" column="1" >
-                       <widget class="QLabel" name="cadenceLabel" >
-                        <property name="minimumSize" >
-                         <size>
-                          <width>0</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize" >
-                         <size>
-                          <width>16777215</width>
-                          <height>22</height>
-                         </size>
-                        </property>
-                        <property name="text" >
-                         <string>83</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_2" >
-                      <property name="orientation" >
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType" >
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0" >
-                       <size>
-                        <width>128</width>
-                        <height>15</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </widget>
-               </widget>
+               </spacer>
               </item>
              </layout>
             </item>
@@ -1819,8 +1868,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1231</width>
-     <height>22</height>
+     <width>1183</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >
@@ -1839,7 +1888,6 @@ p, li { white-space: pre-wrap; }
      <string>View</string>
     </property>
     <addaction name="actionShow_Track_Settings" />
-    <addaction name="actionShow_TrackInfo" />
     <addaction name="actionShow_Diagram" />
     <addaction name="actionShow_Calendar" />
     <addaction name="actionClear" />
@@ -1978,22 +2026,6 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel" >
      <x>744</x>
      <y>795</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionShow_TrackInfo</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>infoDockWidget</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>1066</x>
-     <y>859</y>
     </hint>
    </hints>
   </connection>

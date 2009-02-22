@@ -45,7 +45,7 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mCalendarButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendarWidget(bool)));
     connect(calToolButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendar(bool)));
     connect(diagramDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetDiagramWidgetVisibility(bool)));
-    connect(infoDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetInfoWidgetVisibility(bool)));
+//    connect(infoDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetInfoWidgetVisibility(bool)));
     connect(actionSave,SIGNAL(triggered()),this,SLOT(slotSaveTrackInfos()));
     connect(actionShow_Track_Settings,SIGNAL(toggled(bool)),leftGroupBox,SLOT(setVisible(bool)));
     connect(trackname,SIGNAL(textChanged(const QString&)),this,SLOT(slotSetWindowTitle(const QString &)));
@@ -493,6 +493,8 @@ void SportsDiary::slotSelectCurrentTrack( int num )
     mPrevDayButton->setEnabled(!previousAvailAdx.isEmpty());
     mNextDayButton->setEnabled(!nextAvailAdx.isEmpty());
 
+    toolBox->setCurrentIndex(1);
+
   }
 }
 
@@ -583,10 +585,12 @@ void SportsDiary::slotSetDiagramWidgetVisibility(bool /*state*/)
     actionShow_Diagram->setChecked(diagramDockWidget->isVisible());
 }
 
-void SportsDiary::slotSetInfoWidgetVisibility(bool /*state*/)
+/*
+void SportsDiary::slotSetInfoWidgetVisibility(bool state)
 {
     actionShow_TrackInfo->setChecked(infoDockWidget->isVisible());
 }
+*/
 
 void SportsDiary::slotSaveTrackInfos()
 {

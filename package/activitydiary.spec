@@ -1,3 +1,55 @@
+Name:           activitydiary
+BuildRequires:  libkde4-devel
+BuildRequires:  libqwt5-devel
+BuildRequires:  cmake >= 2.4.6
+License:        GPL
+Group:          System/Management
+Summary:        ad
+Version:        0.1
+Release:        1
+URL:            http://en.opensuse.org/
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+Source0:        %{name}-%{version}.tar.bz2
+Requires:       libqwt5
+
+
+%description
+A Diary for recorded GPS-Tracks.
+
+Authors:
+--------
+Thomas Goettlicher <tgoettlicher@suse.de>
+Tom Patzig <tpatzig@suse.de>
+
+
+%prep
+%setup -q -n %{name}-%{version} 
+
+%build
+qmake activitydiary.pro
+%make_jobs DESTDIR=%buildroot%_prefix
+
+%install
+mkdir -p %buildroot%_prefix/bin
+%makeinstall INSTALL_ROOT=%{buildroot} 
+#%kde_post_install
+
+
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%_prefix/share/activitydiary
+/usr/share/icons/hicolor/*/apps/activitydiary.*
+/usr/share/applications/kde4/activitydiary.desktop
+%_prefix/bin/activitydiary
+
+
+%changelog
+
+=======
 Name:           activitydiary    
 BuildRequires:  libkde4-devel    
 BuildRequires:  libqwt5-devel    

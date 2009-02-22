@@ -50,6 +50,7 @@ SOURCES += src/adxparser.cpp \
 
 icons.path = /usr/share/activitydiary/icons
 icons.files = icons/*.png
+icons.files += icons/*.gif
 target.path = /usr/bin/
 
 !macx and unix {

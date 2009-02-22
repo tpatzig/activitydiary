@@ -277,10 +277,17 @@ void SportsDiary::readSettings()
 
          settings->setValue("ActivityImgMap",activities);
          iconMap = activities;
-         if (!settings->contains("ActivityIconDir")) {
+
+//       if (!settings->contains("ActivityIconDir")) {
+         if (QDir("/usr/share/activitydiary/icons/").exists()) {
             settings->setValue("ActivityIconDir",QString("/usr/share/activitydiary/icons/"));
+         } else {
+            QString local_icon_dir = QDir("./icons").absolutePath();
+            settings->setValue("ActivityIconDir",QString(local_icon_dir + "/"));
          }
+            
          iconDir = settings->value("ActivityIconDir").toString();
+         qDebug() << iconDir;
 //  }
 
     settings->beginGroup("MainWindow");

@@ -105,6 +105,7 @@ void GPXParser::parse_file(QFile &file)
         }
         if (points.size() > 0 ) {
             Track *track = new Track( points );
+            track->set_custom_track(false);
 
             track->set_max_north( maxNorth );
             if (maxNorth.y() > allMaxNorth.y()) {
@@ -134,6 +135,7 @@ void GPXParser::parse_file(QFile &file)
         }
     }
     Track *allOverTrack = new Track(allPoints);
+    allOverTrack->set_custom_track(false);
     allOverTrack->set_max_north(allMaxNorth);
     allOverTrack->set_max_south(allMaxSouth);
     allOverTrack->set_max_west(allMaxWest);

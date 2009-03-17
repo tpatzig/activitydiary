@@ -34,10 +34,12 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mapFrame,SIGNAL(downloadState(int)),this,SLOT(slotUpdateDownloadState(int)));
     connect(mapFrame,SIGNAL(zoomChanged(int)),this,SLOT(slotSetSliderValue(int)));
     connect(mapFrame,SIGNAL(startEndPointsMoved(Waypoint*,Waypoint*)),this,SLOT(slotStartEndPointsChanged(Waypoint*,Waypoint*)));
+    connect(mapFrame,SIGNAL(customTrackChanged(Track*)), this, SLOT(slotCustomTrackChanged(Track*)));
 
     connect(abortButton,SIGNAL(clicked()),mapFrame,SLOT(slotAbortDownload()));
     connect(actionImport,SIGNAL(triggered()),this,SLOT(slotImportTrack()));
     connect(actionImportPhysical,SIGNAL(triggered()),this,SLOT(slotImportPhysical()));
+    connect(actionCreate_Track,SIGNAL(triggered()),this,SLOT(slotSetManualMode()));
     connect(zoomSlider,SIGNAL(sliderMoved(int)),this,SLOT(slotSetZoom(int)));
     connect(altitudeCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotAltitudeCheck(bool)));
     connect(speedCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotSpeedCheck(bool)));
@@ -412,6 +414,8 @@ void SportsDiary::slotImportPhysical(QString fileName)
 
 void SportsDiary::slotImportTrack(QString fileName)
 {
+    mapFrame->setEditMode(false);
+
     if ( parser ) delete parser;
 
     parser = new GPXParser(fileName);
@@ -888,6 +892,17 @@ void SportsDiary::slotRatingClicked(const QString& link)
         enableRating(star);
     else
         disableRating(star);
+}
+
+void SportsDiary::slotCustomTrackChanged(Track* trk)
+{
+    toolBox->setCurrentIndex(1);
+    distanceLabel->setText(roundNumberAsString(trk->get_overall_distance()) + " km");
+}
+
+void SportsDiary::slotSetManualMode()
+{
+    mapFrame->setEditMode(true);
 }
 
 void SportsDiary::enableRating(int star)

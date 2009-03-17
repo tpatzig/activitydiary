@@ -221,6 +221,16 @@ QDate Track::get_start_date()
     return waypoint_list.at(0)->get_date();
 }
 
+bool Track::is_custom_track()
+{
+    return custom_track;
+}
+
+void Track::set_custom_track(bool val)
+{
+    custom_track = val;
+}
+
 // ################################################################################
 
 TrackList::TrackList() : QList<Track*>()

@@ -27,6 +27,10 @@ MapView::MapView( QWidget* parent) : QFrame(parent)
     QSettings settings;
     iconDir = settings.value("ActivityIconDir").toString();
 
+    customTrack = new Track();
+    customTrack->set_custom_track(true);
+    editMode = false;
+
 }
 
 
@@ -35,6 +39,7 @@ MapView::~MapView()
     if (_imageLoader->getQueueCount() > 0)
         slotAbortDownload();
     delete _imageLoader;
+    delete customTrack;
 
 }
 
@@ -152,6 +157,7 @@ void MapView::paintEvent(QPaintEvent *event)
     drawTrack();
     drawInfos();
     drawPins();
+    drawSinglePoint();
 
     QFrame::paintEvent(event);
     return;
@@ -174,6 +180,65 @@ void MapView::mousePressEvent ( QMouseEvent * event )
         menu.addAction ( "set waypoint as end", this, SLOT(slotSetEndPoint() ) );
         menu.addAction ( "reset start and end", this, SLOT(slotResetStartEndPoint() ) );
         menu.exec(event->globalPos());
+    }
+}
+
+void MapView::mouseDoubleClickEvent(QMouseEvent * event )
+{
+    if (! editMode)
+        return;
+
+    if (event->button() == Qt::LeftButton) {
+
+        qDebug() << "We received a double Click event";
+        _temp = event->pos();
+
+        QPoint mpos = _temp;
+
+        QPoint centerMove = QPoint( width() / 2 , height() /2);
+
+        mpos -= centerMove;
+        mpos += _center;
+
+        double lon = Calc::xAtZoomToLongitude(mpos.x(),_zoom);
+        double lat = Calc::yAtZoomToLatitude(mpos.y(),_zoom);
+
+        QDateTime today = QDateTime::currentDateTime();
+
+        new_point_to_draw = true;
+        Waypoint* tmp = new Waypoint(lat,lon,0,0,0,0,today);
+        customWaypointList.append(tmp);
+        customTrack->set_waypoint_list(customWaypointList);
+        emit customTrackChanged(customTrack);
+        setTrack(customTrack);
+
+    }
+}
+
+void MapView::drawSinglePoint()
+{
+    if (! editMode)
+        return;
+
+    if (new_point_to_draw) {
+
+        int current_x = _temp.x();
+        int current_y = _temp.y();
+
+        QPainter painter(this);
+        QPen pen;
+        pen.setColor(Qt::red);
+        pen.setWidth(5);
+        painter.setPen(pen);
+        QPoint newPoint(current_x,current_y);
+        qDebug() << "Current x: " << current_x;
+        qDebug() << "Current y: " << current_y;
+        qDebug() << "Current Zoom: " << _zoom;
+
+        painter.drawPoint(newPoint);
+        painter.end();
+
+        new_point_to_draw = false;
     }
 }
 
@@ -280,34 +345,37 @@ void MapView::setTrack (Track* t)
     if (_track) {
         _startWaypoint = _track->wayPoint( 0 );
         _endWaypoint   = _track->wayPoint( _track->count_waypoints() -1 );
+        if ( ! _track->is_custom_track() ) {
 
-        QPointF n = _track->max_north();
-        QPointF s = _track->max_south();
-        QPointF w = _track->max_west();
-        QPointF e = _track->max_east();
-
-        // calculate zoom
-        QPointF p1( w.x(), n.y() );
-        QPointF p2( e.x(), s.y() );
+            QPointF n = _track->max_north();
+            QPointF s = _track->max_south();
+            QPointF w = _track->max_west();
+            QPointF e = _track->max_east();
 
 
-        int fzoom = MAXZOOM;
-        for (int z = MAXZOOM ; z >= MINZOOM; z--)
-        {
-            int tmpwidth = Calc::longitudeToXAtZoom(p2.x(), z) - Calc::longitudeToXAtZoom(p1.x(), z) ;
-            int tmpheight = Calc::latitudeToYAtZoom( p2.y(), z) - Calc::latitudeToYAtZoom( p1.y(), z) ;
+            // calculate zoom
+            QPointF p1( w.x(), n.y() );
+            QPointF p2( e.x(), s.y() );
 
-            if ( tmpwidth < width() && tmpheight < height() )
+
+            int fzoom = MAXZOOM;
+            for (int z = MAXZOOM ; z >= MINZOOM; z--)
             {
-                fzoom = z;
-                break;
-            }
-        }
-        setZoom(fzoom);
+                int tmpwidth = Calc::longitudeToXAtZoom(p2.x(), z) - Calc::longitudeToXAtZoom(p1.x(), z) ;
+                int tmpheight = Calc::latitudeToYAtZoom( p2.y(), z) - Calc::latitudeToYAtZoom( p1.y(), z) ;
 
-        // calculate center
-        QPointF c( w.x() + ((e.x() - w.x()) /2.0) , ( n.y() + (( s.y() - n.y()) / 2.0   )    ));
-        setCenter(c);
+                if ( tmpwidth < width() && tmpheight < height() )
+                {
+                    fzoom = z;
+                    break;
+                }
+            }
+            setZoom(fzoom);
+
+            // calculate center
+            QPointF c( w.x() + ((e.x() - w.x()) /2.0) , ( n.y() + (( s.y() - n.y()) / 2.0   )    ));
+            setCenter(c);
+        }
     }
 
     repaint();
@@ -372,4 +440,9 @@ void MapView::clearMap()
     _startWaypoint = 0;
     _endWaypoint = 0;
     repaint();
+}
+
+void MapView::setEditMode(bool val)
+{
+    editMode = val;
 }

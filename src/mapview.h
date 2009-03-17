@@ -33,6 +33,7 @@ class MapView : public QFrame
         void setCenter   ( QPointF );
         void setZoom     ( int );
         void clearMap();
+        void setEditMode(bool);
 
     signals:
         void pointSelected( Waypoint* );
@@ -40,12 +41,14 @@ class MapView : public QFrame
         void zoomChanged ( int );
         void downloadState( int );
         void startEndPointsMoved(Waypoint*,Waypoint*);
+        void customTrackChanged(Track*);
 
 
     private:
         void paintEvent( QPaintEvent *event );
         void mouseMoveEvent ( QMouseEvent * event );
         void mousePressEvent ( QMouseEvent * event );
+        void mouseDoubleClickEvent( QMouseEvent * event );
         void wheelEvent(QWheelEvent* event);
 
 
@@ -57,6 +60,7 @@ class MapView : public QFrame
         void drawPin( QPointF pin, QString pixmapName);
         void drawTrack();
         void drawInfos();
+        void drawSinglePoint();
 
         QPoint _center;
         QPoint _temp;
@@ -69,10 +73,15 @@ class MapView : public QFrame
         int _zoom;
 
         Track* _track;
+        Track* customTrack;
+        WaypointList customWaypointList;
 
         Waypoint* findWaypointNear(QPoint mpos);
 
         QString iconDir;
+
+        bool new_point_to_draw;
+        bool editMode;
 
 
     public slots:

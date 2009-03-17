@@ -65,6 +65,8 @@ public slots:
   void slotRemoveTrack();
   void slotClearAll();
   void slotRatingClicked(const QString&);
+  void slotCustomTrackChanged(Track*);
+  void slotSetManualMode();
 
 private:
 

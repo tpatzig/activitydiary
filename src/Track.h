@@ -59,6 +59,9 @@ class Track
         Waypoint* first();
         Waypoint* last();
 
+        bool is_custom_track();
+        void set_custom_track(bool);
+
     private:
 
         WaypointList waypoint_list;
@@ -72,6 +75,8 @@ class Track
         QPointF maxEast;
 
         QPen _trackPen;
+
+        bool custom_track;
 
 };
 

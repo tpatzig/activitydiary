@@ -797,7 +797,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>201</width>
+              <width>285</width>
               <height>250</height>
              </rect>
             </property>
@@ -1176,7 +1176,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>276</width>
+              <width>285</width>
               <height>226</height>
              </rect>
             </property>
@@ -1220,8 +1220,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>106</width>
-              <height>106</height>
+              <width>300</width>
+              <height>195</height>
              </rect>
             </property>
             <attribute name="label">
@@ -1928,9 +1928,7 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionCreate_Track"/>
-    <addaction name="actionImport"/>
-    <addaction name="actionImportPhysical"/>
+    <addaction name="actionNewActivity"/>
     <addaction name="actionRemoveTrack"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
@@ -2005,7 +2003,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionRemoveTrack">
    <property name="text">
-    <string>RemoveTrack</string>
+    <string>Remove Activity</string>
    </property>
   </action>
   <action name="actionClose">
@@ -2029,9 +2027,9 @@ p, li { white-space: pre-wrap; }
     <string>Show Track Settings</string>
    </property>
   </action>
-  <action name="actionCreate_Track">
+  <action name="actionNewActivity">
    <property name="text">
-    <string>Create Track</string>
+    <string>New Activity...</string>
    </property>
   </action>
  </widget>

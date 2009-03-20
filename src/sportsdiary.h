@@ -16,12 +16,11 @@
 #include "adxparser.h"
 #include "Physical.h"
 #include "hrmparser.h"
+#include "wizarddialog.h"
 
 
 
 #include "ui_activitydiary.h"
-
-
 
 
 
@@ -66,7 +65,11 @@ public slots:
   void slotClearAll();
   void slotRatingClicked(const QString&);
   void slotCustomTrackChanged(Track*);
-  void slotSetManualMode();
+  void slotStartWizard();
+
+private slots:
+  void slotWizardFinished(QString, QString, QString);
+  void slotWizardCancelled();
 
 private:
 
@@ -96,6 +99,8 @@ private:
   QString iconDir;
   QMap<QString,QVariant> iconMap;
   int trackRating;
+
+  ADWizard* adWizard;
 
 };
 

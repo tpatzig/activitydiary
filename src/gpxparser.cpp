@@ -149,3 +149,40 @@ bool GPXParser::open_file(QFile &file) {
     return true;
 }
 
+
+void GPXParser::writeGPX(QString filename, Track* track)
+{
+    QDomDocument doc("ActivityDiary - GPX");
+    QDomElement gpx_string = doc.createElement("gpx");
+    gpx_string.setAttribute("version","1.1");
+    gpx_string.setAttribute("creator","ActivityDiary");
+    doc.appendChild(gpx_string);
+    QDomElement trk = doc.createElement("trk");
+    gpx_string.appendChild(trk);
+    QDomElement trkseg = doc.createElement("trkseg");
+    trk.appendChild(trkseg);
+
+    QFile file(filename);
+    QFileInfo info(filename);
+    QDir dir;
+    if (!info.absoluteDir().exists())
+        dir.mkpath(info.path());
+
+    WaypointList waypoints = track->get_waypoint_list();
+    foreach(Waypoint* wpt, waypoints) {
+        QDomElement element = doc.createElement("trkpt");
+        element.setAttribute("lat",QString::number(wpt->get_latitude()) );
+        element.setAttribute("lon",QString::number(wpt->get_longitude()) );
+        trkseg.appendChild(element);
+    }
+
+
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+        qDebug() << "Could not open " << filename;
+    else {
+        QTextStream out(&file);
+        out << doc.toString();
+        file.flush();
+        file.close();
+    }
+}

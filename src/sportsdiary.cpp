@@ -11,7 +11,7 @@ SportsDiary::SportsDiary(QObject* parent)
 
     settings = new QSettings();
     readSettings();
-    
+    qDebug() << iconDir;
     activitytype->addItem(QIcon(iconDir + iconMap["default"].toString()), "Select your Activity...");
     foreach (QString key, iconMap.keys()) {
         if (key == "default")
@@ -37,9 +37,9 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mapFrame,SIGNAL(customTrackChanged(Track*)), this, SLOT(slotCustomTrackChanged(Track*)));
 
     connect(abortButton,SIGNAL(clicked()),mapFrame,SLOT(slotAbortDownload()));
-    connect(actionImport,SIGNAL(triggered()),this,SLOT(slotImportTrack()));
-    connect(actionImportPhysical,SIGNAL(triggered()),this,SLOT(slotImportPhysical()));
-    connect(actionCreate_Track,SIGNAL(triggered()),this,SLOT(slotSetManualMode()));
+    //connect(actionImport,SIGNAL(triggered()),this,SLOT(slotImportTrack()));
+    //connect(actionImportPhysical,SIGNAL(triggered()),this,SLOT(slotImportPhysical()));
+    connect(actionNewActivity,SIGNAL(triggered()),this,SLOT(slotStartWizard()));
     connect(zoomSlider,SIGNAL(sliderMoved(int)),this,SLOT(slotSetZoom(int)));
     connect(altitudeCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotAltitudeCheck(bool)));
     connect(speedCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotSpeedCheck(bool)));
@@ -47,7 +47,7 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mCalendarButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendarWidget(bool)));
     connect(calToolButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendar(bool)));
     connect(diagramDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetDiagramWidgetVisibility(bool)));
-//    connect(infoDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetInfoWidgetVisibility(bool)));
+//  connect(infoDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetInfoWidgetVisibility(bool)));
     connect(actionSave,SIGNAL(triggered()),this,SLOT(slotSaveTrackInfos()));
     connect(actionShow_Track_Settings,SIGNAL(toggled(bool)),leftGroupBox,SLOT(setVisible(bool)));
     connect(trackname,SIGNAL(textChanged(const QString&)),this,SLOT(slotSetWindowTitle(const QString &)));
@@ -92,6 +92,8 @@ SportsDiary::SportsDiary(QObject* parent)
 
     mNextDayButton->setEnabled(false);
     mPrevDayButton->setEnabled(false);
+
+    mapFrame->setEditMode(true);
 
     parser = 0;
     altitudeDiagram = 0;
@@ -605,13 +607,30 @@ void SportsDiary::slotSetInfoWidgetVisibility(bool state)
 
 void SportsDiary::slotSaveTrackInfos()
 {
+    QDate startdate;
+    QTime starttime;
+    QString filename;
+
     if (!mCurrentTrack) {
         qDebug() << "No Track loaded";
     } else {
+        if ( mCurrentTrack->is_custom_track() ) {
+            startdate = QDate::currentDate();
+            starttime = QTime::currentTime();
+            filename = QString("%6/%1/%2/%1_%3_%4-%5.gpx").arg(startdate.year())
+                                                            .arg(startdate.weekNumber())
+                                                            .arg(startdate.toString("MM"))
+                                                            .arg(startdate.toString("dd"))
+                                                            .arg(starttime.toString("HHmmss"))
+                                                            .arg(settings->value("TracksDir").toString());
+            GPXParser::writeGPX(filename,mCurrentTrack);
+        }
+
+        if ( 6 ) {
         QMap<QString,QString> trackSettings;
-        QDate startdate = mCurrentTrack->at(0)->get_date();
-        QTime starttime = mCurrentTrack->at(0)->get_time();
-        QString filename = QString("%6/%1/%2/%1_%3_%4-%5.adx").arg(startdate.year())
+        startdate = mCurrentTrack->at(0)->get_date();
+        starttime = mCurrentTrack->at(0)->get_time();
+        filename = QString("%6/%1/%2/%1_%3_%4-%5.adx").arg(startdate.year())
                                                             .arg(startdate.weekNumber())
                                                             .arg(startdate.toString("MM"))
                                                             .arg(startdate.toString("dd"))
@@ -663,7 +682,7 @@ void SportsDiary::slotSaveTrackInfos()
         if (calendarWidget->selectedDate().weekNumber() == QDate::fromString(mDateLabel->text()).weekNumber())
             calendar->slotUpdateCurrentKW(QDate::fromString(mDateLabel->text()));
 
-
+    }
         setWindowModified(false);
     }
 }
@@ -732,18 +751,24 @@ void SportsDiary::slotClearAll()
     mapFrame->clearMap();
     mDateLabel->setText(QDate::currentDate().toString());
 
+    diagram->clear();
+
     if (altitudeDiagram) {
+        altitudeDiagram->detach();
         delete altitudeDiagram;
         altitudeDiagram = 0;
     }
     if (speedDiagram) {
+        speedDiagram->detach();
         delete speedDiagram;
         speedDiagram = 0;
     }
     if (hrDiagram) {
+        hrDiagram->detach();
         delete hrDiagram;
         hrDiagram = 0;
     }
+
 
 
     cadenceLabel->setText("");
@@ -847,8 +872,11 @@ void SportsDiary::slotLoadSavedTrack(const QString& filenameAdx)
 
 void SportsDiary::slotSetWindowModified(const QString & /* val */)
 {
-    if (mCurrentTrack)
+    if (mCurrentTrack) {
         setWindowModified(true);
+        actionSave->setEnabled(true);
+        actionRemoveTrack->setEnabled(true);
+    }
 
 }
 
@@ -898,12 +926,70 @@ void SportsDiary::slotCustomTrackChanged(Track* trk)
 {
     toolBox->setCurrentIndex(1);
     distanceLabel->setText(roundNumberAsString(trk->get_overall_distance()) + " km");
+    mCurrentTrack = trk;
+    slotSetWindowModified("");
 }
 
-void SportsDiary::slotSetManualMode()
+void SportsDiary::slotStartWizard()
 {
-    mapFrame->setEditMode(true);
+    qDebug() << "New Activity Wizard called";
+
+    adWizard = new ADWizard(this);
+    connect(adWizard,SIGNAL(wizardFinished(QString,QString,QString)),this,SLOT(slotWizardFinished(QString,QString,QString)));
+    connect(adWizard,SIGNAL(wizardCancelled()),this,SLOT(slotWizardCancelled()));
+
+    if ( isWindowModified() ) {
+        QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
+                "Save Changes for Track \"" + trackname->text() + "\" ?",
+                QMessageBox::Yes | QMessageBox::No,this);
+        switch (msgBox.exec()) {
+            case QMessageBox::Yes: {
+                slotSaveTrackInfos();
+                break;
+            }
+            case QMessageBox::No: {
+                setWindowModified(false);
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    adWizard->show();
 }
+
+void SportsDiary::slotWizardFinished(QString name,QString trackSource, QString physical)
+{
+    qDebug() << "Wizard finished";
+
+    clearTrackInfos();
+    trackname->setText(name);
+    setWindowModified(true);
+
+    if (trackSource == "gps") {
+
+        slotImportTrack(adWizard->getGPXFileName());
+
+    } else if (trackSource == "manual") {
+
+        mapFrame->setEditMode(true);
+        QDateTime start = adWizard->getManualStartDateTime();
+        QDateTime end = adWizard->getManualEndDateTime();
+    }
+
+    adWizard->deleteLater();
+    adWizard = 0;
+}
+
+
+void SportsDiary::slotWizardCancelled()
+{
+    qDebug() << "Wizard cancelled";
+    adWizard->deleteLater();
+    adWizard = 0;
+}
+
 
 void SportsDiary::enableRating(int star)
 {

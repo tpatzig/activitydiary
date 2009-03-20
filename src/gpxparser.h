@@ -9,7 +9,6 @@
 #include <qdebug.h>
 
 #include "waypoint.h"
-#include "gpxparser.h"
 #include "Track.h"
 
 class Track;
@@ -25,6 +24,7 @@ class GPXParser : public QObject
         TrackList getTracks() { return singleTracks; }
         TrackList getAllInOneTrack() { return allInOneTrack; }
         QString getFileName() { return mFileName; }
+        static void writeGPX(QString, Track*);
     private: 
         TrackList singleTracks;
         TrackList allInOneTrack;

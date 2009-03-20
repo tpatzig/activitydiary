@@ -52,10 +52,14 @@ void GPXParser::parse_file(QFile &file)
         QPointF maxWest;
         QPointF maxEast;
 
+        qDebug() << "have found a trk element";
+
         QDomElement trkseg = trk.firstChildElement("trkseg");
         for ( ; !trkseg.isNull(); trkseg = trkseg.nextSiblingElement( "trkseg" ) ) {
+            qDebug() << "have found a trkseg element";
             QDomElement trkpt = trkseg.firstChildElement("trkpt");
             for (; !trkpt.isNull(); trkpt = trkpt.nextSiblingElement("trkpt")) {
+                qDebug() << "have found a trkpt element";
 
                 double lat = trkpt.attributeNode("lat").value().toDouble();
                 double lon = trkpt.attributeNode("lon").value().toDouble();
@@ -87,12 +91,18 @@ void GPXParser::parse_file(QFile &file)
                 }
 
                 QString date_time_string =  trkpt.firstChildElement("time").text();
-                QStringList date_list = date_time_string.split('T')[0].split('-');
-                QStringList time_list = date_time_string.split('T')[1].split('Z')[0].split(':');
 
-                QDate date(date_list[0].toInt(),date_list[1].toInt(),date_list[2].toInt());
-                QTime time(time_list[0].toInt(),time_list[1].toInt(),time_list[2].toInt());
-                QDateTime date_time(date,time);
+                QDateTime date_time;
+
+                if (!date_time_string.isEmpty()) {
+                    QStringList date_list = date_time_string.split('T')[0].split('-');
+                    QStringList time_list = date_time_string.split('T')[1].split('Z')[0].split(':');
+
+                    QDate date(date_list[0].toInt(),date_list[1].toInt(),date_list[2].toInt());
+                    QTime time(time_list[0].toInt(),time_list[1].toInt(),time_list[2].toInt());
+                    date_time.setDate(date);
+                    date_time.setTime(time);
+                }
 
                 int sat = trkpt.firstChildElement("sat").text().toInt();
                 float speed =  trkpt.firstChildElement("extensions").firstChildElement("rmc:speed").text().toFloat();
@@ -150,9 +160,12 @@ bool GPXParser::open_file(QFile &file) {
 }
 
 
-void GPXParser::writeGPX(QString filename, Track* track)
+void GPXParser::writeGPX(QString filename, Track* track, QDateTime start, QDateTime end)
 {
-    QDomDocument doc("ActivityDiary - GPX");
+    track->at(0)->set_date_time(start);
+    track->at(track->count_waypoints() - 1 )->set_date_time(end);
+
+    QDomDocument doc;
     QDomElement gpx_string = doc.createElement("gpx");
     gpx_string.setAttribute("version","1.1");
     gpx_string.setAttribute("creator","ActivityDiary");
@@ -174,6 +187,14 @@ void GPXParser::writeGPX(QString filename, Track* track)
         element.setAttribute("lat",QString::number(wpt->get_latitude()) );
         element.setAttribute("lon",QString::number(wpt->get_longitude()) );
         trkseg.appendChild(element);
+
+        if (wpt->has_date_time()) {
+            QDomElement dateElem = doc.createElement("time");
+            QDomText t = doc.createTextNode(wpt->get_date().toString("yyyy-MM-dd") + "T" + wpt->get_time().toString() + "Z");
+            dateElem.appendChild(t);
+            element.appendChild(dateElem);
+
+        }
     }
 
 

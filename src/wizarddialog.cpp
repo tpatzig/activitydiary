@@ -29,7 +29,7 @@ ADWizard::ADWizard(QObject* parent) : QWizard(), m_parent(parent)
         connect(button(QWizard::NextButton),SIGNAL(clicked()),this,SLOT(slotNext()));
         connect(button(QWizard::FinishButton),SIGNAL(clicked()),this,SLOT(slotFinish()));
 
-        QPixmap pixmap(iconDir + "logo_128.png");
+        QPixmap pixmap(iconDir + "kompassberg_medium.png");
 
         setPixmap(QWizard::WatermarkPixmap,pixmap);
 
@@ -190,13 +190,9 @@ void ADWizard::slotNext()
                          }
                 case 2 : {
 
-                        if (gpsRadioButton->isChecked())
-                            trackSource = "gps";
-                        else if (manualRadioButton->isChecked()) {
-                            trackSource = "manual";
+                        if (manualRadioButton->isChecked()) {
                             trackSourcePage->setComplete(true);
                         }
-
                         qDebug() << "page 2 reached!";
 
                         break;
@@ -216,6 +212,13 @@ void ADWizard::slotNext()
 void ADWizard::slotFinish()
 {
     qDebug() << "Track Name: " << activityName->text();
+
+    if (gpsRadioButton->isChecked())
+        trackSource = "gps";
+    else if (manualRadioButton->isChecked()) {
+        trackSource = "manual";
+    }
+
     emit wizardFinished(activityName->text(),trackSource,physLineEdit->text() );
     close();
 }

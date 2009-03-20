@@ -24,7 +24,7 @@ class GPXParser : public QObject
         TrackList getTracks() { return singleTracks; }
         TrackList getAllInOneTrack() { return allInOneTrack; }
         QString getFileName() { return mFileName; }
-        static void writeGPX(QString, Track*);
+        static void writeGPX(QString, Track*, QDateTime, QDateTime);
     private: 
         TrackList singleTracks;
         TrackList allInOneTrack;

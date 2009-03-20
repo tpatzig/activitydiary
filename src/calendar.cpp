@@ -136,7 +136,7 @@ QMap<QString,double> Calendar::getWeekSummary(const QDate& date)
     return summary;
 }
 
-QString Calendar::getNextActivityDay(const QDate& date)
+QString Calendar::getNextActivityDay(const QDate& date, const QTime& time)
 {
     QString path = settings->value("TracksDir").toString() + "/" + QString::number(date.year()) + "/" + QString::number(date.weekNumber());
     QString yearPath = settings->value("TracksDir").toString() + "/" + QString::number(date.year());
@@ -149,13 +149,14 @@ QString Calendar::getNextActivityDay(const QDate& date)
     if (kwDir.entryList(QStringList("*.adx")).size() > 0 ) {
         foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
             QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
-            if (adxDate > date)
+            QTime adxTime = QTime::fromString(AdxParser::readSetting(path + "/" + filename,"starttime"));
+            if (adxDate > date || adxTime > time)
                 return path + "/" + filename;
         }
     }
     //next track is in a higher calendar week number
-    if (yearDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
-        foreach(QString dirname,yearDir.entryList(QStringList("*"),QDir::Dirs,QDir::Name)) {
+    if (yearDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot).size() > 0 ) {
+        foreach(QString dirname,yearDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name)) {
             if (dirname.toInt() > date.weekNumber()) {
                 QDir tmpDir(yearDir.path() + "/" + dirname);
                 if (tmpDir.entryList(QStringList("*.adx")).size() > 0 ) 
@@ -165,10 +166,10 @@ QString Calendar::getNextActivityDay(const QDate& date)
     }
     //next track is in a higher calendar year
     if (baseDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
-        foreach(QString dirname,baseDir.entryList(QStringList("*"),QDir::Dirs,QDir::Name)) {
+        foreach(QString dirname,baseDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name)) {
             if (dirname.toInt() > date.year()) {
                 QDir tmpDir(baseDir.path() + "/" + dirname);
-                if (tmpDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
+                if (tmpDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot).size() > 0 ) {
                     QDir tmpKwDir(tmpDir.path() + "/" + tmpDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name)[0]);
                     if (tmpKwDir.entryList(QStringList("*.adx")).size() > 0 )
                         return tmpKwDir.path() + "/" + tmpKwDir.entryList(QStringList("*.adx"),QDir::Files,QDir::Name)[0];
@@ -181,7 +182,7 @@ QString Calendar::getNextActivityDay(const QDate& date)
 
 }
 
-QString Calendar::getPrevActivityDay(const QDate& date)
+QString Calendar::getPrevActivityDay(const QDate& date, const QTime& time)
 {
     QString path = settings->value("TracksDir").toString() + "/" + QString::number(date.year()) + "/" + QString::number(date.weekNumber());
     QString yearPath = settings->value("TracksDir").toString() + "/" + QString::number(date.year());
@@ -189,32 +190,36 @@ QString Calendar::getPrevActivityDay(const QDate& date)
     QDir kwDir(path);
     QDir yearDir(yearPath);
     QDir baseDir(basePath);
-
+    
     //prevoius track is in the same calendar week number
     if (kwDir.entryList(QStringList("*.adx")).size() > 0 ) {
         foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
             QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
-            if (adxDate < date)
+            QTime adxTime = QTime::fromString(AdxParser::readSetting(path + "/" + filename,"starttime"));
+            if ( (adxDate < date) || (adxTime < time) )
                 return path + "/" + filename;
+
         }
     }
+
     //prevoius track is in a lower calendar week number
-    if (yearDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
-        foreach(QString dirname,yearDir.entryList(QStringList("*"),QDir::Dirs,QDir::Name | QDir::Reversed)) {
+    if (yearDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot).size() > 0 ) {
+        foreach(QString dirname,yearDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::Reversed)) {
             if (dirname.toInt() < date.weekNumber()) {
                 QDir tmpDir(yearDir.path() + "/" + dirname);
                 if (tmpDir.entryList(QStringList("*.adx")).size() > 0 )
                     return tmpDir.path() + "/" + tmpDir.entryList(QStringList("*.adx"),QDir::Files,QDir::Name | QDir::Reversed)[0];
-                
+
             }
         }
     }
+
     // prevoius track is in a lower calendar year
-    if (baseDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
-        foreach(QString dirname,baseDir.entryList(QStringList("*"),QDir::Dirs,QDir::Name | QDir::Reversed)) {
+    if (baseDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot).size() > 0 ) {
+        foreach(QString dirname,baseDir.entryList(QStringList("*"), QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::Reversed)) {
             if (dirname.toInt() < date.year()) {
                 QDir tmpDir(baseDir.path() + "/" + dirname);
-                if (tmpDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
+                if (tmpDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot).size() > 0 ) {
                     QDir tmpKwDir(tmpDir.path() + "/" + tmpDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::Reversed)[0]);
                     if (tmpKwDir.entryList(QStringList("*.adx")).size() > 0 )
                         return tmpKwDir.path() + "/" + tmpKwDir.entryList(QStringList("*.adx"),QDir::Files,QDir::Name | QDir::Reversed)[0];

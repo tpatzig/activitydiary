@@ -14,8 +14,8 @@ public:
     ~Calendar();
 
     QMap<QString,double> getWeekSummary(const QDate& date);
-    QString getNextActivityDay(const QDate&);
-    QString getPrevActivityDay(const QDate&);
+    QString getNextActivityDay(const QDate&, const QTime&);
+    QString getPrevActivityDay(const QDate&, const QTime&);
 
 public slots:
     void slotUpdateCurrentKW(const QDate& date);

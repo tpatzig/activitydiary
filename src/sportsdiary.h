@@ -101,6 +101,8 @@ private:
   int trackRating;
 
   ADWizard* adWizard;
+  QDateTime manualStart;
+  QDateTime manualEnd;
 
 };
 

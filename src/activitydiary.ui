@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
+<ui version="4.0" >
  <class>SportsDiary</class>
- <widget class="QMainWindow" name="SportsDiary">
-  <property name="geometry">
+ <widget class="QMainWindow" name="SportsDiary" >
+  <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
@@ -10,60 +9,60 @@
     <height>732</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="windowTitle">
+  <property name="windowTitle" >
    <string>ActivityDiary</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_23">
+  <widget class="QWidget" name="centralwidget" >
+   <layout class="QVBoxLayout" name="verticalLayout_23" >
     <item>
-     <widget class="QSplitter" name="splitter_2">
-      <property name="orientation">
+     <widget class="QSplitter" name="splitter_2" >
+      <property name="orientation" >
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QSplitter" name="splitter">
-       <property name="orientation">
+      <widget class="QSplitter" name="splitter" >
+       <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <widget class="QGroupBox" name="leftGroupBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <widget class="QGroupBox" name="leftGroupBox" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimumSize">
+        <property name="minimumSize" >
          <size>
           <width>330</width>
           <height>0</height>
          </size>
         </property>
-        <property name="maximumSize">
+        <property name="maximumSize" >
          <size>
           <width>420</width>
           <height>111111</height>
          </size>
         </property>
-        <property name="palette">
+        <property name="palette" >
          <palette>
           <active>
-           <colorrole role="Base">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
+           <colorrole role="Base" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
               <red>255</red>
               <green>255</green>
               <blue>255</blue>
              </color>
             </brush>
            </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
+           <colorrole role="Window" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
               <red>196</red>
               <green>195</green>
               <blue>195</blue>
@@ -72,18 +71,18 @@
            </colorrole>
           </active>
           <inactive>
-           <colorrole role="Base">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
+           <colorrole role="Base" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
               <red>255</red>
               <green>255</green>
               <blue>255</blue>
              </color>
             </brush>
            </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
+           <colorrole role="Window" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
               <red>196</red>
               <green>195</green>
               <blue>195</blue>
@@ -92,18 +91,18 @@
            </colorrole>
           </inactive>
           <disabled>
-           <colorrole role="Base">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
+           <colorrole role="Base" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
               <red>196</red>
               <green>195</green>
               <blue>195</blue>
              </color>
             </brush>
            </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
+           <colorrole role="Window" >
+            <brush brushstyle="SolidPattern" >
+             <color alpha="255" >
               <red>196</red>
               <green>195</green>
               <blue>195</blue>
@@ -113,21 +112,21 @@
           </disabled>
          </palette>
         </property>
-        <property name="title">
+        <property name="title" >
          <string/>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_12">
+        <layout class="QVBoxLayout" name="verticalLayout_12" >
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
+          <layout class="QVBoxLayout" name="verticalLayout_5" >
            <item>
-            <spacer name="verticalSpacer_5">
-             <property name="orientation">
+            <spacer name="verticalSpacer_5" >
+             <property name="orientation" >
               <enum>Qt::Vertical</enum>
              </property>
-             <property name="sizeType">
+             <property name="sizeType" >
               <enum>QSizePolicy::Fixed</enum>
              </property>
-             <property name="sizeHint" stdset="0">
+             <property name="sizeHint" stdset="0" >
               <size>
                <width>20</width>
                <height>10</height>
@@ -136,16 +135,16 @@
             </spacer>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <layout class="QHBoxLayout" name="horizontalLayout_2" >
              <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
+              <spacer name="horizontalSpacer" >
+               <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeType">
+               <property name="sizeType" >
                 <enum>QSizePolicy::Preferred</enum>
                </property>
-               <property name="sizeHint" stdset="0">
+               <property name="sizeHint" stdset="0" >
                 <size>
                  <width>10</width>
                  <height>56</height>
@@ -154,58 +153,58 @@
               </spacer>
              </item>
              <item>
-              <widget class="QLabel" name="label_2">
-               <property name="font">
+              <widget class="QLabel" name="label_2" >
+               <property name="font" >
                 <font>
                  <pointsize>25</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
-               <property name="text">
+               <property name="text" >
                 <string>Activity</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="iconLabel">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <widget class="QLabel" name="iconLabel" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <property name="autoFillBackground">
+               <property name="autoFillBackground" >
                 <bool>false</bool>
                </property>
-               <property name="text">
+               <property name="text" >
                 <string/>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_4">
-               <property name="font">
+              <widget class="QLabel" name="label_4" >
+               <property name="font" >
                 <font>
                  <pointsize>25</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
-               <property name="text">
+               <property name="text" >
                 <string>Diary</string>
                </property>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_10">
-               <property name="orientation">
+              <spacer name="horizontalSpacer_10" >
+               <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeType">
+               <property name="sizeType" >
                 <enum>QSizePolicy::Preferred</enum>
                </property>
-               <property name="sizeHint" stdset="0">
+               <property name="sizeHint" stdset="0" >
                 <size>
                  <width>10</width>
                  <height>56</height>
@@ -216,14 +215,14 @@
             </layout>
            </item>
            <item>
-            <spacer name="verticalSpacer_3">
-             <property name="orientation">
+            <spacer name="verticalSpacer_3" >
+             <property name="orientation" >
               <enum>Qt::Vertical</enum>
              </property>
-             <property name="sizeType">
+             <property name="sizeType" >
               <enum>QSizePolicy::Fixed</enum>
              </property>
-             <property name="sizeHint" stdset="0">
+             <property name="sizeHint" stdset="0" >
               <size>
                <width>20</width>
                <height>10</height>
@@ -234,65 +233,65 @@
           </layout>
          </item>
          <item>
-          <widget class="QFrame" name="separatorFrame_2">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <widget class="QFrame" name="separatorFrame_2" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="minimumSize">
+           <property name="minimumSize" >
             <size>
              <width>0</width>
              <height>3</height>
             </size>
            </property>
-           <property name="maximumSize">
+           <property name="maximumSize" >
             <size>
              <width>16777215</width>
              <height>3</height>
             </size>
            </property>
-           <property name="frameShape">
+           <property name="frameShape" >
             <enum>QFrame::Box</enum>
            </property>
-           <property name="frameShadow">
+           <property name="frameShadow" >
             <enum>QFrame::Raised</enum>
            </property>
-           <property name="lineWidth">
+           <property name="lineWidth" >
             <number>5</number>
            </property>
-           <property name="midLineWidth">
+           <property name="midLineWidth" >
             <number>0</number>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <layout class="QHBoxLayout" name="horizontalLayout_11" >
            <item>
-            <widget class="QLabel" name="label">
-             <property name="font">
+            <widget class="QLabel" name="label" >
+             <property name="font" >
               <font>
                <pointsize>16</pointsize>
               </font>
              </property>
-             <property name="text">
+             <property name="text" >
               <string>Track:</string>
              </property>
-             <property name="buddy">
+             <property name="buddy" >
               <cstring>mTrackCombo</cstring>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="mTrackCombo">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <widget class="QComboBox" name="mTrackCombo" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <property name="minimumSize">
+             <property name="minimumSize" >
               <size>
                <width>0</width>
                <height>0</height>
@@ -303,37 +302,37 @@
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_9">
+          <layout class="QVBoxLayout" name="verticalLayout_9" >
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_19">
+            <layout class="QHBoxLayout" name="horizontalLayout_19" >
              <item>
-              <widget class="QLabel" name="label_23">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <widget class="QLabel" name="label_23" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <property name="font">
+               <property name="font" >
                 <font>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
-               <property name="text">
+               <property name="text" >
                 <string>Name:</string>
                </property>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_5">
-               <property name="orientation">
+              <spacer name="horizontalSpacer_5" >
+               <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeType">
+               <property name="sizeType" >
                 <enum>QSizePolicy::Preferred</enum>
                </property>
-               <property name="sizeHint" stdset="0">
+               <property name="sizeHint" stdset="0" >
                 <size>
                  <width>40</width>
                  <height>20</height>
@@ -344,9 +343,9 @@
             </layout>
            </item>
            <item>
-            <widget class="QLineEdit" name="trackname">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <widget class="QLineEdit" name="trackname" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -356,24 +355,24 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <layout class="QHBoxLayout" name="horizontalLayout_9" >
            <item>
-            <widget class="QLabel" name="label_21">
-             <property name="font">
+            <widget class="QLabel" name="label_21" >
+             <property name="font" >
               <font>
                <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
-             <property name="text">
+             <property name="text" >
               <string>Activity:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="activitytype">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <widget class="QComboBox" name="activitytype" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -383,11 +382,11 @@
           </layout>
          </item>
          <item>
-          <spacer name="verticalSpacer_8">
-           <property name="orientation">
+          <spacer name="verticalSpacer_8" >
+           <property name="orientation" >
             <enum>Qt::Vertical</enum>
            </property>
-           <property name="sizeHint" stdset="0">
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>20</width>
              <height>36</height>
@@ -396,72 +395,72 @@
           </spacer>
          </item>
          <item>
-          <widget class="QFrame" name="separatorFrame">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <widget class="QFrame" name="separatorFrame" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="minimumSize">
+           <property name="minimumSize" >
             <size>
              <width>0</width>
              <height>3</height>
             </size>
            </property>
-           <property name="maximumSize">
+           <property name="maximumSize" >
             <size>
              <width>16777215</width>
              <height>3</height>
             </size>
            </property>
-           <property name="frameShape">
+           <property name="frameShape" >
             <enum>QFrame::Box</enum>
            </property>
-           <property name="frameShadow">
+           <property name="frameShadow" >
             <enum>QFrame::Raised</enum>
            </property>
-           <property name="lineWidth">
+           <property name="lineWidth" >
             <number>5</number>
            </property>
-           <property name="midLineWidth">
+           <property name="midLineWidth" >
             <number>0</number>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QToolBox" name="toolBox">
-           <property name="minimumSize">
+          <widget class="QToolBox" name="toolBox" >
+           <property name="minimumSize" >
             <size>
              <width>0</width>
              <height>335</height>
             </size>
            </property>
-           <property name="currentIndex">
-            <number>0</number>
+           <property name="currentIndex" >
+            <number>1</number>
            </property>
-           <widget class="QWidget" name="page">
-            <property name="geometry">
+           <widget class="QWidget" name="page" >
+            <property name="geometry" >
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>285</width>
-              <height>243</height>
+              <width>302</width>
+              <height>216</height>
              </rect>
             </property>
-            <attribute name="label">
+            <attribute name="label" >
              <string>Activity Details</string>
             </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_13">
+            <layout class="QVBoxLayout" name="verticalLayout_13" >
              <item>
-              <spacer name="verticalSpacer_10">
-               <property name="orientation">
+              <spacer name="verticalSpacer_10" >
+               <property name="orientation" >
                 <enum>Qt::Vertical</enum>
                </property>
-               <property name="sizeType">
+               <property name="sizeType" >
                 <enum>QSizePolicy::Expanding</enum>
                </property>
-               <property name="sizeHint" stdset="0">
+               <property name="sizeHint" stdset="0" >
                 <size>
                  <width>20</width>
                  <height>10</height>
@@ -470,56 +469,56 @@
               </spacer>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_18">
+              <layout class="QHBoxLayout" name="horizontalLayout_18" >
                <item>
-                <widget class="QLabel" name="label_20">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QLabel" name="label_20" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="font">
+                 <property name="font" >
                   <font>
                    <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
-                 <property name="text">
+                 <property name="text" >
                   <string>Weather:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="weather">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QComboBox" name="weather" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string/>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>sunny</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>cloudly</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>rainy</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>dusty</string>
                   </property>
                  </item>
@@ -528,30 +527,30 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_20">
+              <layout class="QHBoxLayout" name="horizontalLayout_20" >
                <item>
-                <widget class="QLabel" name="label_29">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QLabel" name="label_29" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="font">
+                 <property name="font" >
                   <font>
                    <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
-                 <property name="text">
+                 <property name="text" >
                   <string>Temperature:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="temperature">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QLineEdit" name="temperature" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -561,56 +560,56 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_17">
+              <layout class="QHBoxLayout" name="horizontalLayout_17" >
                <item>
-                <widget class="QLabel" name="label_19">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QLabel" name="label_19" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="font">
+                 <property name="font" >
                   <font>
                    <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
-                 <property name="text">
+                 <property name="text" >
                   <string>Covering:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="covering">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QComboBox" name="covering" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string/>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>asphalt</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>ballast</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>forest</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>gras</string>
                   </property>
                  </item>
@@ -619,46 +618,46 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_16">
+              <layout class="QHBoxLayout" name="horizontalLayout_16" >
                <item>
-                <widget class="QLabel" name="label_18">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QLabel" name="label_18" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="font">
+                 <property name="font" >
                   <font>
                    <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
-                 <property name="text">
+                 <property name="text" >
                   <string>Profil:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="profil">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QComboBox" name="profil" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string/>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>even</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>hilly</string>
                   </property>
                  </item>
@@ -667,51 +666,51 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_13">
+              <layout class="QHBoxLayout" name="horizontalLayout_13" >
                <item>
-                <widget class="QLabel" name="label_22">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QLabel" name="label_22" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="font">
+                 <property name="font" >
                   <font>
                    <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
-                 <property name="text">
+                 <property name="text" >
                   <string>Quality:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="quality">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QComboBox" name="quality" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string/>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>excellent</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>good</string>
                   </property>
                  </item>
                  <item>
-                  <property name="text">
+                  <property name="text" >
                    <string>bad</string>
                   </property>
                  </item>
@@ -720,52 +719,52 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <layout class="QHBoxLayout" name="horizontalLayout_8" >
                <item>
-                <widget class="QLabel" name="label_17">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <widget class="QLabel" name="label_17" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="font">
+                 <property name="font" >
                   <font>
                    <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
-                 <property name="text">
+                 <property name="text" >
                   <string>Rating:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <layout class="QHBoxLayout" name="horizontalLayout_10" >
                  <item>
-                  <widget class="QLabel" name="ratingLabel_1">
-                   <property name="text">
+                  <widget class="QLabel" name="ratingLabel_1" >
+                   <property name="text" >
                     <string/>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="ratingLabel_2">
-                   <property name="text">
+                  <widget class="QLabel" name="ratingLabel_2" >
+                   <property name="text" >
                     <string/>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="ratingLabel_3">
-                   <property name="text">
+                  <widget class="QLabel" name="ratingLabel_3" >
+                   <property name="text" >
                     <string/>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="ratingLabel_4">
-                   <property name="text">
+                  <widget class="QLabel" name="ratingLabel_4" >
+                   <property name="text" >
                     <string/>
                    </property>
                   </widget>
@@ -775,14 +774,14 @@
               </layout>
              </item>
              <item>
-              <spacer name="verticalSpacer_6">
-               <property name="orientation">
+              <spacer name="verticalSpacer_6" >
+               <property name="orientation" >
                 <enum>Qt::Vertical</enum>
                </property>
-               <property name="sizeType">
+               <property name="sizeType" >
                 <enum>QSizePolicy::Expanding</enum>
                </property>
-               <property name="sizeHint" stdset="0">
+               <property name="sizeHint" stdset="0" >
                 <size>
                  <width>20</width>
                  <height>10</height>
@@ -792,421 +791,387 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_4">
-            <property name="geometry">
+           <widget class="QWidget" name="page_4" >
+            <property name="geometry" >
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>285</width>
-              <height>250</height>
+              <width>302</width>
+              <height>213</height>
              </rect>
             </property>
-            <attribute name="label">
+            <attribute name="label" >
              <string>Track Details</string>
             </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_22">
+            <layout class="QVBoxLayout" name="verticalLayout" >
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <item>
-                <spacer name="verticalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+              <spacer name="verticalSpacer" >
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType" >
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>289</width>
+                 <height>13</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QGridLayout" name="gridLayout" >
+               <item row="0" column="0" >
+                <widget class="QLabel" name="label_3" >
+                 <property name="text" >
+                  <string>Start:</string>
                  </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
+                </widget>
+               </item>
+               <item row="0" column="1" >
+                <widget class="QLabel" name="startLabel" >
+                 <property name="font" >
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
                  </property>
-                 <property name="sizeHint" stdset="0">
+                 <property name="text" >
+                  <string/>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" >
+                <widget class="QLabel" name="label_7" >
+                 <property name="minimumSize" >
                   <size>
-                   <width>138</width>
-                   <height>15</height>
+                   <width>0</width>
+                   <height>0</height>
                   </size>
                  </property>
-                </spacer>
-               </item>
-               <item>
-                <layout class="QGridLayout" name="gridLayout">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_5">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Distance:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLabel" name="distanceLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>12</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>40km</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_7">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Time:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QLabel" name="timeLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>12</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>56min</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_13">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Average Speed:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QLabel" name="speedLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>12</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>12km/h</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QLabel" name="label_6">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Average Altitude:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QLabel" name="altitudeLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>12</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>305m</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
-                  <widget class="QLabel" name="label_15">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Average Heartrate:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QLabel" name="heartrateLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>12</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>161</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="0">
-                  <widget class="QLabel" name="label_8">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Average Cadence:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QLabel" name="cadenceLabel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>22</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>12</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>83</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
+                 <property name="maximumSize" >
                   <size>
-                   <width>128</width>
-                   <height>15</height>
+                   <width>16777215</width>
+                   <height>16777215</height>
                   </size>
                  </property>
-                </spacer>
+                 <property name="font" >
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>Duration:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" >
+                <widget class="QLabel" name="timeLabel" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>56min</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" >
+                <widget class="QLabel" name="label_5" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>22</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>Distance:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" >
+                <widget class="QLabel" name="distanceLabel" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>40km</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" >
+                <widget class="QLabel" name="label_13" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>Average Speed:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1" >
+                <widget class="QLabel" name="speedLabel" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>12km/h</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" >
+                <widget class="QLabel" name="label_6" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>Average Altitude:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1" >
+                <widget class="QLabel" name="altitudeLabel" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>305m</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0" >
+                <widget class="QLabel" name="label_15" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>Average Heartrate:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1" >
+                <widget class="QLabel" name="heartrateLabel" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font" >
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text" >
+                  <string>161</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
+             <item>
+              <spacer name="verticalSpacer_2" >
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType" >
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>289</width>
+                 <height>13</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_2">
-            <property name="geometry">
+           <widget class="QWidget" name="page_2" >
+            <property name="geometry" >
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>285</width>
-              <height>226</height>
+              <width>302</width>
+              <height>213</height>
              </rect>
             </property>
-            <attribute name="label">
+            <attribute name="label" >
              <string>Pictures</string>
             </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_20">
+            <layout class="QVBoxLayout" name="verticalLayout_20" >
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_6">
+              <layout class="QVBoxLayout" name="verticalLayout_6" >
                <item>
-                <widget class="QFrame" name="pictureFrame">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <widget class="QFrame" name="pictureFrame" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="minimumSize">
+                 <property name="minimumSize" >
                   <size>
                    <width>250</width>
                    <height>200</height>
                   </size>
                  </property>
-                 <property name="frameShape">
+                 <property name="frameShape" >
                   <enum>QFrame::Box</enum>
                  </property>
-                 <property name="frameShadow">
+                 <property name="frameShadow" >
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <property name="lineWidth">
+                 <property name="lineWidth" >
                   <number>3</number>
                  </property>
                 </widget>
@@ -1215,41 +1180,41 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_3">
-            <property name="geometry">
+           <widget class="QWidget" name="page_3" >
+            <property name="geometry" >
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>300</width>
-              <height>195</height>
+              <width>302</width>
+              <height>213</height>
              </rect>
             </property>
-            <attribute name="label">
+            <attribute name="label" >
              <string>Description</string>
             </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_21">
+            <layout class="QVBoxLayout" name="verticalLayout_21" >
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_11">
+              <layout class="QVBoxLayout" name="verticalLayout_11" >
                <item>
-                <widget class="QTextBrowser" name="descriptionTextBrowser">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <widget class="QTextBrowser" name="descriptionTextBrowser" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="frameShadow">
+                 <property name="frameShadow" >
                   <enum>QFrame::Sunken</enum>
                  </property>
-                 <property name="readOnly">
+                 <property name="readOnly" >
                   <bool>false</bool>
                  </property>
-                 <property name="html">
-                  <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+                 <property name="html" >
+                  <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Lucida Grande'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:10pt;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/body>&lt;/html></string>
                  </property>
                 </widget>
                </item>
@@ -1261,29 +1226,29 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <layout class="QVBoxLayout" name="verticalLayout_15">
+       <widget class="QWidget" name="layoutWidget" >
+        <layout class="QVBoxLayout" name="verticalLayout_15" >
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <layout class="QHBoxLayout" name="horizontalLayout_7" >
            <item>
-            <widget class="QToolButton" name="propsButton">
-             <property name="toolTip">
+            <widget class="QToolButton" name="propsButton" >
+             <property name="toolTip" >
               <string>Hide Track Information Panel</string>
              </property>
-             <property name="text">
+             <property name="text" >
               <string/>
              </property>
             </widget>
            </item>
            <item>
-            <spacer name="horizontalSpacer_9">
-             <property name="orientation">
+            <spacer name="horizontalSpacer_9" >
+             <property name="orientation" >
               <enum>Qt::Horizontal</enum>
              </property>
-             <property name="sizeType">
+             <property name="sizeType" >
               <enum>QSizePolicy::Expanding</enum>
              </property>
-             <property name="sizeHint" stdset="0">
+             <property name="sizeHint" stdset="0" >
               <size>
                <width>48</width>
                <height>22</height>
@@ -1292,26 +1257,26 @@ p, li { white-space: pre-wrap; }
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="headlineLable">
-             <property name="font">
+            <widget class="QLabel" name="headlineLable" >
+             <property name="font" >
               <font>
                <pointsize>15</pointsize>
               </font>
              </property>
-             <property name="text">
+             <property name="text" >
               <string/>
              </property>
             </widget>
            </item>
            <item>
-            <spacer name="horizontalSpacer_11">
-             <property name="orientation">
+            <spacer name="horizontalSpacer_11" >
+             <property name="orientation" >
               <enum>Qt::Horizontal</enum>
              </property>
-             <property name="sizeType">
+             <property name="sizeType" >
               <enum>QSizePolicy::Expanding</enum>
              </property>
-             <property name="sizeHint" stdset="0">
+             <property name="sizeHint" stdset="0" >
               <size>
                <width>48</width>
                <height>22</height>
@@ -1320,43 +1285,43 @@ p, li { white-space: pre-wrap; }
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="mPrevDayButton">
-             <property name="toolTip">
+            <widget class="QPushButton" name="mPrevDayButton" >
+             <property name="toolTip" >
               <string>Jump to previous saved Track</string>
              </property>
-             <property name="text">
+             <property name="text" >
               <string>prev</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="mDateLabel">
-             <property name="font">
+            <widget class="QLabel" name="mDateLabel" >
+             <property name="font" >
               <font>
                <pointsize>14</pointsize>
               </font>
              </property>
-             <property name="text">
+             <property name="text" >
               <string>Tuesday, Oct. 7th, 2008</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="mNextDayButton">
-             <property name="toolTip">
+            <widget class="QPushButton" name="mNextDayButton" >
+             <property name="toolTip" >
               <string>Jump to next saved Track</string>
              </property>
-             <property name="text">
+             <property name="text" >
               <string>next</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="mCalendarButton">
-             <property name="toolTip">
+            <widget class="QPushButton" name="mCalendarButton" >
+             <property name="toolTip" >
               <string>Show Calendar Panel</string>
              </property>
-             <property name="text">
+             <property name="text" >
               <string>Calendar</string>
              </property>
             </widget>
@@ -1364,27 +1329,27 @@ p, li { white-space: pre-wrap; }
           </layout>
          </item>
          <item>
-          <widget class="QGroupBox" name="groupBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <widget class="QGroupBox" name="groupBox" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Expanding" hsizetype="Preferred" >
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="title">
+           <property name="title" >
             <string/>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_16">
+           <layout class="QVBoxLayout" name="verticalLayout_16" >
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_10">
+             <layout class="QVBoxLayout" name="verticalLayout_10" >
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <layout class="QHBoxLayout" name="horizontalLayout_5" >
                 <item>
-                 <spacer name="verticalSpacer_4">
-                  <property name="orientation">
+                 <spacer name="verticalSpacer_4" >
+                  <property name="orientation" >
                    <enum>Qt::Vertical</enum>
                   </property>
-                  <property name="sizeHint" stdset="0">
+                  <property name="sizeHint" stdset="0" >
                    <size>
                     <width>13</width>
                     <height>528</height>
@@ -1393,43 +1358,43 @@ p, li { white-space: pre-wrap; }
                  </spacer>
                 </item>
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_4">
+                 <layout class="QVBoxLayout" name="verticalLayout_4" >
                   <item>
-                   <widget class="MapView" name="mapFrame" native="true">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                   <widget class="MapView" native="1" name="mapFrame" >
+                    <property name="sizePolicy" >
+                     <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <property name="minimumSize">
+                    <property name="minimumSize" >
                      <size>
                       <width>400</width>
                       <height>200</height>
                      </size>
                     </property>
-                    <property name="lineWidth" stdset="0">
+                    <property name="lineWidth" stdset="0" >
                      <number>3</number>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <layout class="QHBoxLayout" name="horizontalLayout_4" >
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_3">
+                     <layout class="QHBoxLayout" name="horizontalLayout_3" >
                       <item>
-                       <widget class="QLabel" name="loaderStatusLabel">
-                        <property name="text">
+                       <widget class="QLabel" name="loaderStatusLabel" >
+                        <property name="text" >
                          <string/>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="abortButton">
-                        <property name="toolTip">
+                       <widget class="QPushButton" name="abortButton" >
+                        <property name="toolTip" >
                          <string>Abort Download of Map tiles</string>
                         </property>
-                        <property name="text">
+                        <property name="text" >
                          <string>Abort</string>
                         </property>
                        </widget>
@@ -1437,11 +1402,11 @@ p, li { white-space: pre-wrap; }
                      </layout>
                     </item>
                     <item>
-                     <spacer name="horizontalSpacer_2">
-                      <property name="orientation">
+                     <spacer name="horizontalSpacer_2" >
+                      <property name="orientation" >
                        <enum>Qt::Horizontal</enum>
                       </property>
-                      <property name="sizeHint" stdset="0">
+                      <property name="sizeHint" stdset="0" >
                        <size>
                         <width>378</width>
                         <height>20</height>
@@ -1454,35 +1419,35 @@ p, li { white-space: pre-wrap; }
                  </layout>
                 </item>
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_2">
+                 <layout class="QVBoxLayout" name="verticalLayout_2" >
                   <item>
-                   <widget class="QSlider" name="zoomSlider">
-                    <property name="minimum">
+                   <widget class="QSlider" name="zoomSlider" >
+                    <property name="minimum" >
                      <number>4</number>
                     </property>
-                    <property name="maximum">
+                    <property name="maximum" >
                      <number>16</number>
                     </property>
-                    <property name="pageStep">
+                    <property name="pageStep" >
                      <number>1</number>
                     </property>
-                    <property name="orientation">
+                    <property name="orientation" >
                      <enum>Qt::Vertical</enum>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_3">
+                   <layout class="QVBoxLayout" name="verticalLayout_3" >
                     <item>
-                     <widget class="QCheckBox" name="checkBox">
-                      <property name="text">
+                     <widget class="QCheckBox" name="checkBox" >
+                      <property name="text" >
                        <string>km</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QCheckBox" name="checkBox_2">
-                      <property name="text">
+                     <widget class="QCheckBox" name="checkBox_2" >
+                      <property name="text" >
                        <string>WP</string>
                       </property>
                      </widget>
@@ -1494,11 +1459,11 @@ p, li { white-space: pre-wrap; }
                </layout>
               </item>
               <item>
-               <spacer name="horizontalSpacer_8">
-                <property name="orientation">
+               <spacer name="horizontalSpacer_8" >
+                <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" stdset="0">
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>668</width>
                   <height>13</height>
@@ -1509,45 +1474,45 @@ p, li { white-space: pre-wrap; }
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <layout class="QHBoxLayout" name="horizontalLayout_12" >
               <item>
-               <widget class="QDockWidget" name="diagramDockWidget">
-                <property name="windowTitle">
+               <widget class="QDockWidget" name="diagramDockWidget" >
+                <property name="windowTitle" >
                  <string>Diagram</string>
                 </property>
-                <widget class="QWidget" name="dockWidgetContents_2">
-                 <layout class="QVBoxLayout" name="verticalLayout_8">
+                <widget class="QWidget" name="dockWidgetContents_2" >
+                 <layout class="QVBoxLayout" name="verticalLayout_8" >
                   <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_7">
+                   <layout class="QVBoxLayout" name="verticalLayout_7" >
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout">
+                     <layout class="QHBoxLayout" name="horizontalLayout" >
                       <item>
-                       <widget class="QCheckBox" name="altitudeCheckBox">
-                        <property name="text">
+                       <widget class="QCheckBox" name="altitudeCheckBox" >
+                        <property name="text" >
                          <string>Altitude</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="speedCheckBox">
-                        <property name="text">
+                       <widget class="QCheckBox" name="speedCheckBox" >
+                        <property name="text" >
                          <string>Speed</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="hrCheckBox">
-                        <property name="text">
+                       <widget class="QCheckBox" name="hrCheckBox" >
+                        <property name="text" >
                          <string>Heart Rate</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <spacer name="horizontalSpacer_7">
-                        <property name="orientation">
+                       <spacer name="horizontalSpacer_7" >
+                        <property name="orientation" >
                          <enum>Qt::Horizontal</enum>
                         </property>
-                        <property name="sizeHint" stdset="0">
+                        <property name="sizeHint" stdset="0" >
                          <size>
                           <width>508</width>
                           <height>20</height>
@@ -1558,14 +1523,14 @@ p, li { white-space: pre-wrap; }
                      </layout>
                     </item>
                     <item>
-                     <widget class="QwtPlot" name="diagram">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <widget class="QwtPlot" name="diagram" >
+                      <property name="sizePolicy" >
+                       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
                       </property>
-                      <property name="minimumSize">
+                      <property name="minimumSize" >
                        <size>
                         <width>0</width>
                         <height>180</height>
@@ -1580,14 +1545,14 @@ p, li { white-space: pre-wrap; }
                </widget>
               </item>
               <item>
-               <spacer name="verticalSpacer_9">
-                <property name="orientation">
+               <spacer name="verticalSpacer_9" >
+                <property name="orientation" >
                  <enum>Qt::Vertical</enum>
                 </property>
-                <property name="sizeType">
+                <property name="sizeType" >
                  <enum>QSizePolicy::Minimum</enum>
                 </property>
-                <property name="sizeHint" stdset="0">
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>20</width>
                   <height>0</height>
@@ -1603,28 +1568,28 @@ p, li { white-space: pre-wrap; }
         </layout>
        </widget>
       </widget>
-      <widget class="QGroupBox" name="rightGroupBox">
-       <property name="minimumSize">
+      <widget class="QGroupBox" name="rightGroupBox" >
+       <property name="minimumSize" >
         <size>
          <width>340</width>
          <height>0</height>
         </size>
        </property>
-       <property name="palette">
+       <property name="palette" >
         <palette>
          <active>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
+          <colorrole role="Base" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
              <red>255</red>
              <green>255</green>
              <blue>255</blue>
             </color>
            </brush>
           </colorrole>
-          <colorrole role="Window">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
+          <colorrole role="Window" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
              <red>196</red>
              <green>195</green>
              <blue>195</blue>
@@ -1633,18 +1598,18 @@ p, li { white-space: pre-wrap; }
           </colorrole>
          </active>
          <inactive>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
+          <colorrole role="Base" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
              <red>255</red>
              <green>255</green>
              <blue>255</blue>
             </color>
            </brush>
           </colorrole>
-          <colorrole role="Window">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
+          <colorrole role="Window" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
              <red>196</red>
              <green>195</green>
              <blue>195</blue>
@@ -1653,18 +1618,18 @@ p, li { white-space: pre-wrap; }
           </colorrole>
          </inactive>
          <disabled>
-          <colorrole role="Base">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
+          <colorrole role="Base" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
              <red>196</red>
              <green>195</green>
              <blue>195</blue>
             </color>
            </brush>
           </colorrole>
-          <colorrole role="Window">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
+          <colorrole role="Window" >
+           <brush brushstyle="SolidPattern" >
+            <color alpha="255" >
              <red>196</red>
              <green>195</green>
              <blue>195</blue>
@@ -1674,18 +1639,18 @@ p, li { white-space: pre-wrap; }
          </disabled>
         </palette>
        </property>
-       <property name="title">
+       <property name="title" >
         <string/>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_19">
+       <layout class="QVBoxLayout" name="verticalLayout_19" >
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <layout class="QHBoxLayout" name="horizontalLayout_14" >
           <item>
-           <spacer name="horizontalSpacer_12">
-            <property name="orientation">
+           <spacer name="horizontalSpacer_12" >
+            <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" stdset="0">
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -1694,25 +1659,25 @@ p, li { white-space: pre-wrap; }
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="kwLabel">
-            <property name="font">
+           <widget class="QLabel" name="kwLabel" >
+            <property name="font" >
              <font>
               <pointsize>12</pointsize>
               <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
-            <property name="text">
+            <property name="text" >
              <string/>
             </property>
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
+           <spacer name="horizontalSpacer_4" >
+            <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" stdset="0">
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -1721,11 +1686,11 @@ p, li { white-space: pre-wrap; }
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="calToolButton">
-            <property name="toolTip">
+           <widget class="QToolButton" name="calToolButton" >
+            <property name="toolTip" >
              <string>Hide Day Selection</string>
             </property>
-            <property name="text">
+            <property name="text" >
              <string/>
             </property>
            </widget>
@@ -1733,18 +1698,18 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item>
-         <widget class="QGroupBox" name="calendarGroupBox">
-          <property name="title">
+         <widget class="QGroupBox" name="calendarGroupBox" >
+          <property name="title" >
            <string/>
           </property>
-          <property name="flat">
+          <property name="flat" >
            <bool>true</bool>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_14">
+          <layout class="QVBoxLayout" name="verticalLayout_14" >
            <item>
-            <widget class="QCalendarWidget" name="calendarWidget">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <widget class="QCalendarWidget" name="calendarWidget" >
+             <property name="sizePolicy" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -1755,21 +1720,21 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <layout class="QHBoxLayout" name="horizontalLayout_6" >
           <item>
-           <widget class="Calendar" name="calendar" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <widget class="Calendar" native="1" name="calendar" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="palette">
+            <property name="palette" >
              <palette>
               <active>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
+               <colorrole role="Base" >
+                <brush brushstyle="SolidPattern" >
+                 <color alpha="255" >
                   <red>224</red>
                   <green>223</green>
                   <blue>222</blue>
@@ -1778,9 +1743,9 @@ p, li { white-space: pre-wrap; }
                </colorrole>
               </active>
               <inactive>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
+               <colorrole role="Base" >
+                <brush brushstyle="SolidPattern" >
+                 <color alpha="255" >
                   <red>224</red>
                   <green>223</green>
                   <blue>222</blue>
@@ -1789,9 +1754,9 @@ p, li { white-space: pre-wrap; }
                </colorrole>
               </inactive>
               <disabled>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
+               <colorrole role="Base" >
+                <brush brushstyle="SolidPattern" >
+                 <color alpha="255" >
                   <red>244</red>
                   <green>244</green>
                   <blue>244</blue>
@@ -1801,20 +1766,20 @@ p, li { white-space: pre-wrap; }
               </disabled>
              </palette>
             </property>
-            <property name="autoFillBackground">
+            <property name="autoFillBackground" >
              <bool>false</bool>
             </property>
-            <property name="lineWidth" stdset="0">
+            <property name="lineWidth" stdset="0" >
              <number>0</number>
             </property>
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer_7">
-            <property name="orientation">
+           <spacer name="verticalSpacer_7" >
+            <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0">
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>40</height>
@@ -1825,37 +1790,37 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item>
-         <widget class="QFrame" name="frame">
-          <property name="frameShape">
+         <widget class="QFrame" name="frame" >
+          <property name="frameShape" >
            <enum>QFrame::StyledPanel</enum>
           </property>
-          <property name="frameShadow">
+          <property name="frameShadow" >
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_18">
+          <layout class="QVBoxLayout" name="verticalLayout_18" >
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_17">
+            <layout class="QVBoxLayout" name="verticalLayout_17" >
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_15">
+              <layout class="QHBoxLayout" name="horizontalLayout_15" >
                <item>
-                <widget class="QLabel" name="label_9">
-                 <property name="font">
+                <widget class="QLabel" name="label_9" >
+                 <property name="font" >
                   <font>
                    <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
-                 <property name="text">
+                 <property name="text" >
                   <string>Week Summary</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_13">
-                 <property name="orientation">
+                <spacer name="horizontalSpacer_13" >
+                 <property name="orientation" >
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0">
+                 <property name="sizeHint" stdset="0" >
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -1866,8 +1831,8 @@ p, li { white-space: pre-wrap; }
               </layout>
              </item>
              <item>
-              <widget class="Line" name="line_3">
-               <property name="orientation">
+              <widget class="Line" name="line_3" >
+               <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
                </property>
               </widget>
@@ -1875,31 +1840,31 @@ p, li { white-space: pre-wrap; }
             </layout>
            </item>
            <item>
-            <layout class="QGridLayout" name="gridLayout_3">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_10">
-               <property name="text">
+            <layout class="QGridLayout" name="gridLayout_3" >
+             <item row="0" column="0" >
+              <widget class="QLabel" name="label_10" >
+               <property name="text" >
                 <string>Total Activity Distance:</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="totalWeekDistanceLabel">
-               <property name="text">
+             <item row="0" column="1" >
+              <widget class="QLabel" name="totalWeekDistanceLabel" >
+               <property name="text" >
                 <string/>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_11">
-               <property name="text">
+             <item row="1" column="0" >
+              <widget class="QLabel" name="label_11" >
+               <property name="text" >
                 <string>Total Activity Time:</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="totalWeekTimeLabel">
-               <property name="text">
+             <item row="1" column="1" >
+              <widget class="QLabel" name="totalWeekTimeLabel" >
+               <property name="text" >
                 <string/>
                </property>
               </widget>
@@ -1915,120 +1880,120 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
+  <widget class="QMenuBar" name="menubar" >
+   <property name="geometry" >
     <rect>
      <x>0</x>
      <y>0</y>
      <width>1231</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
+   <widget class="QMenu" name="menuFile" >
+    <property name="title" >
      <string>File</string>
     </property>
-    <addaction name="actionNewActivity"/>
-    <addaction name="actionRemoveTrack"/>
-    <addaction name="actionSave"/>
-    <addaction name="separator"/>
-    <addaction name="actionClose"/>
+    <addaction name="actionNewActivity" />
+    <addaction name="actionRemoveTrack" />
+    <addaction name="actionSave" />
+    <addaction name="separator" />
+    <addaction name="actionClose" />
    </widget>
-   <widget class="QMenu" name="menuView">
-    <property name="title">
+   <widget class="QMenu" name="menuView" >
+    <property name="title" >
      <string>View</string>
     </property>
-    <addaction name="actionShow_Track_Settings"/>
-    <addaction name="actionShow_Diagram"/>
-    <addaction name="actionShow_Calendar"/>
-    <addaction name="actionClear"/>
+    <addaction name="actionShow_Track_Settings" />
+    <addaction name="actionShow_Diagram" />
+    <addaction name="actionShow_Calendar" />
+    <addaction name="actionClear" />
    </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuView"/>
+   <addaction name="menuFile" />
+   <addaction name="menuView" />
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionImport">
-   <property name="text">
+  <widget class="QStatusBar" name="statusbar" />
+  <action name="actionImport" >
+   <property name="text" >
     <string>Import Track...</string>
    </property>
-   <property name="shortcut">
+   <property name="shortcut" >
     <string>Ctrl+I</string>
    </property>
   </action>
-  <action name="actionImportPhysical">
-   <property name="text">
+  <action name="actionImportPhysical" >
+   <property name="text" >
     <string>Import Physical Data...</string>
    </property>
-   <property name="shortcut">
+   <property name="shortcut" >
     <string>Ctrl+P</string>
    </property>
   </action>
-  <action name="actionSave">
-   <property name="text">
+  <action name="actionSave" >
+   <property name="text" >
     <string>Save</string>
    </property>
-   <property name="shortcut">
+   <property name="shortcut" >
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionShow_TrackInfo">
-   <property name="checkable">
+  <action name="actionShow_TrackInfo" >
+   <property name="checkable" >
     <bool>true</bool>
    </property>
-   <property name="checked">
+   <property name="checked" >
     <bool>true</bool>
    </property>
-   <property name="text">
+   <property name="text" >
     <string>Show Track Info</string>
    </property>
   </action>
-  <action name="actionShow_Diagram">
-   <property name="checkable">
+  <action name="actionShow_Diagram" >
+   <property name="checkable" >
     <bool>true</bool>
    </property>
-   <property name="checked">
+   <property name="checked" >
     <bool>true</bool>
    </property>
-   <property name="text">
+   <property name="text" >
     <string>Show Diagram</string>
    </property>
   </action>
-  <action name="actionShow_Calendar">
-   <property name="checkable">
+  <action name="actionShow_Calendar" >
+   <property name="checkable" >
     <bool>true</bool>
    </property>
-   <property name="text">
+   <property name="text" >
     <string>Show Calendar</string>
    </property>
   </action>
-  <action name="actionRemoveTrack">
-   <property name="text">
+  <action name="actionRemoveTrack" >
+   <property name="text" >
     <string>Remove Activity</string>
    </property>
   </action>
-  <action name="actionClose">
-   <property name="text">
+  <action name="actionClose" >
+   <property name="text" >
     <string>Close</string>
    </property>
   </action>
-  <action name="actionClear">
-   <property name="text">
+  <action name="actionClear" >
+   <property name="text" >
     <string>Clear</string>
    </property>
   </action>
-  <action name="actionShow_Track_Settings">
-   <property name="checkable">
+  <action name="actionShow_Track_Settings" >
+   <property name="checkable" >
     <bool>true</bool>
    </property>
-   <property name="checked">
+   <property name="checked" >
     <bool>true</bool>
    </property>
-   <property name="text">
+   <property name="text" >
     <string>Show Track Settings</string>
    </property>
   </action>
-  <action name="actionNewActivity">
-   <property name="text">
+  <action name="actionNewActivity" >
+   <property name="text" >
     <string>New Activity...</string>
    </property>
   </action>
@@ -2059,11 +2024,11 @@ p, li { white-space: pre-wrap; }
    <receiver>headlineLable</receiver>
    <slot>setText(QString)</slot>
    <hints>
-    <hint type="sourcelabel">
+    <hint type="sourcelabel" >
      <x>330</x>
      <y>301</y>
     </hint>
-    <hint type="destinationlabel">
+    <hint type="destinationlabel" >
      <x>537</x>
      <y>68</y>
     </hint>
@@ -2075,11 +2040,11 @@ p, li { white-space: pre-wrap; }
    <receiver>diagramDockWidget</receiver>
    <slot>setVisible(bool)</slot>
    <hints>
-    <hint type="sourcelabel">
+    <hint type="sourcelabel" >
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel">
+    <hint type="destinationlabel" >
      <x>744</x>
      <y>795</y>
     </hint>
@@ -2091,11 +2056,11 @@ p, li { white-space: pre-wrap; }
    <receiver>rightGroupBox</receiver>
    <slot>setVisible(bool)</slot>
    <hints>
-    <hint type="sourcelabel">
+    <hint type="sourcelabel" >
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel">
+    <hint type="destinationlabel" >
      <x>1349</x>
      <y>461</y>
     </hint>
@@ -2107,11 +2072,11 @@ p, li { white-space: pre-wrap; }
    <receiver>SportsDiary</receiver>
    <slot>close()</slot>
    <hints>
-    <hint type="sourcelabel">
+    <hint type="sourcelabel" >
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel">
+    <hint type="destinationlabel" >
      <x>595</x>
      <y>425</y>
     </hint>

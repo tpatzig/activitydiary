@@ -41,6 +41,9 @@ class Waypoint : public QObject
         bool gt (Waypoint* w) const;
         bool lt (Waypoint* w) const;
 
+        void set_date_time(QDateTime);
+        bool has_date_time();
+
     private: 
 
         double latitude;

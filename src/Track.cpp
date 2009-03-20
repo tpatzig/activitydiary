@@ -9,7 +9,8 @@ Track::Track(WaypointList wpList)
         set_waypoint_list(wpList);
 
     // default pen (a yellow highlighter)
-    QColor color( 200, 255, 0 ) ;
+//    QColor color( 200, 255, 0 ) ;
+    QColor color( 0, 100, 255 ) ;
     color.setAlpha(140);
     _trackPen.setColor ( color );
     _trackPen.setWidth( 5 );
@@ -117,32 +118,42 @@ float Track::get_overall_time() {
     Waypoint* tmp = 0;
 
     foreach(Waypoint* wp,waypoint_list) {
-        if (tmp) {
-            time_in_sec += tmp->get_time().secsTo(wp->get_time());
+        if (wp->has_date_time()) {
+
+            if (tmp) 
+                time_in_sec += tmp->get_time().secsTo(wp->get_time());
+            
+            tmp = wp;
         }
-        tmp = wp;
     }
-    return time_in_sec / 60;
+    return (time_in_sec > 0 ? time_in_sec / 60 : time_in_sec);
 }
 
 float Track::get_wp_time(Waypoint* wp1,Waypoint* wp2) {
     Waypoint* tmp = 0;
     float time_in_sec = 0;
 
+
     for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
-        if (tmp)
-            time_in_sec += tmp->get_time().secsTo(at(i)->get_time());
-        tmp = at(i);
+        if (at(i)->has_date_time()) {
+            if (tmp)
+                time_in_sec += tmp->get_time().secsTo(at(i)->get_time());
+            tmp = at(i);
+        }
     }
-    return time_in_sec / 60;
+
+    return (time_in_sec > 0 ? time_in_sec / 60 : time_in_sec);
 }
 
 float Track::get_wp_speed(Waypoint* wp1,Waypoint* wp2) {
-    float time = get_wp_time(wp1,wp2) * 60;
-    float distance = get_wp_distance(wp1,wp2) * 1000;
+    if (wp1->has_date_time() && wp2->has_date_time()) {
+        float time = get_wp_time(wp1,wp2) * 60;
+        float distance = get_wp_distance(wp1,wp2) * 1000;
 
-    // return speed in m/s
-    return distance/time;
+        // return speed in m/s
+        return distance/time;
+    } 
+    return 0;
 }
 
 float Track::get_overall_avg_speed()
@@ -156,7 +167,7 @@ float Track::get_overall_avg_speed()
         }
         tmp = wp;
     }
-    return avg_speed / count_waypoints();
+    return (avg_speed > 0 ? avg_speed / count_waypoints() : avg_speed) ;
 
 }
 
@@ -172,7 +183,7 @@ float Track::get_wp_avg_speed(Waypoint* wp1, Waypoint* wp2)
         tmp = at(i);
     }
     int count = indexOf(wp2) - indexOf(wp1);
-    return avg_speed / count;
+    return (avg_speed > 0 ? avg_speed / count : avg_speed) ;
 
 }
 
@@ -196,7 +207,7 @@ float Track::get_wp_avg_altitude(Waypoint* wp1, Waypoint* wp2)
     }
     int count = indexOf(wp2) - indexOf(wp1);
 
-    return avg_alt / count;
+    return avg_alt > 0 ? avg_alt / count : avg_alt;
 }
 
 
@@ -219,6 +230,11 @@ Waypoint* Track::last() {
 QDate Track::get_start_date()
 {
     return waypoint_list.at(0)->get_date();
+}
+
+QTime Track::get_start_time()
+{
+    return waypoint_list.at(0)->get_time();
 }
 
 bool Track::is_custom_track()

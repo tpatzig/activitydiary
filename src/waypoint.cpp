@@ -105,6 +105,9 @@ bool Waypoint::ge (Waypoint* w) const
 {
     if (!w)
         return false;
+    if (!w->has_date_time() || !date_time.isValid())
+        return false;
+       
     return date_time >= w->date_time;
 }
 
@@ -112,6 +115,9 @@ bool Waypoint::le (Waypoint* w) const
 {
     if (!w)
         return false;
+    if (!w->has_date_time() || !date_time.isValid())
+        return false;
+       
     return date_time <= w->date_time;
 }
 
@@ -119,6 +125,9 @@ bool Waypoint::gt (Waypoint* w) const
 {
     if (!w)
         return false;
+    if (!w->has_date_time() || !date_time.isValid())
+        return false;
+       
     return date_time > w->date_time;
 }
 
@@ -126,9 +135,21 @@ bool Waypoint::lt (Waypoint* w) const
 {
     if (!w)
         return false;
+    if (!w->has_date_time() || !date_time.isValid())
+        return false;
+
     return date_time < w->date_time;
 }
 
+void Waypoint::set_date_time(QDateTime dt)
+{
+    date_time = dt;
+}
+
+bool Waypoint::has_date_time()
+{
+    return date_time.isValid();
+}
 
 // ################################################################################
 

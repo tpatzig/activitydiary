@@ -123,12 +123,11 @@ void MapView::drawTrack()
         QPen pen = _track->pen();
         pen.setWidth(_zoom / 2);	// adapt pen width to zoom level
 
-        if ( fromPoint->lt(_startWaypoint) || toPoint->gt(_endWaypoint))
+        if ( ( (fromPoint->lt(_startWaypoint) || toPoint->gt(_endWaypoint)) ) || ( (_track->indexOf(fromPoint) < _track->indexOf(_startWaypoint)) || (_track->indexOf(toPoint) > _track->indexOf(_endWaypoint)) ) )
         {
             QColor color = pen.color();
             color.setAlpha(50);
             pen.setColor ( color );
-
         }
 
         painter.setPen(pen);
@@ -203,10 +202,10 @@ void MapView::mouseDoubleClickEvent(QMouseEvent * event )
         double lon = Calc::xAtZoomToLongitude(mpos.x(),_zoom);
         double lat = Calc::yAtZoomToLatitude(mpos.y(),_zoom);
 
-        QDateTime today = QDateTime::currentDateTime();
+        QDateTime time;
 
         new_point_to_draw = true;
-        Waypoint* tmp = new Waypoint(lat,lon,0,0,0,0,today);
+        Waypoint* tmp = new Waypoint(lat,lon,0,0,0,0,time);
         customWaypointList.append(tmp);
         customTrack->set_waypoint_list(customWaypointList);
         emit customTrackChanged(customTrack);

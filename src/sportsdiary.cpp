@@ -93,7 +93,7 @@ SportsDiary::SportsDiary(QObject* parent)
     mNextDayButton->setEnabled(false);
     mPrevDayButton->setEnabled(false);
 
-    mapFrame->setEditMode(true);
+    mapFrame->setEditMode(false);
 
     parser = 0;
     altitudeDiagram = 0;
@@ -485,6 +485,7 @@ void SportsDiary::slotSelectCurrentTrack( int num )
 
     qDebug() << "Waypoints counter: " << mCurrentTrack->count_waypoints();
 
+    startLabel->setText(mCurrentTrack->get_start_time().toString());
     mDateLabel->setText( mCurrentTrack->get_start_date().toString() );
     distanceLabel->setText(roundNumberAsString(mCurrentTrack->get_overall_distance()) + " km");
     if (mCurrentTrack->get_overall_time() > 60)
@@ -498,8 +499,8 @@ void SportsDiary::slotSelectCurrentTrack( int num )
 
     drawGraph(mCurrentTrack->first(),mCurrentTrack->last());
 
-    nextAvailAdx = calendar->getNextActivityDay(mCurrentTrack->get_start_date());
-    previousAvailAdx = calendar->getPrevActivityDay(mCurrentTrack->get_start_date());
+    nextAvailAdx = calendar->getNextActivityDay(mCurrentTrack->get_start_date(), mCurrentTrack->get_start_time());
+    previousAvailAdx = calendar->getPrevActivityDay(mCurrentTrack->get_start_date(), mCurrentTrack->get_start_time());
 
     qDebug() << "next: " << nextAvailAdx << "prev: " << previousAvailAdx;
 
@@ -543,6 +544,7 @@ void SportsDiary::slotStartEndPointsChanged(Waypoint* start,Waypoint* end)
     timeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_time(start,end)) + " min");
     speedLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_speed(start,end) * 3.6 ) + " km/h");
     altitudeLabel->setText( roundNumberAsString(mCurrentTrack->get_wp_avg_altitude(start,end)) + " m");
+    startLabel->setText(mCurrentTrack->get_start_time().toString());
 }
 
 void SportsDiary::slotAltitudeCheck(bool checked)
@@ -615,21 +617,14 @@ void SportsDiary::slotSaveTrackInfos()
         qDebug() << "No Track loaded";
     } else {
         if ( mCurrentTrack->is_custom_track() ) {
-            startdate = QDate::currentDate();
-            starttime = QTime::currentTime();
-            filename = QString("%6/%1/%2/%1_%3_%4-%5.gpx").arg(startdate.year())
-                                                            .arg(startdate.weekNumber())
-                                                            .arg(startdate.toString("MM"))
-                                                            .arg(startdate.toString("dd"))
-                                                            .arg(starttime.toString("HHmmss"))
-                                                            .arg(settings->value("TracksDir").toString());
-            GPXParser::writeGPX(filename,mCurrentTrack);
-        }
+            startdate = manualStart.date();
+            starttime = manualStart.time();
 
-        if ( 6 ) {
+        } else {
+            startdate = mCurrentTrack->at(0)->get_date();
+            starttime = mCurrentTrack->at(0)->get_time();
+        }
         QMap<QString,QString> trackSettings;
-        startdate = mCurrentTrack->at(0)->get_date();
-        starttime = mCurrentTrack->at(0)->get_time();
         filename = QString("%6/%1/%2/%1_%3_%4-%5.adx").arg(startdate.year())
                                                             .arg(startdate.weekNumber())
                                                             .arg(startdate.toString("MM"))
@@ -638,7 +633,6 @@ void SportsDiary::slotSaveTrackInfos()
                                                             .arg(settings->value("TracksDir").toString());
         QFileInfo info(filename);                                                            
 
-        trackSettings["trackfile"] = parser->getFileName();
         if (! trackname->text().isEmpty() )
             trackSettings["trackname"] = trackname->text();
         if (! activitytype->currentIndex() == 0) 
@@ -646,6 +640,7 @@ void SportsDiary::slotSaveTrackInfos()
         trackSettings["totaltime"] = roundNumberAsString(mCurrentTrack->get_overall_time());
         trackSettings["distance"] = roundNumberAsString(mCurrentTrack->get_overall_distance());
         trackSettings["startdate"] = mCurrentTrack->get_start_date().toString();
+        trackSettings["starttime"] = mCurrentTrack->get_start_time().toString();
         if (! weather->currentText().isEmpty() )
             trackSettings["weather"] = weather->currentText();
         if (! profil->currentText().isEmpty() )
@@ -666,13 +661,31 @@ void SportsDiary::slotSaveTrackInfos()
             trackSettings["allInOneTrack"] = AdxParser::readSetting(filename,"allInOneTrack");
         } else { 
 
-            if (parser->getTracks().size() > 1 && mTrackCombo->count() == 1)
-                trackSettings["allInOneTrack"] = "true";
-            else if (parser->getTracks().size() > 1 && mTrackCombo->count() > 1 )
-                trackSettings["allInOneTrack"] = "false";
-           
             if (! mTrackCombo->currentText().isEmpty() )
                 trackSettings["selectedTrack"] = mTrackCombo->currentText().split("No. ")[1];
+        }
+
+
+        if (mCurrentTrack->is_custom_track() ) {
+
+            QString filenameGPX = filename;
+            filenameGPX.chop(3);
+            filenameGPX += "gpx";
+
+            trackSettings["startdate"] = manualStart.date().toString();
+            trackSettings["starttime"] = manualStart.time().toString();
+            trackSettings["trackfile"] = filename;
+            trackSettings["totaltime"] = roundNumberAsString(manualStart.secsTo(manualEnd) / 60);
+            GPXParser::writeGPX(filenameGPX,mCurrentTrack,manualStart,manualEnd);
+        } else {
+
+            trackSettings["trackfile"] = parser->getFileName();
+            if (!info.exists()) {
+                if (parser->getTracks().size() > 1 && mTrackCombo->count() == 1)
+                    trackSettings["allInOneTrack"] = "true";
+                else if (parser->getTracks().size() > 1 && mTrackCombo->count() > 1 )
+                    trackSettings["allInOneTrack"] = "false";
+            }
         }
 
         AdxParser::writeSettings(filename, trackSettings);
@@ -684,7 +697,10 @@ void SportsDiary::slotSaveTrackInfos()
 
     }
         setWindowModified(false);
-    }
+
+        mapFrame->setEditMode(false);
+        manualStart = QDateTime();
+        manualEnd = QDateTime();
 }
 
 void SportsDiary::slotRemoveTrack()
@@ -751,32 +767,31 @@ void SportsDiary::slotClearAll()
     mapFrame->clearMap();
     mDateLabel->setText(QDate::currentDate().toString());
 
-    diagram->clear();
 
     if (altitudeDiagram) {
-        altitudeDiagram->detach();
+        //altitudeDiagram->detach();
         delete altitudeDiagram;
         altitudeDiagram = 0;
     }
     if (speedDiagram) {
-        speedDiagram->detach();
+        //speedDiagram->detach();
         delete speedDiagram;
         speedDiagram = 0;
     }
     if (hrDiagram) {
-        hrDiagram->detach();
+        //hrDiagram->detach();
         delete hrDiagram;
         hrDiagram = 0;
     }
 
+    diagram->replot();
 
-
-    cadenceLabel->setText("");
     heartrateLabel->setText("");
     speedLabel->setText("");
     altitudeLabel->setText("");
     timeLabel->setText("");
     distanceLabel->setText("");
+    startLabel->setText("");
 
     altitudeCheckBox->setChecked(true);
     speedCheckBox->setChecked(true);
@@ -796,8 +811,8 @@ void SportsDiary::slotClearAll()
 
     currentAdx = "";
 
-    nextAvailAdx = calendar->getNextActivityDay(QDate::currentDate());
-    previousAvailAdx = calendar->getPrevActivityDay(QDate::currentDate());
+    nextAvailAdx = calendar->getNextActivityDay(QDate::currentDate(), QTime::currentTime());
+    previousAvailAdx = calendar->getPrevActivityDay(QDate::currentDate(),QTime::currentTime());
     mPrevDayButton->setEnabled(!previousAvailAdx.isEmpty());
     mNextDayButton->setEnabled(!nextAvailAdx.isEmpty());
 
@@ -974,8 +989,12 @@ void SportsDiary::slotWizardFinished(QString name,QString trackSource, QString p
     } else if (trackSource == "manual") {
 
         mapFrame->setEditMode(true);
-        QDateTime start = adWizard->getManualStartDateTime();
-        QDateTime end = adWizard->getManualEndDateTime();
+
+        manualStart = adWizard->getManualStartDateTime();
+        manualEnd = adWizard->getManualEndDateTime();
+
+        mDateLabel->setText(manualStart.date().toString() );
+
     }
 
     adWizard->deleteLater();

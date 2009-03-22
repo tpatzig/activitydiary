@@ -150,7 +150,9 @@ QString Calendar::getNextActivityDay(const QDate& date, const QTime& time)
         foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
             QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
             QTime adxTime = QTime::fromString(AdxParser::readSetting(path + "/" + filename,"starttime"));
-            if (adxDate > date || adxTime > time)
+            if (adxDate > date)
+                return path + "/" + filename;
+            else if ((adxDate == date) && (adxTime > time))
                 return path + "/" + filename;
         }
     }
@@ -196,7 +198,9 @@ QString Calendar::getPrevActivityDay(const QDate& date, const QTime& time)
         foreach(QString filename,kwDir.entryList(QStringList("*.adx"))) {
             QDate adxDate = QDate::fromString(AdxParser::readSetting(path + "/" + filename,"startdate"));
             QTime adxTime = QTime::fromString(AdxParser::readSetting(path + "/" + filename,"starttime"));
-            if ( (adxDate < date) || (adxTime < time) )
+            if (adxDate < date)
+                return path + "/" + filename;
+            else if ( (adxDate == date) && (adxTime < time) )
                 return path + "/" + filename;
 
         }

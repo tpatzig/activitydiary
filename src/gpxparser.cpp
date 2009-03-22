@@ -52,14 +52,10 @@ void GPXParser::parse_file(QFile &file)
         QPointF maxWest;
         QPointF maxEast;
 
-        qDebug() << "have found a trk element";
-
         QDomElement trkseg = trk.firstChildElement("trkseg");
         for ( ; !trkseg.isNull(); trkseg = trkseg.nextSiblingElement( "trkseg" ) ) {
-            qDebug() << "have found a trkseg element";
             QDomElement trkpt = trkseg.firstChildElement("trkpt");
             for (; !trkpt.isNull(); trkpt = trkpt.nextSiblingElement("trkpt")) {
-                qDebug() << "have found a trkpt element";
 
                 double lat = trkpt.attributeNode("lat").value().toDouble();
                 double lon = trkpt.attributeNode("lon").value().toDouble();

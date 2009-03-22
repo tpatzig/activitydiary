@@ -41,7 +41,7 @@ ImageLoader::~ImageLoader() {
 QPixmap ImageLoader::load_tile(int zoom, int x, int y) {
 
     if ( access( get_pic_path( zoom,x,y,QString(tilesPath) ).toLatin1(),F_OK ) == 0 ) {
-        qDebug() << "file exists";
+        //qDebug() << "file exists";
         QPixmap local_pixmap(get_pic_path( zoom,x,y,QString(tilesPath) ));
         return local_pixmap;
     } else {

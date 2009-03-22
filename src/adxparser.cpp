@@ -27,6 +27,14 @@ void AdxParser::writeSettings(QString filename, QMap<QString,QString> settings)
 
     settings["trackfile"] = newGpxFileName;
 
+    if (settings.contains("heartratefile")) {
+        QString newHRMFileName = info.path() + "/" + info.baseName() + ".hrm";
+        if (!info.exists())
+            QFile::copy(settings["heartratefile"],newHRMFileName);
+
+        settings["heartratefile"] = newHRMFileName;
+    }
+
     foreach(QString key, settings.keys()) {
         QDomElement element = doc.createElement(key);
         root.appendChild(element);

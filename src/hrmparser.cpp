@@ -60,9 +60,6 @@ Physical HRMParser::read(const QString& fileName)
 	}
     } 
 
-
-
-
     return p;
 
 }

@@ -49,6 +49,10 @@ int DiagramCurve::yAxis()
     return curve->yAxis();
 }
 
+bool DiagramCurve::isVisible()
+{
+    return curve->isVisible();
+}
 
 
 

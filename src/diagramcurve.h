@@ -21,6 +21,7 @@ class Q_DECL_EXPORT DiagramCurve : public QWidget
         void detach();
         void attachToDiagram(QwtPlot*);
         int yAxis();
+        bool isVisible();
 
 
 

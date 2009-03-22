@@ -37,19 +37,13 @@ SportsDiary::SportsDiary(QObject* parent)
     connect(mapFrame,SIGNAL(customTrackChanged(Track*)), this, SLOT(slotCustomTrackChanged(Track*)));
 
     connect(abortButton,SIGNAL(clicked()),mapFrame,SLOT(slotAbortDownload()));
-    //connect(actionImport,SIGNAL(triggered()),this,SLOT(slotImportTrack()));
-    //connect(actionImportPhysical,SIGNAL(triggered()),this,SLOT(slotImportPhysical()));
     connect(actionNewActivity,SIGNAL(triggered()),this,SLOT(slotStartWizard()));
     connect(zoomSlider,SIGNAL(sliderMoved(int)),this,SLOT(slotSetZoom(int)));
-    //connect(altitudeCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotAltitudeCheck(bool)));
-    //connect(speedCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotSpeedCheck(bool)));
-    //connect(hrCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotHrCheck(bool)));
     connect(leftDiagramCombo,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(slotLeftDiagramChanged(const QString&)));
     connect(rightDiagramCombo,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(slotRightDiagramChanged(const QString&)));
     connect(mCalendarButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendarWidget(bool)));
     connect(calToolButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendar(bool)));
     connect(diagramDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetDiagramWidgetVisibility(bool)));
-//  connect(infoDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetInfoWidgetVisibility(bool)));
     connect(actionSave,SIGNAL(triggered()),this,SLOT(slotSaveTrackInfos()));
     connect(actionShow_Track_Settings,SIGNAL(toggled(bool)),leftGroupBox,SLOT(setVisible(bool)));
     connect(trackname,SIGNAL(textChanged(const QString&)),this,SLOT(slotSetWindowTitle(const QString &)));
@@ -188,18 +182,20 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     if (!altitudeDiagram) {
         altitudeDiagram = new DiagramCurve(diagram,"Altitude");
         altitudeDiagram->setColor(QColor(0,0,255));
-        slotAltitudeCheck(altitudeCheckBox->isChecked());
-
+        if (altitudeValues.size() > 0) 
+            leftDiagramCombo->setCurrentIndex(leftDiagramCombo->findText("Altitude"));
     }
+
     if (!speedDiagram) {
         speedDiagram = new DiagramCurve(diagram,"Speed");
         speedDiagram->setColor(QColor(0,255,0));
-        slotSpeedCheck(speedCheckBox->isChecked());
+        if (speedValues.size() > 0)
+            rightDiagramCombo->setCurrentIndex(rightDiagramCombo->findText("Speed"));
     }
+
     if (!hrDiagram) {
         hrDiagram = new DiagramCurve(diagram,"Heart Rate");
         hrDiagram->setColor(QColor(255,0,0));
-        //slotHrCheck(hrCheckBox->isChecked());
     } 
 
     diagram->setAxisTitle(QwtPlot::xBottom,"Time in min");
@@ -209,60 +205,80 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     hrDiagram->setValues(timeValues,hrValues);
 
     diagram->replot();
-
-    //altitudeCheckBox->setEnabled(true);
-    //speedCheckBox->setEnabled(true);
-    //hrCheckBox->setEnabled(true);
-    leftDiagramCombo->setEnabled(true);
-    rightDiagramCombo->setEnabled(true);
+    
+    if (timeValues.size() > 0 && ( altitudeValues.size() > 0 || speedValues.size() > 0 || hrValues.size() > 0) ) {
+        leftDiagramCombo->setEnabled(true);
+        rightDiagramCombo->setEnabled(true);
+    } else {
+        leftDiagramCombo->setEnabled(false);
+        rightDiagramCombo->setEnabled(false);
+    }
 
 }
 
 void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString axText, int axisId)
 {
-    if (check) {
+    if (curve) {
+        if (check) {
+            curve->detach();
+            qDebug() << "enable " << axText << " Diagram";
 
-        qDebug() << "enable " << axText << " Diagram";
+            curve->setAxis(QwtPlot::xBottom, axisId);
+            diagram->setAxisTitle(axisId,axText);
+            curve->attachToDiagram(diagram);
 
-        curve->setAxis(QwtPlot::xBottom, axisId);
-        diagram->setAxisTitle(axisId,axText);
-        curve->attachToDiagram(diagram);
+        } else {
+            qDebug() << "disable " << axText << " Diagram";
 
-    } else {
-        qDebug() << "disable " << axText << " Diagram";
-
-        curve->detach();
-        diagram->setAxisTitle(axisId,"");
+            curve->detach();
+            diagram->setAxisTitle(axisId,"");
+        }
+        diagram->replot();
     }
-    diagram->replot();
 }
 
-/*
-void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString axText)
+void SportsDiary::setActualDiagramContent(DiagramCurve* curveLeft, DiagramCurve* curveRight,QString textLeft, QString textRight)
 {
-    if (check) {
+    //diagram->clear();
+    if (speedDiagram)
+         speedDiagram->detach();
+    if (altitudeDiagram)
+         altitudeDiagram->detach();
+    if (hrDiagram)
+         hrDiagram->detach();
 
-        qDebug() << "enable " << axText << " Diagram";
+    if (curveLeft)
+        enableDisableDiagram(true,curveLeft,textLeft,QwtPlot::yLeft);
 
-        curve->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
-        diagram->setAxisTitle(QwtPlot::yRight,axText);
+    if (curveRight) 
+        enableDisableDiagram(true,curveRight,textRight,QwtPlot::yRight);
 
-        curve->attachToDiagram(diagram);
-
-    } else {
-        curve->detach();
-
-        qDebug() << "disable " << axText << " Diagram";
-
-        //diagram->enableAxis(QwtPlot::yRight,false);
-        //diagram->setAxisTitle(QwtPlot::yLeft,diagram->axisTitle(QwtPlot::yRight ).text());
-        //diagram->enableAxis(QwtPlot::yRight,false);
-
-        diagram->setAxisTitle(QwtPlot::yRight,"");
-    }
-    diagram->replot();
 }
-*/
+
+DiagramCurve* SportsDiary::getDiagramFromText(QString text)
+{
+    if (text == "Speed")
+        return speedDiagram;
+    else if (text == "Altitude")
+        return altitudeDiagram;
+    else if (text == "Heartrate")
+        return hrDiagram;
+    else
+        return 0;
+}
+
+QString SportsDiary::getDiagramTextFromName(QString text)
+{
+    if (text == "Speed")
+        return "Speed in km/h";
+    else if (text == "Altitude")
+        return "Altitude in m";
+    else if (text == "Heartrate")
+        return "Heartrate in 1/min";
+    else
+        return "";
+}
+
 
 void SportsDiary::writeSettings()
 {
@@ -423,6 +439,7 @@ void SportsDiary::slotImportPhysical(QString fileName)
     _physical = HRMParser::read(fileName);
      
     qDebug() << _physical[2]->hr();
+    qDebug() << "HR Count " << _physical.size();
 
 }
 
@@ -560,51 +577,63 @@ void SportsDiary::slotStartEndPointsChanged(Waypoint* start,Waypoint* end)
     startLabel->setText(mCurrentTrack->get_start_time().toString());
 }
 
-void SportsDiary::slotAltitudeCheck(bool checked)
-{
-    enableDisableDiagram(checked,altitudeDiagram,"Altitude in m");
-}
-
-void SportsDiary::slotSpeedCheck(bool checked)
-{
-    enableDisableDiagram(checked,speedDiagram,"Speed in km/h");
-
-}
-
-void SportsDiary::slotHrCheck(bool checked)
-{
-    enableDisableDiagram(checked,hrDiagram,"Heart Rate in 1/min");
-
-}
-
 void SportsDiary::slotLeftDiagramChanged(const QString& text)
 {
-    if (text == "Speed")
-        enableDisableDiagramLeft(checked,speedDiagram,"Speed in km/h",QwtPlot::yLeft);
-    else if (text == "Altitude")
-        enableDisableDiagramLeft(checked,altitudeDiagram,"Altitude in m",QwtPlot::yLeft);
-    else if (text == "Heartrate")
-        enableDisableDiagramLeft(checked,hrDiagram,"Heart Rate in 1/min",QwtPlot::yLeft);
-    else {
-        enableDisableDiagramLeft(false,speedDiagram,"Speed in km/h",QwtPlot::yLeft);
-        enableDisableDiagramLeft(false,altitudeDiagram,"Altitude in m",QwtPlot::yLeft);
-        enableDisableDiagramLeft(false,hrDiagram,"Heart Rate in 1/min",QwtPlot::yLeft);
+    disconnect(rightDiagramCombo,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(slotRightDiagramChanged(const QString&)));
+    QString currentRightComboText = rightDiagramCombo->currentText();
+    rightDiagramCombo->clear();
+    QStringList items;
+
+    qDebug() << "slotLeftDiagramChanged  Text: " << text << " currentRightComboText: " << currentRightComboText;
+
+    if (text == "Speed") {
+        diagram->enableAxis(QwtPlot::yLeft,true);
+        items << "-" << "Altitude" << "Heartrate";
+    } else if (text == "Altitude") {
+        diagram->enableAxis(QwtPlot::yLeft,true);
+        items << "-" << "Speed" << "Heartrate";
+    } else if (text == "Heartrate") {
+        diagram->enableAxis(QwtPlot::yLeft,true);
+        items << "-" << "Speed" << "Altitude";
+    } else {
+        diagram->enableAxis(QwtPlot::yLeft,false);
+        items << "-" << "Speed" << "Altitude" << "Heartrate";
+
     }
+    rightDiagramCombo->addItems(items);
+    rightDiagramCombo->setCurrentIndex(rightDiagramCombo->findText(currentRightComboText));
+    
+    connect(rightDiagramCombo,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(slotRightDiagramChanged(const QString&)));
+    setActualDiagramContent(getDiagramFromText(text),getDiagramFromText(currentRightComboText),getDiagramTextFromName(text),getDiagramTextFromName(currentRightComboText));
 }
 
 void SportsDiary::slotRightDiagramChanged(const QString& text)
 {
-    if (text == "Speed")
-        enableDisableDiagramLeft(checked,speedDiagram,"Speed in km/h",QwtPlot::yRight);
-    else if (text == "Altitude")
-        enableDisableDiagramLeft(checked,altitudeDiagram,"Altitude in m",QwtPlot::yRight);
-    else if (text == "Heartrate")
-        enableDisableDiagramLeft(checked,hrDiagram,"Heart Rate in 1/min",QwtPlot::yRight);
-    else {
-        enableDisableDiagramLeft(false,speedDiagram,"Speed in km/h",QwtPlot::yRight);
-        enableDisableDiagramLeft(false,altitudeDiagram,"Altitude in m",QwtPlot::yRight);
-        enableDisableDiagramLeft(false,hrDiagram,"Heart Rate in 1/min",QwtPlot::yRight);
+    disconnect(leftDiagramCombo,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(slotLeftDiagramChanged(const QString&)));
+    QString currentLeftComboText = leftDiagramCombo->currentText();
+    leftDiagramCombo->clear();
+    QStringList items;
+
+    qDebug() << "slotRightDiagramChanged  Text: " << text << " currentLeftComboText: " << currentLeftComboText;
+    if (text == "Speed") {
+        diagram->enableAxis(QwtPlot::yRight,true);
+        items << "-" << "Altitude" << "Heartrate";
+    } else if (text == "Altitude") {
+        diagram->enableAxis(QwtPlot::yRight,true);
+        items << "-" << "Speed" << "Heartrate";
+    } else if (text == "Heartrate") {
+        diagram->enableAxis(QwtPlot::yRight,true);
+        items << "-" << "Speed" << "Altitude";
+    } else {
+        diagram->enableAxis(QwtPlot::yRight,false);
+        items << "-" << "Speed" << "Altitude" << "Heartrate";
     }
+    leftDiagramCombo->addItems(items);
+    leftDiagramCombo->setCurrentIndex(leftDiagramCombo->findText(currentLeftComboText));
+
+    connect(leftDiagramCombo,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(slotLeftDiagramChanged(const QString&)));
+    setActualDiagramContent(getDiagramFromText(currentLeftComboText), getDiagramFromText(text),getDiagramTextFromName(currentLeftComboText), getDiagramTextFromName(text));
+
 }
 
 void SportsDiary::slotShowCalendarWidget(bool /*check*/ )
@@ -666,6 +695,7 @@ void SportsDiary::slotSaveTrackInfos()
             startdate = mCurrentTrack->at(0)->get_date();
             starttime = mCurrentTrack->at(0)->get_time();
         }
+
         QMap<QString,QString> trackSettings;
         filename = QString("%6/%1/%2/%1_%3_%4-%5.adx").arg(startdate.year())
                                                             .arg(startdate.weekNumber())
@@ -706,6 +736,9 @@ void SportsDiary::slotSaveTrackInfos()
             if (! mTrackCombo->currentText().isEmpty() )
                 trackSettings["selectedTrack"] = mTrackCombo->currentText().split("No. ")[1];
         }
+
+        if (!HRM_File.isEmpty())
+            trackSettings["heartratefile"] = HRM_File;
 
 
         if (mCurrentTrack->is_custom_track() ) {
@@ -765,8 +798,10 @@ void SportsDiary::slotRemoveTrack()
                     setWindowModified(false);
                     QFile adxfile(currentAdx);
                     QFile gpxfile(AdxParser::readSetting(currentAdx,"trackfile"));
+                    QFile hrm(AdxParser::readSetting(currentAdx,"heartratefile"));
                     adxfile.remove();
                     gpxfile.remove();
+                    hrm.remove();
                     if (calendarWidget->selectedDate().weekNumber() == QDate::fromString(mDateLabel->text()).weekNumber())
                         calendar->slotUpdateCurrentKW(QDate::fromString(mDateLabel->text()));
                     slotClearAll();
@@ -811,17 +846,14 @@ void SportsDiary::slotClearAll()
 
 
     if (altitudeDiagram) {
-        //altitudeDiagram->detach();
         delete altitudeDiagram;
         altitudeDiagram = 0;
     }
     if (speedDiagram) {
-        //speedDiagram->detach();
         delete speedDiagram;
         speedDiagram = 0;
     }
     if (hrDiagram) {
-        //hrDiagram->detach();
         delete hrDiagram;
         hrDiagram = 0;
     }
@@ -835,12 +867,8 @@ void SportsDiary::slotClearAll()
     distanceLabel->setText("");
     startLabel->setText("");
 
-    altitudeCheckBox->setChecked(true);
-    speedCheckBox->setChecked(true);
-    hrCheckBox->setChecked(true);
-    altitudeCheckBox->setEnabled(false);
-    speedCheckBox->setEnabled(false);
-    hrCheckBox->setEnabled(false);
+    leftDiagramCombo->setEnabled(false);
+    rightDiagramCombo->setEnabled(false);
 
     actionSave->setEnabled(false);
     actionRemoveTrack->setEnabled(false);
@@ -852,6 +880,7 @@ void SportsDiary::slotClearAll()
     }
 
     currentAdx = "";
+    HRM_File = "";
 
     nextAvailAdx = calendar->getNextActivityDay(QDate::currentDate(), QTime::currentTime());
     previousAvailAdx = calendar->getPrevActivityDay(QDate::currentDate(),QTime::currentTime());
@@ -899,6 +928,8 @@ void SportsDiary::slotLoadSavedTrack(const QString& filenameAdx)
         qDebug() << "Loading Adx: " << filenameAdx;
         QString filenameGpx = AdxParser::readSetting(filenameAdx,"trackfile");
         qDebug() << "Loading GPX" << filenameGpx;
+        QString filenameHRM = AdxParser::readSetting(filenameAdx,"heartratefile");
+        qDebug() << "Loading HRM" << filenameHRM;
 
         QMap<QString,QString> setts = AdxParser::readSettings(filenameAdx);
 
@@ -921,8 +952,13 @@ void SportsDiary::slotLoadSavedTrack(const QString& filenameAdx)
         if (! setts["rating"].isEmpty() )
             enableRating(setts["rating"].toInt());
 
-        slotImportTrack(filenameGpx);
+        if (!filenameHRM.isEmpty()) {
+            slotImportPhysical(filenameHRM);
+        }
 
+        HRM_File = filenameHRM;
+
+        slotImportTrack(filenameGpx);
     }
 
 }
@@ -1019,15 +1055,23 @@ void SportsDiary::slotStartWizard()
 void SportsDiary::slotWizardFinished(QString name,QString trackSource, QString physical)
 {
     qDebug() << "Wizard finished";
+    qDebug() << "Physical " << physical;
 
-    clearTrackInfos();
+    slotClearAll();
+
     trackname->setText(name);
     setWindowModified(true);
+
+    if (!physical.isEmpty() && QFile::exists(physical)) {
+        slotImportPhysical(physical);
+        HRM_File = physical;
+    }
 
     if (trackSource == "gps") {
 
         slotImportTrack(adWizard->getGPXFileName());
 
+        slotSaveTrackInfos();
     } else if (trackSource == "manual") {
 
         mapFrame->setEditMode(true);

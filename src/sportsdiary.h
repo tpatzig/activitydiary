@@ -45,14 +45,10 @@ public slots:
   void slotWaypointSelected(Waypoint*);
   void slotStartEndPointsChanged(Waypoint* start,Waypoint* end);
   void slotSelectCurrentTrack( int );
-  void slotAltitudeCheck(bool);
-  void slotSpeedCheck(bool);
-  void slotHrCheck(bool checked);
   void slotShowCalendar(bool);
   void slotShowCalendarWidget(bool);
   void slotShowTrackProperties(bool);
   void slotSetDiagramWidgetVisibility(bool);
-//  void slotSetInfoWidgetVisibility(bool);
   void slotSaveTrackInfos();
   void slotCalendarUpdated(const QDate&);
   void slotLoadSavedTrack(const QString&);
@@ -70,17 +66,22 @@ public slots:
 private slots:
   void slotWizardFinished(QString, QString, QString);
   void slotWizardCancelled();
+  void slotLeftDiagramChanged(const QString&);
+  void slotRightDiagramChanged(const QString&);
 
 private:
 
   void drawGraph( Waypoint* ,Waypoint* );
-  void enableDisableDiagram(bool, DiagramCurve*, QString);
+  void enableDisableDiagram(bool, DiagramCurve*, QString,int);
   void writeSettings();
   void readSettings();
   void clearTrackInfos();
   void closeEvent(QCloseEvent *event);
   void enableRating(int);
   void disableRating(int);
+  void setActualDiagramContent(DiagramCurve*, DiagramCurve*,QString, QString);
+  DiagramCurve* getDiagramFromText(QString);
+  QString getDiagramTextFromName(QString);
 
 
   Track *mCurrentTrack;
@@ -103,6 +104,7 @@ private:
   ADWizard* adWizard;
   QDateTime manualStart;
   QDateTime manualEnd;
+  QString HRM_File;
 
 };
 

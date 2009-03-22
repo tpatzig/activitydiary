@@ -41,9 +41,11 @@ SportsDiary::SportsDiary(QObject* parent)
     //connect(actionImportPhysical,SIGNAL(triggered()),this,SLOT(slotImportPhysical()));
     connect(actionNewActivity,SIGNAL(triggered()),this,SLOT(slotStartWizard()));
     connect(zoomSlider,SIGNAL(sliderMoved(int)),this,SLOT(slotSetZoom(int)));
-    connect(altitudeCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotAltitudeCheck(bool)));
-    connect(speedCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotSpeedCheck(bool)));
-    connect(hrCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotHrCheck(bool)));
+    //connect(altitudeCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotAltitudeCheck(bool)));
+    //connect(speedCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotSpeedCheck(bool)));
+    //connect(hrCheckBox,SIGNAL(clicked(bool)),this,SLOT(slotHrCheck(bool)));
+    connect(leftDiagramCombo,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(slotLeftDiagramChanged(const QString&)));
+    connect(rightDiagramCombo,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(slotRightDiagramChanged(const QString&)));
     connect(mCalendarButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendarWidget(bool)));
     connect(calToolButton,SIGNAL(clicked(bool)),this,SLOT(slotShowCalendar(bool)));
     connect(diagramDockWidget,SIGNAL(visibilityChanged(bool)),this,SLOT(slotSetDiagramWidgetVisibility(bool)));
@@ -187,6 +189,7 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
         altitudeDiagram = new DiagramCurve(diagram,"Altitude");
         altitudeDiagram->setColor(QColor(0,0,255));
         slotAltitudeCheck(altitudeCheckBox->isChecked());
+
     }
     if (!speedDiagram) {
         speedDiagram = new DiagramCurve(diagram,"Speed");
@@ -196,7 +199,7 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     if (!hrDiagram) {
         hrDiagram = new DiagramCurve(diagram,"Heart Rate");
         hrDiagram->setColor(QColor(255,0,0));
-        slotHrCheck(hrCheckBox->isChecked());
+        //slotHrCheck(hrCheckBox->isChecked());
     } 
 
     diagram->setAxisTitle(QwtPlot::xBottom,"Time in min");
@@ -205,51 +208,61 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     speedDiagram->setValues(timeValues,speedValues);
     hrDiagram->setValues(timeValues,hrValues);
 
-
     diagram->replot();
 
-    altitudeCheckBox->setEnabled(true);
-    speedCheckBox->setEnabled(true);
-    hrCheckBox->setEnabled(true);
-
-
-
+    //altitudeCheckBox->setEnabled(true);
+    //speedCheckBox->setEnabled(true);
+    //hrCheckBox->setEnabled(true);
+    leftDiagramCombo->setEnabled(true);
+    rightDiagramCombo->setEnabled(true);
 
 }
 
+void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString axText, int axisId)
+{
+    if (check) {
+
+        qDebug() << "enable " << axText << " Diagram";
+
+        curve->setAxis(QwtPlot::xBottom, axisId);
+        diagram->setAxisTitle(axisId,axText);
+        curve->attachToDiagram(diagram);
+
+    } else {
+        qDebug() << "disable " << axText << " Diagram";
+
+        curve->detach();
+        diagram->setAxisTitle(axisId,"");
+    }
+    diagram->replot();
+}
+
+/*
 void SportsDiary::enableDisableDiagram(bool check, DiagramCurve* curve, QString axText)
 {
     if (check) {
 
         qDebug() << "enable " << axText << " Diagram";
-        if (diagram->itemList().size() == 1) {
-            diagram->enableAxis(QwtPlot::yRight);
-            curve->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
-            diagram->setAxisTitle(QwtPlot::yRight,axText);
-        } else if (diagram->itemList().size() == 0) {
-            curve->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
-            diagram->setAxisTitle(QwtPlot::yLeft,axText);
-        }
+
+        curve->setAxis(QwtPlot::xBottom,QwtPlot::yRight);
+        diagram->setAxisTitle(QwtPlot::yRight,axText);
+
         curve->attachToDiagram(diagram);
 
     } else {
         curve->detach();
 
         qDebug() << "disable " << axText << " Diagram";
-        if (curve->yAxis() == QwtPlot::yRight) {
-            diagram->enableAxis(QwtPlot::yRight,false);
 
-        } else if (diagram->itemList().size() > 0) {
-            diagram->itemList()[0]->setAxis(QwtPlot::xBottom,QwtPlot::yLeft);
-            diagram->setAxisTitle(QwtPlot::yLeft,diagram->axisTitle(QwtPlot::yRight ).text());
-            diagram->enableAxis(QwtPlot::yRight,false);
-            
-        } else {
-            diagram->setAxisTitle(QwtPlot::yLeft,"");
-        }
+        //diagram->enableAxis(QwtPlot::yRight,false);
+        //diagram->setAxisTitle(QwtPlot::yLeft,diagram->axisTitle(QwtPlot::yRight ).text());
+        //diagram->enableAxis(QwtPlot::yRight,false);
+
+        diagram->setAxisTitle(QwtPlot::yRight,"");
     }
     diagram->replot();
 }
+*/
 
 void SportsDiary::writeSettings()
 {
@@ -564,6 +577,35 @@ void SportsDiary::slotHrCheck(bool checked)
 
 }
 
+void SportsDiary::slotLeftDiagramChanged(const QString& text)
+{
+    if (text == "Speed")
+        enableDisableDiagramLeft(checked,speedDiagram,"Speed in km/h",QwtPlot::yLeft);
+    else if (text == "Altitude")
+        enableDisableDiagramLeft(checked,altitudeDiagram,"Altitude in m",QwtPlot::yLeft);
+    else if (text == "Heartrate")
+        enableDisableDiagramLeft(checked,hrDiagram,"Heart Rate in 1/min",QwtPlot::yLeft);
+    else {
+        enableDisableDiagramLeft(false,speedDiagram,"Speed in km/h",QwtPlot::yLeft);
+        enableDisableDiagramLeft(false,altitudeDiagram,"Altitude in m",QwtPlot::yLeft);
+        enableDisableDiagramLeft(false,hrDiagram,"Heart Rate in 1/min",QwtPlot::yLeft);
+    }
+}
+
+void SportsDiary::slotRightDiagramChanged(const QString& text)
+{
+    if (text == "Speed")
+        enableDisableDiagramLeft(checked,speedDiagram,"Speed in km/h",QwtPlot::yRight);
+    else if (text == "Altitude")
+        enableDisableDiagramLeft(checked,altitudeDiagram,"Altitude in m",QwtPlot::yRight);
+    else if (text == "Heartrate")
+        enableDisableDiagramLeft(checked,hrDiagram,"Heart Rate in 1/min",QwtPlot::yRight);
+    else {
+        enableDisableDiagramLeft(false,speedDiagram,"Speed in km/h",QwtPlot::yRight);
+        enableDisableDiagramLeft(false,altitudeDiagram,"Altitude in m",QwtPlot::yRight);
+        enableDisableDiagramLeft(false,hrDiagram,"Heart Rate in 1/min",QwtPlot::yRight);
+    }
+}
 
 void SportsDiary::slotShowCalendarWidget(bool /*check*/ )
 {

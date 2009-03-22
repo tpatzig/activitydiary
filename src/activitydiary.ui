@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1231</width>
-    <height>732</height>
+    <height>742</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1469,28 +1469,28 @@ p, li { white-space: pre-wrap; }
                     <item>
                      <layout class="QHBoxLayout" name="horizontalLayout">
                       <item>
-                       <widget class="QCheckBox" name="altitudeCheckBox">
-                        <property name="text">
-                         <string>Altitude</string>
-                        </property>
+                       <widget class="QComboBox" name="leftDiagramCombo">
+                        <item>
+                         <property name="text">
+                          <string>-</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Speed</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Altitude</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Heartrate</string>
+                         </property>
+                        </item>
                        </widget>
-                      </item>
-                      <item>
-                       <widget class="QCheckBox" name="speedCheckBox">
-                        <property name="text">
-                         <string>Speed</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QCheckBox" name="hrCheckBox">
-                        <property name="text">
-                         <string>Heart Rate</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QComboBox" name="comboBox"/>
                       </item>
                       <item>
                        <spacer name="horizontalSpacer_7">
@@ -1504,6 +1504,30 @@ p, li { white-space: pre-wrap; }
                          </size>
                         </property>
                        </spacer>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="rightDiagramCombo">
+                        <item>
+                         <property name="text">
+                          <string>-</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Speed</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Altitude</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Heartrate</string>
+                         </property>
+                        </item>
+                       </widget>
                       </item>
                      </layout>
                     </item>

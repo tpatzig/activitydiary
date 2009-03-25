@@ -189,7 +189,6 @@ void MapView::mouseDoubleClickEvent(QMouseEvent * event )
 
     if (event->button() == Qt::LeftButton) {
 
-        qDebug() << "We received a double Click event";
         _temp = event->pos();
 
         QPoint mpos = _temp;

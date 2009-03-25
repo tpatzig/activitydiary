@@ -170,9 +170,11 @@ QString Calendar::getNextActivityDay(const QDate& date, const QTime& time)
     if (baseDir.entryList(QStringList("*"),QDir::Dirs).size() > 0 ) {
         foreach(QString dirname,baseDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name)) {
             if (dirname.toInt() > date.year()) {
+                qDebug() << "searching in  the next year, basedir: " << baseDir.path() << " dirname: " << dirname; 
                 QDir tmpDir(baseDir.path() + "/" + dirname);
                 if (tmpDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot).size() > 0 ) {
                     QDir tmpKwDir(tmpDir.path() + "/" + tmpDir.entryList(QStringList("*"),QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name)[0]);
+                    qDebug() << "tmpKwDir: " << tmpKwDir.path();
                     if (tmpKwDir.entryList(QStringList("*.adx")).size() > 0 )
                         return tmpKwDir.path() + "/" + tmpKwDir.entryList(QStringList("*.adx"),QDir::Files,QDir::Name)[0];
                 }

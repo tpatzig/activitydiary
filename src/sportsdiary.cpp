@@ -167,7 +167,6 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 		    PhysicalElement* pe = _physical.atSec(start->get_time().secsTo(it->get_time()));
 		    if (pe) {
 			hrValues << pe->hr();
-                        qDebug() << pe->hr();
 		    } else
 			hrValues << 0;
 		 }
@@ -189,8 +188,8 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     if (!speedDiagram) {
         speedDiagram = new DiagramCurve(diagram,"Speed");
         speedDiagram->setColor(QColor(0,255,0));
-        if (speedValues.size() > 0)
-            rightDiagramCombo->setCurrentIndex(rightDiagramCombo->findText("Speed"));
+        //if (speedValues.size() > 0)
+            //rightDiagramCombo->setCurrentIndex(rightDiagramCombo->findText("Speed"));
     }
 
     if (!hrDiagram) {
@@ -799,9 +798,21 @@ void SportsDiary::slotRemoveTrack()
                     QFile adxfile(currentAdx);
                     QFile gpxfile(AdxParser::readSetting(currentAdx,"trackfile"));
                     QFile hrm(AdxParser::readSetting(currentAdx,"heartratefile"));
+
+                    QFileInfo info(adxfile);
+                    QStringList dirnames = info.absolutePath().split('/');
+                    QString dirname = dirnames[dirnames.size() -1];
+                    QDir adxdir(info.absolutePath());
+
                     adxfile.remove();
                     gpxfile.remove();
                     hrm.remove();
+
+                    if (! adxdir.entryList(QStringList("*"),QDir::NoDotAndDotDot).size() > 0) {
+                        adxdir.cdUp();
+                        adxdir.rmdir(dirname);
+                    }
+
                     if (calendarWidget->selectedDate().weekNumber() == QDate::fromString(mDateLabel->text()).weekNumber())
                         calendar->slotUpdateCurrentKW(QDate::fromString(mDateLabel->text()));
                     slotClearAll();
@@ -959,6 +970,7 @@ void SportsDiary::slotLoadSavedTrack(const QString& filenameAdx)
         HRM_File = filenameHRM;
 
         slotImportTrack(filenameGpx);
+        setWindowModified(false);
     }
 
 }

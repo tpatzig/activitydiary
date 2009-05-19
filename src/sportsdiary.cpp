@@ -82,7 +82,7 @@ SportsDiary::SportsDiary(QObject* parent)
     zoomSlider->setValue(mapFrame->zoom());
 
     rightGroupBox->setHidden(true);
-    kwLabel->setText( QString("%1. KW %2").arg(calendarWidget->selectedDate().weekNumber()).arg(calendarWidget->selectedDate().year()) );
+    kwLabel->setText( QString("%1. CW %2").arg(calendarWidget->selectedDate().weekNumber()).arg(calendarWidget->selectedDate().year()) );
     calendar->slotUpdateCurrentKW(calendarWidget->selectedDate());
     //calendarGroupBox->setHidden(true);
 
@@ -903,7 +903,7 @@ void SportsDiary::slotClearAll()
 void SportsDiary::slotCalendarUpdated(const QDate& date)
 {
 
-    kwLabel->setText( QString("%1. KW %2").arg(date.weekNumber()).arg(date.year()) );
+    kwLabel->setText( QString("%1. CW %2").arg(date.weekNumber()).arg(date.year()) );
     QMap<QString,double> summary = calendar->getWeekSummary(date);
     totalWeekDistanceLabel->setText(QString::number(summary["distance"]) + " km");
 

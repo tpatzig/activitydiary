@@ -1,0 +1,22 @@
+Version 0.2 - 20.04.09
+=====================================
+ *  "New Activity..." Wizard
+ * Manually draw Tracks (without GPS Data) directly in the map
+ * Polar Heartrate Data (HRM) can be added to Track
+ * Many Bugfixes and stability enhancements
+
+
+Version 0.1 - 06.02.09
+======================================
+-initial version of ActivityDiary
+ * MapView with dynamic downloaded and cached maptiles from OpenStreetMap
+ * Smoothless scroll and zoom around the world within the Map View
+ * Offline usage, with cached maptiles from pre-downloaded area
+ * Import GPS Data from GPX files
+ * Visualize all waypoints as track in the Map View
+ * Moveable start and end points in the Map View to select only parts of the track
+ * Additional track information represents the currently selected part of the track
+ * Dynamic line chart for track speed and altitude
+ * Add user defined add-on information to your activity
+ * Save, Edit, Load or Remove Activities
+ * Calendar to navigate through your Activities

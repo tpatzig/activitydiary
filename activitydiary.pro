@@ -13,10 +13,21 @@ macx {
     LIBS += /usr/lib/libqwt.dylib
 }
 else:unix { 
-    INCLUDEPATH += /usr/include/qwt
-    LIBS += -L/usr/lib \
-        -L/usr/lib64 \
-        -lqwt
+    INCLUDEPATH += /usr/include/qwt \
+            /usr/include/qwt-qt4
+
+    exists( /usr/lib/libqwt-qt4* ) {
+        LIBS += -L/usr/lib -lqwt-qt4
+    }
+    exists( /usr/lib64/libqwt-qt4* ) {
+        LIBS += -L/usr/lib64 -lqwt-qt4
+    }
+    exists( /usr/lib/libqwt.* ) {   
+        LIBS += -L/usr/lib -lqwt
+    }
+    exists( /usr/lib64/libqwt.* ) {   
+        LIBS += -L/usr/lib64 -lqwt
+    }
 }
 
 # Input

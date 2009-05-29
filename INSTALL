@@ -8,7 +8,7 @@ Build on Mac OS X
 Build on Linux
 =================================
 1. qwt header are searched in /usr/include/qwt
-2. qwt lib must be named libqwt.so
+2. qwt lib must be named libqwt.so or libqwt-qt4.so
 3. mkdir build && cd build && qmake ../activitydiary.pro
 3. make
 4. make install

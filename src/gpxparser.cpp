@@ -33,7 +33,7 @@ GPXParser::GPXParser(QString filename) {
     if (open_file(file))
         parse_file(file);
     else
-        qDebug() <<"Can't open " << filename << " for reading.";
+        qDebug() <<"Can't open file" << filename << " for reading.";
 }
 
 GPXParser::~GPXParser()

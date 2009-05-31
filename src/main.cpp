@@ -26,19 +26,34 @@
 #include <iostream>
 #include <QtGui>
 #include <qdebug.h>
+#include <QTranslator>
+#include <QLocale>
 
-#include "mainwindow.h"
 #include "sportsdiary.h"
+
+#define APP_PREFIX "/usr/share/activitydiary"
 
 int main( int argc, char **argv )
 {
     QApplication app(argc, argv);
+
+    QTranslator translator;
+
+    if (QDir(QString(APP_PREFIX) + "/ts").exists()) {
+        translator.load(QString(APP_PREFIX) + "/ts/activitydiary_" + QLocale::system().name() );
+    } else {
+        translator.load("activitydiary_" + QLocale::system().name() );
+    }
+
+    app.installTranslator(&translator);
+
     QCoreApplication::setOrganizationName("ActivityDiary");
     QCoreApplication::setApplicationName("ActivityDiary");
     QCoreApplication::setOrganizationDomain("activitydiary.org");
 
     SportsDiary mainWin;
     //    MainWindow mainWin;
+
     mainWin.show();
     return app.exec();
 }

@@ -46,7 +46,7 @@ ADWizard::ADWizard(QObject* parent) : QWizard(), m_parent(parent)
         addPage(createPhysicalSourcePage());
 
         setWindowIcon(QIcon(iconDir + "logo_64.png"));
-        setWindowTitle("ActivityDiary - New Activity Wizard");
+        setWindowTitle(tr("ActivityDiary - New Activity Wizard"));
 
 
         connect(button(QWizard::CancelButton),SIGNAL(clicked()),this,SLOT(slotCancel()));
@@ -79,9 +79,9 @@ WizardPage* ADWizard::createIntroPage()
 {
      introPage = new WizardPage;
 
-     introPage->setTitle("Add New Activity");
+     introPage->setTitle(tr("Add New Activity"));
 
-     introLabel = new QLabel("This wizard will help to add new Activities to ActivityDiary.",introPage);
+     introLabel = new QLabel(tr("This wizard will help to add new Activities to ActivityDiary."),introPage);
      introLabel->setWordWrap(true);
 
      introLayout = new QVBoxLayout(introPage);
@@ -97,9 +97,9 @@ WizardPage* ADWizard::createDefineNamePage()
 {
         namePage = new WizardPage;
 
-        namePage->setTitle("Set Activity Name");
+        namePage->setTitle(tr("Set Activity Name"));
 
-        nameLabel = new QLabel("Please define a name for your Activity.",namePage);
+        nameLabel = new QLabel(tr("Please define a name for your Activity."),namePage);
         nameLabel->setWordWrap(true);
 
         activityName = new QLineEdit(namePage);
@@ -120,26 +120,26 @@ WizardPage* ADWizard::createSelectTrackSourcePage()
         trackSourcePage = new WizardPage;
         trackSourcePage->setComplete(false);
 
-        trackSourcePage->setTitle("Select Track Source");
+        trackSourcePage->setTitle(tr("Select Track Source"));
 
-        trackLabel = new QLabel("Please select your Track Source.",trackSourcePage);
+        trackLabel = new QLabel(tr("Please select your Track Source."),trackSourcePage);
         trackLabel->setWordWrap(true);
 
-        gpsRadioButton = new QRadioButton("Use a GPS recorded Track",trackSourcePage);
+        gpsRadioButton = new QRadioButton(tr("Use a GPS recorded Track"),trackSourcePage);
         gpsRadioButton->setChecked(true);
         connect(gpsRadioButton,SIGNAL(toggled(bool)),this,SLOT(slotGpsTrackSourceToggled(bool)));
         gpsLineEdit = new QLineEdit(trackSourcePage);
         connect(gpsLineEdit,SIGNAL(textChanged(const QString &)), this, SLOT(slotGPSLineEditChanged(const QString &)));
 
-        gpsToolButton = new QPushButton("Choose...", trackSourcePage);
+        gpsToolButton = new QPushButton(tr("Choose..."), trackSourcePage);
         connect(gpsToolButton,SIGNAL(clicked()),this,SLOT(slotGpsToolButtonClicked()));
 
-        manualRadioButton = new QRadioButton("Create Track manually in the map",trackSourcePage);
+        manualRadioButton = new QRadioButton(tr("Create Track manually in the map"),trackSourcePage);
         connect(manualRadioButton,SIGNAL(toggled(bool)),this,SLOT(slotManualTrackSourceToggled(bool)));
 
-        startDateLabel = new QLabel("Activity Start");
+        startDateLabel = new QLabel(tr("Activity Start"));
 
-        endDateLabel = new QLabel("Activity End");
+        endDateLabel = new QLabel(tr("Activity End"));
 
         startDateTimeEdit = new QDateTimeEdit(QDateTime::currentDateTime(),trackSourcePage);
         endDateTimeEdit = new QDateTimeEdit(QDateTime::currentDateTime(),trackSourcePage);
@@ -180,12 +180,12 @@ WizardPage* ADWizard::createPhysicalSourcePage()
 {
         physicalPage = new WizardPage;
         physicalPage->setComplete(false);
-        physicalPage->setTitle("Select Physical Data Source");
-        physLabel = new QLabel("Define your Heartrate Data source file",physicalPage);
+        physicalPage->setTitle(tr("Select Physical Data Source"));
+        physLabel = new QLabel(tr("Define your Heartrate Data source file"),physicalPage);
         physLabel->setWordWrap(true);
 
         physLineEdit = new QLineEdit(physicalPage);
-        physToolButton = new QPushButton("Choose...", physicalPage);
+        physToolButton = new QPushButton(tr("Choose..."), physicalPage);
         connect(physToolButton,SIGNAL(clicked()),this,SLOT(slotPhysToolButtonClicked()));
 
 

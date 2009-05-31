@@ -39,7 +39,7 @@ MainWindow::MainWindow(): QMainWindow( 0 )
     _mapWidget = new MapView(centralWidget);
     setCentralWidget(centralWidget);
     layout->addWidget(_mapWidget);
-    QPushButton* button = new QPushButton("Load Track", centralWidget);
+    QPushButton* button = new QPushButton(tr("Load Track"), centralWidget);
     layout->addWidget(button);
     centralWidget->setLayout(layout);
 }

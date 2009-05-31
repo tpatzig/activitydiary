@@ -36,7 +36,7 @@ SportsDiary::SportsDiary(QObject* parent)
     settings = new QSettings();
     readSettings();
     qDebug() << iconDir;
-    activitytype->addItem(QIcon(iconDir + iconMap["default"].toString()), "Select your Activity...");
+    activitytype->addItem(QIcon(iconDir + iconMap["default"].toString()), tr("Select your Activity..."));
     foreach (QString key, iconMap.keys()) {
         if (key == "default")
             break;
@@ -106,7 +106,7 @@ SportsDiary::SportsDiary(QObject* parent)
     zoomSlider->setValue(mapFrame->zoom());
 
     rightGroupBox->setHidden(true);
-    kwLabel->setText( QString("%1. CW %2").arg(calendarWidget->selectedDate().weekNumber()).arg(calendarWidget->selectedDate().year()) );
+    kwLabel->setText( QString("%1. ").arg(calendarWidget->selectedDate().weekNumber()) + tr("CW") + QString(" %1").arg(calendarWidget->selectedDate().year()) );
     calendar->slotUpdateCurrentKW(calendarWidget->selectedDate());
     //calendarGroupBox->setHidden(true);
 
@@ -203,25 +203,25 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
     }
 
     if (!altitudeDiagram) {
-        altitudeDiagram = new DiagramCurve(diagram,"Altitude");
+        altitudeDiagram = new DiagramCurve(diagram,tr("Altitude"));
         altitudeDiagram->setColor(QColor(0,0,255));
         if (altitudeValues.size() > 0) 
-            leftDiagramCombo->setCurrentIndex(leftDiagramCombo->findText("Altitude"));
+            leftDiagramCombo->setCurrentIndex(leftDiagramCombo->findText(tr("Altitude")));
     }
 
     if (!speedDiagram) {
-        speedDiagram = new DiagramCurve(diagram,"Speed");
+        speedDiagram = new DiagramCurve(diagram,tr("Speed"));
         speedDiagram->setColor(QColor(0,255,0));
         //if (speedValues.size() > 0)
             //rightDiagramCombo->setCurrentIndex(rightDiagramCombo->findText("Speed"));
     }
 
     if (!hrDiagram) {
-        hrDiagram = new DiagramCurve(diagram,"Heart Rate");
+        hrDiagram = new DiagramCurve(diagram,tr("Heart Rate"));
         hrDiagram->setColor(QColor(255,0,0));
     } 
 
-    diagram->setAxisTitle(QwtPlot::xBottom,"Time in min");
+    diagram->setAxisTitle(QwtPlot::xBottom,tr("Time in min"));
 
     altitudeDiagram->setValues(timeValues,altitudeValues);
     speedDiagram->setValues(timeValues,speedValues);
@@ -324,12 +324,12 @@ void SportsDiary::readSettings()
          settings->setValue("TracksDir",QDir::homePath() + "/ActivityDiary/tracks");
 //  if (!settings->contains("ActivityImgMap")) {
          QMap<QString,QVariant> activities;
-         activities["Cycling - Racing Bike"] = "cycling.png";
-         activities["Cycling - Mountain Bike"] = "cycling.png";
-         activities["Running"] = "running.png";
-         activities["Hiking"] = "hiking.png";
-         activities["Skiing"] = "skiing.png";
-         activities["default"] = "kompassberg_small.png";
+         activities[tr("Cycling - Racing Bike")] = "cycling.png";
+         activities[tr("Cycling - Mountain Bike")] = "cycling.png";
+         activities[tr("Running")] = "running.png";
+         activities[tr("Hiking")] = "hiking.png";
+         activities[tr("Skiing")] = "skiing.png";
+         activities[tr("default")] = "kompassberg_small.png";
 
          settings->setValue("ActivityImgMap",activities);
          iconMap = activities;
@@ -377,7 +377,7 @@ void SportsDiary::closeEvent(QCloseEvent *event)
 {
     if ( isWindowModified() ) {
         QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                        "Save Changes for Track \"" + trackname->text() + "\" ?",
+                        tr("Save Changes for Track \"") + trackname->text() + "\" ?",
                         QMessageBox::Yes | QMessageBox::No,this);
         switch (msgBox.exec()) {
          case QMessageBox::Yes: {
@@ -415,7 +415,7 @@ void SportsDiary::slotImportTrack()
 
     if ( isWindowModified() ) {
         QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                "Save Changes for Track \"" + trackname->text() + "\" ?",
+                tr("Save Changes for Track \"") + trackname->text() + "\" ?",
                 QMessageBox::Yes | QMessageBox::No,this);
         switch (msgBox.exec()) {
             case QMessageBox::Yes: {
@@ -664,9 +664,9 @@ void SportsDiary::slotShowCalendarWidget(bool /*check*/ )
        rightGroupBox->setVisible(!rightGroupBox->isVisible());
        actionShow_Calendar->setChecked(rightGroupBox->isVisible());
        if ( rightGroupBox->isVisible() )
-           mCalendarButton->setToolTip("Hide Calendar Panel");
+           mCalendarButton->setToolTip(tr("Hide Calendar Panel"));
        else
-           mCalendarButton->setToolTip("Show Calendar Panel");
+           mCalendarButton->setToolTip(tr("Show Calendar Panel"));
 }
 
 void SportsDiary::slotShowTrackProperties(bool /*check*/ )
@@ -674,9 +674,9 @@ void SportsDiary::slotShowTrackProperties(bool /*check*/ )
        leftGroupBox->setVisible(!leftGroupBox->isVisible());
        actionShow_Track_Settings->setChecked(leftGroupBox->isVisible());
        if (leftGroupBox->isVisible())
-           propsButton->setToolTip("Hide Track Information Panel");
+           propsButton->setToolTip(tr("Hide Track Information Panel"));
         else
-           propsButton->setToolTip("Show Track Information Panel");
+           propsButton->setToolTip(tr("Show Track Information Panel"));
 
 }
 
@@ -684,9 +684,9 @@ void SportsDiary::slotShowCalendar(bool /*check*/ )
 {
     calendarGroupBox->setVisible(!calendarGroupBox->isVisible());
     if (calendarGroupBox->isVisible())
-        calToolButton->setToolTip("Hide Day Selection");
+        calToolButton->setToolTip(tr("Hide Day Selection"));
     else
-        calToolButton->setToolTip("Show Day Selection");
+        calToolButton->setToolTip(tr("Show Day Selection"));
 }
 
 void SportsDiary::slotSetDiagramWidgetVisibility(bool /*state*/)
@@ -814,7 +814,7 @@ void SportsDiary::slotRemoveTrack()
                                                             .arg(settings->value("TracksDir").toString());
         if ( currentAdx == filename && QFile::exists(filename) ) {
             QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                    "Really remove Track \"" + trackname->text() + "\" from ActivityDiary ?",
+                    tr("Really remove Track \"") + trackname->text() + tr("\" from ActivityDiary ?"),
                     QMessageBox::Yes | QMessageBox::No,this);
             switch (msgBox.exec()) {
                 case QMessageBox::Yes: {
@@ -859,7 +859,7 @@ void SportsDiary::slotClearAll()
 {
     if ( isWindowModified() ) {
         QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                "Save Changes for Track \"" + trackname->text() + "\" ?",
+                tr("Save Changes for Track \"") + trackname->text() + "\" ?",
                 QMessageBox::Yes | QMessageBox::No,this);
         switch (msgBox.exec()) {
             case QMessageBox::Yes: {
@@ -927,7 +927,7 @@ void SportsDiary::slotClearAll()
 void SportsDiary::slotCalendarUpdated(const QDate& date)
 {
 
-    kwLabel->setText( QString("%1. CW %2").arg(date.weekNumber()).arg(date.year()) );
+    kwLabel->setText( QString("%1. ").arg(date.weekNumber()) + tr("CW") + QString(" %1").arg(date.year()) );
     QMap<QString,double> summary = calendar->getWeekSummary(date);
     totalWeekDistanceLabel->setText(QString::number(summary["distance"]) + " km");
 
@@ -942,7 +942,7 @@ void SportsDiary::slotLoadSavedTrack(const QString& filenameAdx)
     if (!filenameAdx.isEmpty()) {
         if ( isWindowModified() ) {
             QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                    "Save Changes for Track \"" + trackname->text() + "\" ?",
+                    tr("Save Changes for Track \"") + trackname->text() + "\" ?",
                     QMessageBox::Yes | QMessageBox::No,this);
             switch (msgBox.exec()) {
                 case QMessageBox::Yes: {
@@ -1069,7 +1069,7 @@ void SportsDiary::slotStartWizard()
 
     if ( isWindowModified() ) {
         QMessageBox msgBox(QMessageBox::Question,"ActivityDiary",
-                "Save Changes for Track \"" + trackname->text() + "\" ?",
+                tr("Save Changes for Track \"") + trackname->text() + "\" ?",
                 QMessageBox::Yes | QMessageBox::No,this);
         switch (msgBox.exec()) {
             case QMessageBox::Yes: {

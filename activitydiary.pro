@@ -69,6 +69,9 @@ icons.path = /usr/share/activitydiary/icons
 icons.files = icons/*.png
 icons.files += icons/*.gif
 target.path = /usr/bin/
+ts.path = /usr/share/activitydiary/ts
+ts.files = activitydiary*.ts
+ts.files += activitydiary*.qm
 !macx and unix { 
     icon128.path = /usr/share/icons/hicolor/128x128/apps
     icon128.files = icons/128x128/*
@@ -88,5 +91,7 @@ target.path = /usr/bin/
 }
 INSTALLS += target
 INSTALLS += icons
+INSTALLS += ts
 QT += xml \
     network
+TRANSLATIONS += activitydiary_de_DE.ts

@@ -199,9 +199,9 @@ void MapView::mousePressEvent ( QMouseEvent * event )
         _temp = event->pos();
 
         QMenu menu( this );
-        menu.addAction ( "set waypoint as start", this, SLOT(slotSetStartPoint() ) );
-        menu.addAction ( "set waypoint as end", this, SLOT(slotSetEndPoint() ) );
-        menu.addAction ( "reset start and end", this, SLOT(slotResetStartEndPoint() ) );
+        menu.addAction ( tr("set waypoint as start"), this, SLOT(slotSetStartPoint() ) );
+        menu.addAction ( tr("set waypoint as end"), this, SLOT(slotSetEndPoint() ) );
+        menu.addAction ( tr("reset start and end"), this, SLOT(slotResetStartEndPoint() ) );
         menu.exec(event->globalPos());
     }
 }
@@ -438,13 +438,13 @@ int MapView::zoom ()
 
 void MapView::slotNewTileDownloaded(QString filename)
 {
-    qDebug() << "New Tile ready " << filename;
+    qDebug() << tr("New Tile ready ") << filename;
     repaint();
 }
 
 void MapView::slotUpdateDownloadStaus(int queue_size)
 {
-    qDebug() << "QueueSize: " << queue_size;
+    qDebug() << tr("QueueSize: ") << queue_size;
     emit downloadState(queue_size);
 
 }

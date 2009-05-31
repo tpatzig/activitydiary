@@ -42,7 +42,7 @@ int main( int argc, char **argv )
     if (QDir(QString(APP_PREFIX) + "/ts").exists()) {
         translator.load(QString(APP_PREFIX) + "/ts/activitydiary_" + QLocale::system().name() );
     } else {
-        translator.load("activitydiary_" + QLocale::system().name() );
+        translator.load("ts/activitydiary_" + QLocale::system().name() );
     }
 
     app.installTranslator(&translator);

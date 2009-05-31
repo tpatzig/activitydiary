@@ -70,8 +70,8 @@ icons.files = icons/*.png
 icons.files += icons/*.gif
 target.path = /usr/bin/
 ts.path = /usr/share/activitydiary/ts
-ts.files = activitydiary*.ts
-ts.files += activitydiary*.qm
+ts.files = ts/activitydiary*.ts
+ts.files += ts/activitydiary*.qm
 !macx and unix { 
     icon128.path = /usr/share/icons/hicolor/128x128/apps
     icon128.files = icons/128x128/*

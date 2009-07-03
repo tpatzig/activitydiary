@@ -116,10 +116,14 @@ void GPXParser::parse_file(QFile &file)
 
                 if (!date_time_string.isEmpty()) {
                     QStringList date_list = date_time_string.split('T')[0].split('-');
-                    QStringList time_list = date_time_string.split('T')[1].split('Z')[0].split(':');
+                    QString sTime = date_time_string.split('T')[1].split('Z')[0];
+
+					if(sTime.split('.').size() == 1) {
+						sTime += ".0";
+					}
 
                     QDate date(date_list[0].toInt(),date_list[1].toInt(),date_list[2].toInt());
-                    QTime time(time_list[0].toInt(),time_list[1].toInt(),time_list[2].toInt());
+                    QTime time = QTime::fromString(sTime, "hh:mm:ss.z");
                     date_time.setDate(date);
                     date_time.setTime(time);
                 }

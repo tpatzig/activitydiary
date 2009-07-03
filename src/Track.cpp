@@ -155,18 +155,18 @@ float Track::get_overall_time() {
 
 float Track::get_wp_time(Waypoint* wp1,Waypoint* wp2) {
     Waypoint* tmp = 0;
-    float time_in_sec = 0;
-
+    float time_in_msec = 0;
 
     for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
         if (at(i)->has_date_time()) {
-            if (tmp)
-                time_in_sec += tmp->get_time().secsTo(at(i)->get_time());
+            if (tmp) {
+                time_in_msec += tmp->get_time().msecsTo(at(i)->get_time());
+			}
             tmp = at(i);
         }
     }
 
-    return (time_in_sec > 0 ? time_in_sec / 60 : time_in_sec);
+    return (time_in_msec > 0 ? time_in_msec / 1000 / 60 : time_in_msec);
 }
 
 float Track::get_wp_speed(Waypoint* wp1,Waypoint* wp2) {

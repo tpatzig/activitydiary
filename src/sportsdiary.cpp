@@ -23,6 +23,7 @@
 */
 
 #include "sportsdiary.h"
+#include "Physical.h"
 
 #include <QComboBox>
 

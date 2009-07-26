@@ -60,8 +60,8 @@ include_directories(
 add_subdirectory ( src )
 add_subdirectory ( icons )
 
-message(STATUS "Writing spec file...")
-configure_file(${CMAKE_SOURCE_DIR}/package/${PACKAGE}.spec.in ${CMAKE_BINARY_DIR}/package/${PACKAGE}.spec @ONLY)
+# message(STATUS "Writing spec file...")
+# configure_file(${CMAKE_SOURCE_DIR}/package/${PACKAGE}.spec.in ${CMAKE_BINARY_DIR}/package/${PACKAGE}.spec @ONLY)
 
 #set( AUTOBUILD_COMMAND
 #COMMAND ${CMAKE_MAKE_PROGRAM} package_source

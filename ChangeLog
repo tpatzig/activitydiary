@@ -1,6 +1,9 @@
+ * return proper distance, if one value is NaN
+ * Moved Project to gitorious
+
 Version 0.2 - 20.04.09
 =====================================
- *  "New Activity..." Wizard
+ * "New Activity..." Wizard
  * Manually draw Tracks (without GPS Data) directly in the map
  * Polar Heartrate Data (HRM) can be added to Track
  * Many Bugfixes and stability enhancements

@@ -152,8 +152,8 @@ float Calc::distance_in_km(float lat1, float lon1, float lat2, float lon2)
     float distance = (acos(sin(degToRad(lat1)) * sin(degToRad(lat2)) + 
                     cos(degToRad(lat1)) * cos(degToRad(lat2)) * cos(degToRad(lon1)-degToRad(lon2))) * 180*60/M_PI);
 
-    // miles in km
-    return (distance * MILES_PER_KM);
+    // miles in km; return 0 if distance is NaN
+    return (distance * MILES_PER_KM) >= 0 ? (distance * MILES_PER_KM) : 0; 
 
 }
 /*

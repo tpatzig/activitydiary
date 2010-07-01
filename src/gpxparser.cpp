@@ -86,30 +86,7 @@ void GPXParser::parse_file(QFile &file)
                 double lon = trkpt.attributeNode("lon").value().toDouble();
                 float alt = trkpt.firstChildElement("ele").text().toFloat();
 
-                // Search the most east, west, north and south point //
-                if (lat > maxLat) {
-                    maxLat = lat;
-                    maxNorth.setY(lat);
-                    maxNorth.setX(lon);
-                }
-
-                if (lon > maxLon) {
-                    maxLon = lon;
-                    maxEast.setY(lat);
-                    maxEast.setX(lon);
-                }
-
-                if (minLat == 0 || lat < minLat) {
-                    minLat = lat;
-                    maxSouth.setY(lat);
-                    maxSouth.setX(lon);
-                }
-
-                if (minLon == 0 || lon < minLon) {
-                    minLon = lon;
-                    maxWest.setY(lat);
-                    maxWest.setX(lon);
-                }
+              
 
                 QString date_time_string =  trkpt.firstChildElement("time").text();
 
@@ -137,15 +114,40 @@ void GPXParser::parse_file(QFile &file)
 
                 if (prev_wpt) {
 		    float wp_speed = prev_wpt->get_speed_to_wp(wpt);
-                    if ( (wp_speed * 3.6) < SPEED_LIMIT ) {
-                        points.append( wpt );
-                        allPoints.append(wpt);
+                    if ( (wp_speed * 3.6) > SPEED_LIMIT ) {
+                        continue;
                     }
-                } else {
-                    points.append( wpt );
-                    allPoints.append(wpt);
                 }
+                
+                points.append( wpt );
+                allPoints.append(wpt);
+
                 prev_wpt = wpt;
+
+                // Search the most east, west, north and south point //
+                if (lat > maxLat) {
+                    maxLat = lat;
+                    maxNorth.setY(lat);
+                    maxNorth.setX(lon);
+                }
+
+                if (lon > maxLon) {
+                    maxLon = lon;
+                    maxEast.setY(lat);
+                    maxEast.setX(lon);
+                }
+
+                if (minLat == 0 || lat < minLat) {
+                    minLat = lat;
+                    maxSouth.setY(lat);
+                    maxSouth.setX(lon);
+                }
+
+                if (minLon == 0 || lon < minLon) {
+                    minLon = lon;
+                    maxWest.setY(lat);
+                    maxWest.setX(lon);
+                }
             }
         }
         if (points.size() > 0 ) {

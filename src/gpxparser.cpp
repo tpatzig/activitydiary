@@ -1,4 +1,4 @@
-/*
+    /*
  *    ActivityDiary - The smart way to manage your GPS tracks
  *
  *    Copyright (C) 2009
@@ -65,6 +65,7 @@ void GPXParser::parse_file(QFile &file)
     QDomElement trk = mainElement.firstChildElement("trk");
     for ( ; !trk.isNull(); trk = trk.nextSiblingElement( "trk" ) ) {
         WaypointList points;
+        Waypoint* prev_wpt = 0;
 
         double maxLat = 0.0;
         double maxLon = 0.0;
@@ -133,6 +134,13 @@ void GPXParser::parse_file(QFile &file)
                 float course = trkpt.firstChildElement("extensions").firstChildElement("rmc:course").text().toFloat();
 
                 Waypoint *wpt = new Waypoint( lat,lon,sat,alt,speed,course,date_time );
+
+                if (prev_wpt) {
+                    float dist = Calc::distance_in_meter(prev_wpt->get_latitude(),prev_wpt->get_longitude(),wpt->get_latitude(),wpt->get_longitude());
+                    qDebug() << "Waypoint-waypoint distance: " << QString::number(dist);
+                }
+
+                prev_wpt = wpt;
                 points.append( wpt );
                 allPoints.append(wpt);
             }

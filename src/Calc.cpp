@@ -142,20 +142,27 @@ double Calc::xAtZoomToLongitude(int x, int zoom )
     return radToDeg(lon);
 }
 
-float Calc::distance_in_km(float lat1, float lon1, float lat2, float lon2)
+float Calc::distance_in_miles(float lat1, float lon1, float lat2, float lon2)
 {
-
-
 //  float distance = (acos(sin(lat1/180*M_PI)*sin(lat2/180*M_PI) + cos(lat1/180*M_PI)*cos(lat2/180*M_PI)*cos(lon1/180*M_PI-lon2/180*M_PI))*180*60/M_PI);
-
 
     float distance = (acos(sin(degToRad(lat1)) * sin(degToRad(lat2)) + 
                     cos(degToRad(lat1)) * cos(degToRad(lat2)) * cos(degToRad(lon1)-degToRad(lon2))) * 180*60/M_PI);
 
     // miles in km; return 0 if distance is NaN
-    return (distance * MILES_PER_KM) >= 0 ? (distance * MILES_PER_KM) : 0; 
-
+    return ( distance >= 0 ? distance : 0 );
 }
+
+float Calc::distance_in_km(float lat1, float lon1, float lat2, float lon2)
+{
+    return ( distance_in_miles(lat1,lon1,lat2,lon2) * MILES_PER_KM );
+}
+
+float Calc::distance_in_meter(float lat1, float lon1, float lat2, float lon2)
+{
+    return ( distance_in_miles(lat1,lon1,lat2,lon2) * MILES_PER_M );
+}
+
 /*
 float Calc::acos(float f)
 {

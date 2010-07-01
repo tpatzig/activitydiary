@@ -186,7 +186,7 @@ void SportsDiary::drawGraph( Waypoint* start, Waypoint* end)
 //          if ( curr_alt > 0 ) {
                  altitudeValues << it->get_altitude();
 
-                 speedValues << mCurrentTrack->get_wp_speed(tmpWp,it) * 3.6;
+                 speedValues << tmpWp->get_speed_to_wp(it) * 3.6;
 		 if ( _physical.size() > 0 )
 		 {
 		    PhysicalElement* pe = _physical.atSec(start->get_time().secsTo(it->get_time()));

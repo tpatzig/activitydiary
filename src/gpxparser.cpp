@@ -136,13 +136,16 @@ void GPXParser::parse_file(QFile &file)
                 Waypoint *wpt = new Waypoint( lat,lon,sat,alt,speed,course,date_time );
 
                 if (prev_wpt) {
-                    float dist = Calc::distance_in_meter(prev_wpt->get_latitude(),prev_wpt->get_longitude(),wpt->get_latitude(),wpt->get_longitude());
-                    qDebug() << "Waypoint-waypoint distance: " << QString::number(dist);
+		    float wp_speed = prev_wpt->get_speed_to_wp(wpt);
+                    if ( (wp_speed * 3.6) < SPEED_LIMIT ) {
+                        points.append( wpt );
+                        allPoints.append(wpt);
+                    }
+                } else {
+                    points.append( wpt );
+                    allPoints.append(wpt);
                 }
-
                 prev_wpt = wpt;
-                points.append( wpt );
-                allPoints.append(wpt);
             }
         }
         if (points.size() > 0 ) {

@@ -35,6 +35,9 @@
 #include "waypoint.h"
 #include "Track.h"
 
+//is the speed to the next waypoint under SPEED_LIMIT km/h, the waypoint is valid
+#define SPEED_LIMIT 300
+
 class Track;
 
 class GPXParser : public QObject

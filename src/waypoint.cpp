@@ -175,6 +175,32 @@ bool Waypoint::has_date_time()
     return date_time.isValid();
 }
 
+float Waypoint::get_speed_to_wp(Waypoint* wp1) {
+	if (this->has_date_time() && wp1->has_date_time()) {
+		float time = get_msecs_to_wp(wp1) / 1000;
+		float distance = get_dist_to_wp_in_m(wp1);
+
+		// return speed in m/s
+		return distance/time;
+	}
+	return 0;
+}
+
+float Waypoint::get_dist_to_wp_in_m(Waypoint* wp1) {
+	return Calc::distance_in_meter(this->get_latitude(),this->get_longitude(),wp1->get_latitude(),wp1->get_longitude());
+}
+
+float Waypoint::get_dist_to_wp_in_km(Waypoint* wp1) {
+	return Calc::distance_in_km(this->get_latitude(),this->get_longitude(),wp1->get_latitude(),wp1->get_longitude());
+}
+
+float Waypoint::get_msecs_to_wp(Waypoint* wp1) {
+	return this->get_time().msecsTo(wp1->get_time());
+}
+
+
+		
+
 // ################################################################################
 
 WaypointList::WaypointList() : QList<Waypoint*>()

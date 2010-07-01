@@ -32,6 +32,7 @@
 #include <QDate>
 #include <math.h>
 #include <qdebug.h>
+#include "Calc.h"
 
 
 class Waypoint : public QObject
@@ -54,6 +55,11 @@ class Waypoint : public QObject
         int get_course();
         QDate get_date();
         QTime get_time();
+
+	float get_speed_to_wp(Waypoint* wp1);
+	float get_msecs_to_wp(Waypoint* wp1);
+	float get_dist_to_wp_in_m(Waypoint* wp1);
+	float get_dist_to_wp_in_km(Waypoint* wp1);
         QString get_tile_path(int zoom);
 
         int get_floor_y(int zoom);

@@ -112,16 +112,7 @@ void Track::set_max_south(QPointF p)
 }
 
 float Track::get_overall_distance() {
-    float distance = 0;
-    Waypoint* tmp = 0;
-
-    foreach(Waypoint* wp,waypoint_list) {
-        if (tmp) {
-            distance += Calc::distance_in_km(tmp->get_latitude(),tmp->get_longitude(),wp->get_latitude(),wp->get_longitude());
-        }
-        tmp = wp;
-    }
-    return distance;
+    return ( get_wp_distance(this->first(),this->last()) );
 }
 
 float Track::get_wp_distance(Waypoint* wp1,Waypoint* wp2) {
@@ -131,7 +122,7 @@ float Track::get_wp_distance(Waypoint* wp1,Waypoint* wp2) {
 
     for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
         if (tmp)
-            distance += Calc::distance_in_km(tmp->get_latitude(),tmp->get_longitude(),at(i)->get_latitude(),at(i)->get_longitude());
+            distance += tmp->get_dist_to_wp_in_km(at(i));
         tmp = at(i);
     }
     return distance;
@@ -145,7 +136,7 @@ float Track::get_overall_time() {
         if (wp->has_date_time()) {
 
             if (tmp) 
-                time_in_sec += tmp->get_time().secsTo(wp->get_time());
+                time_in_sec += ( tmp->get_msecs_to_wp(wp) / 1000 );
             
             tmp = wp;
         }
@@ -160,24 +151,12 @@ float Track::get_wp_time(Waypoint* wp1,Waypoint* wp2) {
     for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
         if (at(i)->has_date_time()) {
             if (tmp) {
-                time_in_msec += tmp->get_time().msecsTo(at(i)->get_time());
-			}
+                time_in_msec += tmp->get_msecs_to_wp(at(i));
+	    }
             tmp = at(i);
         }
     }
-
     return (time_in_msec > 0 ? time_in_msec / 1000 / 60 : time_in_msec);
-}
-
-float Track::get_wp_speed(Waypoint* wp1,Waypoint* wp2) {
-    if (wp1->has_date_time() && wp2->has_date_time()) {
-        float time = get_wp_time(wp1,wp2) * 60;
-        float distance = get_wp_distance(wp1,wp2) * 1000;
-
-        // return speed in m/s
-        return distance/time;
-    } 
-    return 0;
 }
 
 float Track::get_overall_avg_speed()
@@ -187,12 +166,11 @@ float Track::get_overall_avg_speed()
 
     foreach(Waypoint* wp,waypoint_list) {
         if (tmp) {
-            avg_speed += get_wp_speed(tmp,wp);
+            avg_speed += tmp->get_speed_to_wp(wp);
         }
         tmp = wp;
     }
     return (avg_speed > 0 ? avg_speed / count_waypoints() : avg_speed) ;
-
 }
 
 float Track::get_wp_avg_speed(Waypoint* wp1, Waypoint* wp2)
@@ -202,13 +180,12 @@ float Track::get_wp_avg_speed(Waypoint* wp1, Waypoint* wp2)
 
     for(int i = indexOf(wp1); i <= indexOf(wp2); i++) {
         if (tmp) {
-            avg_speed += get_wp_speed(tmp,at(i));
+            avg_speed += tmp->get_speed_to_wp(at(i));
         }
         tmp = at(i);
     }
     int count = indexOf(wp2) - indexOf(wp1);
     return (avg_speed > 0 ? avg_speed / count : avg_speed) ;
-
 }
 
 float Track::get_overall_avg_altitude()

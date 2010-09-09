@@ -74,7 +74,7 @@ class ImageLoader : public QObject
         //	QString get_local_path(int zoom, int x, int y);
         //	QString get_local_path(QString);
         //	QString get_osm_path(int zoom, int x, int y);
-        QString get_pic_path(int zoom, int x, int y, QString pre = 0);
+        QString get_pic_path(int zoom, int x, int y, QString pre = "");
 
         QStringList download_queue;
         bool active_download;

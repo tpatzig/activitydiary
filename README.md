@@ -1,5 +1,5 @@
 # Activitydiary
-## Analyse and manage all your recorded GPS Tracks
+## Analyze and manage all your recorded GPS Tracks
 
 ActivityDiary is the digital Diary for all your Activities.
 A Diary entry (Activity) consists of:

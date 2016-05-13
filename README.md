@@ -4,17 +4,16 @@
 ActivityDiary is the digital Diary for all your Activities.
 A Diary entry (Activity) consists of:
 
-  * GPS information, read from your recorded Track
-  * User defined add-on informations for your Track (name, profile, weather, description,...)
-  * Calculated informations (speed, length)
+* GPS information, read from your recorded Track
+* User defined add-on informations for your Track (name, profile, weather, description,...)
+* Calculated informations (speed, length)
 
 GPS Tracks can be recorded with your favorite GPS Device and imported as GPX Format into ActivityDiary. 
 Your imported Track gets visualized in a dynamic Map View, with free maptiles from OpenStreetMap. 
 Additional track data informs about time, distance, average speed and average altitude. 
 A Chart shows track information (e.g. speed, altitude) relative to the time of the track.
 
-Imported and visualized Tracks can be extended with user defined information, like name, activity type, track profile, weather, description,... .
-Your new Activity is saved in the Diary and can be loaded, edited and removed at any time with the Diary calendar. 
+Imported and visualized Tracks can be extended with user defined information, like name, activity type, track profile, weather, description, etc. Your new Activity is saved in the Diary and can be loaded, edited and removed at any time with the Diary calendar. 
 
 Features:
 
